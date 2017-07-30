@@ -150,9 +150,9 @@ require_once '../model/Usuario.php';
                                                             <td><br>Tipo:</br></td>
                                                             <td>
                                                                 <select name="tipoidusuario">
-                                                                    <option>CEDULA</option>
-                                                                    <option>PASAPORTE</option>
-                                                                    <option>RUC</option>
+                                                                    <option value="C">CEDULA</option>
+                                                                    <option value="P">PASAPORTE</option>
+                                                                    <option value="R">RUC</option>
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -160,8 +160,8 @@ require_once '../model/Usuario.php';
                                                             <td><br>Rol:</br></td>
                                                             <td>
                                                                 <select name="rolusuario">
-                                                                    <option>CAJERO</option>
-                                                                    <option>ADMINISTRADOR</option>
+                                                                    <option value="C">CAJERO</option>
+                                                                    <option value="A">ADMINISTRADOR</option>
                                                                 </select>
                                                             </td>
                                                             <td ><br>Nombre:</br></td>
