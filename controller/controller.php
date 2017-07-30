@@ -142,7 +142,27 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/proveedor.php');
         break;
-    
+    case "actualizar_proveedor":
+        //obtenemos los parametros del formulario proveedor:
+        $idproveedor = $_REQUEST['idproveedor'];
+        $tipoidproveedor = $_REQUEST['tipoidproveedor'];
+        $nombreproveedor = $_REQUEST['nombreproveedor'];
+        $fecnacproveedor = $_REQUEST['fecnacproveedor'];
+        $ciudnacproveedor = $_REQUEST['ciudnacproveedor'];
+        $tipoproveedor = $_REQUEST['tipoproveedor'];
+        $direccionproveedor = $_REQUEST['direccionproveedor'];
+        $telefonoproveedor = $_REQUEST['telefonoproveedor'];
+        $emailproveedor = $_REQUEST['emailproveedor'];
+        $estadoproveedor = $_REQUEST['estadoproveedor'];
+        //creamos el nuevo registro:
+        $crudModel->actualizarProveedor($idproveedor, $tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor);
+        //actualizamos el listado:
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/crearproveedor.php');
+        break;
      //elimina un empleado especifico
     case "eliminar_proveedor":
         //obtenemos el codigo del empleado a eliminar:
