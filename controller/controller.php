@@ -116,7 +116,7 @@ switch ($opcion) {
         //y los guardamos en sesion:
         $_SESSION['listaProveedores'] = serialize($listaProveedores);
         //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/proveedor.php');
+        header('Location: ../view/crearproveedor.php');
         break;
 
     //crea un nuevo proveedor
