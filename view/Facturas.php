@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/Usuario.php';
+require_once '../model/Facturas.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -235,16 +235,12 @@ require_once '../model/Usuario.php';
                             </style>
                             <table id="example">    
                                 <tr>
-                                    <th>ID USUARIO</th>
-                                    <th>TIPO ID</th>
-                                    <th>ROL</th>
-                                    <th>NOMBRE</th>
-                                    <th>FECHA NAC.</th>
-                                    <th>CIUDAD NAC.</th>
-                                    <th>DIRECCIÓN</th>
-                                    <th>TELÉFONO</th>
-                                    <th>EMAIL</th>
-                                    <th>ESTADO</th>
+                                    <th>NUMERO FACTURA</th>
+                                    <th>PROVEEDOR</th>
+                                    <th>USUARIO</th>
+                                    <th>VALOR FACTURA</th>
+                                    <th>FECHA FACTURA</th>
+                                    <th>IVA FACTURA</th>
                                     <th>ELIMINAR</th>
                                     <th>EDITAR</th>
                                 </tr>
@@ -254,12 +250,12 @@ require_once '../model/Usuario.php';
                                     <?php
                                     //verificamos si existe en sesion el listado de login:
                                     if (isset($_SESSION['listaFacturas'])) {
-                                        $listado = unserialize($_SESSION['listaUsuarios']);
+                                        $listado = unserialize($_SESSION['listaFacturas']);
                                         foreach ($listado as $usu) {
+                                            
                                             echo "<tr>";
                                             echo "<td>" . $usu->getIdfactura(). "</td>";
                                             echo "<td>" . $usu->getIdproveedor() . "</td>";
-                                            echo "<td>" . $usu->getRolusuario() . "</td>";
                                             echo "<td>" . $usu->getIdusuario() . "</td>";
                                             echo "<td>" . $usu->getValorfactura() . "</td>";
                                             echo "<td>" . $usu->getFechafactura() . "</td>";

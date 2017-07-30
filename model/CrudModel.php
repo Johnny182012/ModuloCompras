@@ -2,8 +2,6 @@
 
 include_once 'Database.php';
 
-include_once 'Pedido.php';
-include_once 'Producto.php';
 include_once 'Proveedor.php';
 include_once 'Usuario.php';
 include_once 'Facturas.php';
@@ -225,7 +223,7 @@ class CrudModel {
         $listado = array();
         foreach ($resultado as $res) {
             $factura = new Facturas();
-            $factura->setIdfactura($res['id_factura']);
+            $factura->setIdfactura($res['idfactura']);
             $factura->setIdproveedor($res['idproveedor']);
             $factura->setIdusuario($res['idusuario']);
             $factura->setValorfactura($res['valorfactura']);

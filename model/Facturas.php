@@ -20,14 +20,7 @@ class Facturas {
     private $fechafactura;
     private $ivafactura;
     
-    function __construct($idfactura, $idproveedor, $idusuario, $valorfactura, $fechafactura, $ivafactura) {
-        $this->idfactura = $idfactura;
-        $this->idproveedor = $idproveedor;
-        $this->idusuario = $idusuario;
-        $this->valorfactura = $valorfactura;
-        $this->fechafactura = $fechafactura;
-        $this->ivafactura = $ivafactura;
-    }
+   
     
     function getIdfactura() {
         return $this->idfactura;
