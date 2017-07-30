@@ -88,7 +88,7 @@ require_once '../model/Facturas.php';
 
                 <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="#body">Inicio</a></li>
+                        <li class="current"><a href="../index.html">Inicio</a></li>
                         <li><a href="#about">Acerca de nosotros</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
