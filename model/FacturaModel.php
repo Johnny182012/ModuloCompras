@@ -11,28 +11,6 @@ include_once 'CrudModel.php';
  * @author mrea
  */
 class FacturaModel {
-    public function getFacturas(){
-        //obtenemos la informacion de la bdd:
-        $pdo = Database::connect();
-        $sql = "select * from factura_cab order by id_factura_cab desc";
-        $resultado = $pdo->query($sql);
-        //transformamos los registros en objetos:
-        $listado = array();
-        foreach ($resultado as $res) {
-            $factura = new factura();
-            $factura->setIdfactura($res['id_factura']);
-            $factura->setIdproveedor($res['idproveedor']);
-            $factura->setIdusuario($res['idusuario']);
-            $factura->setValorfactura($res['valorfactura']);
-            $factura->setFechafactura($res['fechafactura']);
-            $factura->setIvafactura($res['ivafactura']);
-            
-            array_push($listado, $factura);
-        }
-        Database::disconnect();
-        //retornamos el listado resultante:
-        return $listado;
-    }
     /**
      * Funcion que adiciona un nuevo producto en los detalles de una factura. La lista
      * de detalles se encuentra en memoria.
@@ -145,7 +123,7 @@ class FacturaModel {
         return $numero;
     }
     
-    public function guardarFactura($listaFacturaDet,$cedula){
+    public function guardarFactura($listaFacturaDet,$idprov,$idusuario){
         if(!isset($listaFacturaDet)){
             throw new Exception("Debe por lo menos registrar un producto.");
         }
