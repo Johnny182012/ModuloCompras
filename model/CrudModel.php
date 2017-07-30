@@ -15,9 +15,6 @@ include_once 'DetalleFactura.php';
  * @author Gaby
  */
 class CrudModel {
-    //////////////////////////
-    //CRUD FCATURAS:        //
-    //////////////////////////
 
     /**
      * Retorna la lista de clientes de la bdd.
