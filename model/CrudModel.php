@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Database.php';
-
+include_once 'Login.php';
 include_once 'Proveedor.php';
 include_once 'Usuario.php';
 include_once 'Facturas.php';
@@ -332,4 +332,99 @@ class CrudModel {
         Database::disconnect();
     }
 
+    
+    //////////////////////////
+    //CRUD: LOGIN          //
+    /////////////////////////
+
+    /**
+     * Retorna la lista de login de la bdd.
+     * @return array
+     */
+    public function getLogins() {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from login";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $listado = array();
+        foreach ($resultado as $res) {
+            $login = new Login($res['idusuario'], $res['idlogin'], $res['passwordlogin']);
+            array_push($listado, $login);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+
+    /**
+     * Busca la informacion de un login en especifico.
+     * @param type $idlogin El numero de $idlogin del login.
+     * @return type
+     */
+    public function getLogin($idlogin) {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from login where idlogin=?";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array($idlogin));
+        //obtenemos el registro especifico:
+        $res = $consulta->fetch(PDO::FETCH_ASSOC);
+        $login = new Login($res['idusuario'], $res['idlogin'], $res['passwordlogin']);
+        Database::disconnect();
+        //retornamos el objeto encontrado:
+        return $login;
+    }
+
+    /**
+     * Inserta un nuevo login en la bdd.
+     * 
+     */
+    public function insertarLogin($idusuario, $passwordlogin) {
+        $pdo = Database::connect();
+        $sql = "insert into login(idusuario,passwordlogin) values(?,?)";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try {
+            $consulta->execute(array($idusuario, $passwordlogin));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+
+    /**
+     * Actualiza un login existente.
+     * 
+     */
+    public function actualizarLogin($idusuario, $passwordlogin, $idlogin) {
+        //Preparamos la conexión a la bdd:
+        $pdo = Database::connect();
+        $sql = "update login set idusuario=?,passwordlogin=? where idlogin=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        $consulta->execute(array($idusuario, $passwordlogin, $idlogin));
+        Database::disconnect();
+    }
+
+    /**
+     * Elimina un login especifico de la bdd.
+     * @param type $idlogin
+     */
+    public function eliminarLogin($idlogin) {
+        //Preparamos la conexion a la bdd:
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "delete from login where idlogin=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        try {
+            $consulta->execute(array($idlogin));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
 }
