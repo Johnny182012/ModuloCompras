@@ -195,15 +195,7 @@ switch ($opcion) {
         break;
 //        PAGINAS DE LA FACTURA
 //        //    -------------------LISTAR---------------------
-    // obtiene los datos de los clientes de la base de datos
-    case "listar_facturas":
-        //obtenemos la lista de los clientes:
-        $listaFacturas = $crudModel->getFacturas();
-        //y los guardamos en sesion:
-        $_SESSION['listaFacturas'] = serialize($listaFacturas);
-        //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/facturas.php');
-        break;
+
     // obtiene los datos de los empleados de la base de datos
     case "listar_Detalle":
         //obtenemos la lista de empleados:
@@ -314,6 +306,16 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/facturas_1.php');
         break;
+    
+    case "listar_facturas":
+        //obtenemos la lista de facturas y subimos a sesion:
+        $_SESSION['listaFacturas']=serialize($crudModel->getFacturas());
+         $vec=$crudModel->getFacturas();
+        header('Location: ../view/Facturas.php');
+        
+        break;
+    
+    
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:

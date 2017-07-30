@@ -37,7 +37,7 @@ class Facturas {
         return $this->idproveedor;
     }
 
-    function getIdusuario() {
+        function getIdusuario() {
         return $this->idusuario;
     }
 
@@ -53,7 +53,7 @@ class Facturas {
         return $this->ivafactura;
     }
 
-    function setIdfactura($idfactura) {
+        function setIdfactura($idfactura) {
         $this->idfactura = $idfactura;
     }
 

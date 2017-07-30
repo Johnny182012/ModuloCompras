@@ -214,4 +214,28 @@ class CrudModel {
         }
         Database::disconnect();
     }
+    
+    ///facturas lista
+    public function getFacturas(){
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from facturas order by idfactura desc";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $listado = array();
+        foreach ($resultado as $res) {
+            $factura = new Facturas();
+            $factura->setIdfactura($res['id_factura']);
+            $factura->setIdproveedor($res['idproveedor']);
+            $factura->setIdusuario($res['idusuario']);
+            $factura->setValorfactura($res['valorfactura']);
+            $factura->setFechafactura($res['fechafactura']);
+            $factura->setIvafactura($res['ivafactura']);
+            
+            array_push($listado, $factura);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
 }

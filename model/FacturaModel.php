@@ -1,6 +1,6 @@
 <?php
 include_once 'Database.php';
-include_once 'Cliente.php';
+include_once 'Facturas.php.php';
 include_once 'Producto.php';
 include_once 'FacturaCab.php';
 include_once 'FacturaDet.php';
@@ -19,15 +19,14 @@ class FacturaModel {
         //transformamos los registros en objetos:
         $listado = array();
         foreach ($resultado as $res) {
-            $factura = new FacturaCab();
-            $factura->setIdFacturaCab($res['id_factura_cab']);
-            $factura->setFecha($res['fecha']);
-            $factura->setCedula($res['cedula']);
-            $factura->setEstado($res['estado']);
-            $factura->setBaseImponible($res['base_imponible']);
-            $factura->setBaseNoImponible($res['base_no_imponible']);
-            $factura->setValorIva($res['valor_iva']);
-            $factura->setTotal($res['total']);
+            $factura = new factura();
+            $factura->setIdfactura($res['id_factura']);
+            $factura->setIdproveedor($res['idproveedor']);
+            $factura->setIdusuario($res['idusuario']);
+            $factura->setValorfactura($res['valorfactura']);
+            $factura->setFechafactura($res['fechafactura']);
+            $factura->setIvafactura($res['ivafactura']);
+            
             array_push($listado, $factura);
         }
         Database::disconnect();
