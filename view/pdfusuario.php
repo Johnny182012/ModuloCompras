@@ -1,16 +1,16 @@
 <?php
 
-require('/fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF {
 
     //Cabecera de página
     function Header() {
+        $this->Image('../img/logop.png');
+        $this->Image('../img/logou.png');
 
-//       $this->Image();
         $this->SetFont('Arial', 'B', 12);
-        $this->Cell(10, 10, 'UNIVERSIDAD TENCNICA DEL NORTE');        
-     
+        $this->Cell(10, 10, 'UNIVERSIDAD TENCNICA DEL NORTE');
     }
 
     //Pie de página
@@ -25,8 +25,6 @@ class PDF extends FPDF {
 
 }
 
-
-
 $pdf = new PDF();
 $pdf->AddPage();
 $pdf->SetFont('Times', '', 12);
@@ -34,8 +32,8 @@ $pdf->SetFont('Times', '', 12);
 $pdf->Ln();
 $pdf->Ln();
 $listaClientes = 'fsfdsf';
-
-$pdf->Cell(40, 10,$listaClientes );
+$pdf->Cell(40, 10, $listaClientes);
+//$pdf->Cell(40, 10,$listado );
 $pdf->AddPage();
 $pdf->Output();
 ?>
