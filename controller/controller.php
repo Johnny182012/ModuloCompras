@@ -339,5 +339,5 @@ switch ($opcion) {
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:
-        header('Location: ../view/index.php');
+        header('Location: ../../view/index.php');
 }
