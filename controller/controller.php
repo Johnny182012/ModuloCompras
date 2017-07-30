@@ -193,6 +193,107 @@ switch ($opcion) {
         //$_SESSION['listado'] = serialize($listado);
         header('Location: ../view/proveedor.php');
         break;
+//        PAGINAS DE LA FACTURA
+        // crea un nuevo factura
+    case "crear_facturas":
+        //obtenemos los parametros del formulario cliente:
+        $idfactura = $_REQUEST['idfactura'];
+        $idproveedor = $_REQUEST['idproveedor'];
+        $idusuario = $_REQUEST['idusuario'];
+        $valorfactura = $_REQUEST['valorfactura'];
+        $fechafactura = $_REQUEST['fechafactura'];
+        $ivafactura = $_REQUEST['ivafactura'];
+        //creamos el nuevo registro:
+        $crudModel->insertarFacturas($idfactura, $idproveedor, $idusuario, $valorfactura, $fechafactura, $ivafactura);
+        //actualizamos el listado:
+        $listaFacturas = $crudModel->getFacturas();
+        //y los guardamos en sesion:
+        $_SESSION['listaFacturas'] = serialize($listaFacturas);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/facturas.php');
+        break;
+    //crea un nuevo empleado
+    case "crear_detalle":
+        //obtenemos los parametros del formulario empleado:
+        $iddetalle = $_REQUEST['iddetalle'];
+        $idproducto = $_REQUEST['idproducto'];
+        $idfactura = $_REQUEST['idfactura'];
+        $cantidadproducto = $_REQUEST['cantidadproducto'];
+        $unidades = $_REQUEST['unidades'];
+        $descuento = $_REQUEST['descuento'];
+        $cantdescuento = $_REQUEST['cantdescuento'];
+        //creamos el nuevo registro:
+        $crudModel->insertarDetalle($iddetalle, $idproducto, $idfactura, $cantidadproducto, $unidades, $descuento, $cantdescuento);
+        //actualizamos el listado:
+        $listaDetalle = $crudModel->getDetalles();
+        //y los guardamos en sesion:
+        $_SESSION['listaDetalles'] = serialize($listaDetalle);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/facturas_1.php');
+        break;
+    
+    //---------------------------EDTTA----------------------------
+    //edita los datos de un cliente especifico
+    case "editar_facturas":
+        //obtenemos los parametros del formulario cliente:
+        $idfactura = $_REQUEST['idfactura'];
+        //Buscamos los datos
+        $listaFacturas = $crudModel->getFactura($idfactura);
+        //guardamos en sesion para edicion posterior:
+        $_SESSION['listaFacturas'] = serialize($listaFacturas);
+        //redirigimos la navegación al formulario de edicion cliente:
+        header('Location: ../view/editarFactura.php');
+        break;
+    //edita los datos de un empleado especifico
+    case "editar_detalle":
+        //obtenemos los parametros del formulario:
+        $iddetalle = $_REQUEST['iddetalle'];
+        //Buscamos los datos
+        $listaDetalle = $crudModel->getDetalle($iddetalle);
+        //guardamos en sesion para edicion posterior:
+        $_SESSION['listaDetalles'] = serialize($listaDetalle);
+        //redirigimos la navegación al formulario de edicion empleado:
+        header('Location: ../view/editarDetalle.php');
+        break;
+        
+//----------------------ACTUALIZA------------------
+    //actualiza los datos de un cliente especifico
+    case "actualizar_facturas":
+        //obtenemos los parametros del formulario :
+        $idfactura = $_REQUEST['idfactura'];
+        $idproveedor = $_REQUEST['idproveedor'];
+        $idusuario = $_REQUEST['idusuario'];
+        $valorfactura = $_REQUEST['valorfactura'];
+        $fechafactura = $_REQUEST['fechafactura'];
+        $ivafactura = $_REQUEST['ivafactura'];
+
+        //actualizamos los datos del cliente:
+        $crudModel->actualizarFcaturas($idfactura, $idproveedor, $idusuario, $valorfactura, $fechafactura, $ivafactura);
+        //actualizamos lista de cliente:
+        $listaFacturas = $crudModel->getFacturas();
+        $_SESSION['listaFacturas'] = serialize($listaFacturas);
+        //redireccionamos a una nueva pagina para visualizar el cambio:
+        header('Location: ../view/facturas.php');
+        break;
+    //actualiza los datos de un empleados especifico
+    case "actualizar_detalle":
+        //obtenemos los parametros del formulario:
+        $iddetalle = $_REQUEST['iddetalle'];
+        $idproducto = $_REQUEST['idproducto'];
+        $idfactura = $_REQUEST['idfactura'];
+        $cantidadproducto = $_REQUEST['cantidadproducto'];
+        $unidades = $_REQUEST['unidades'];
+        $descuento = $_REQUEST['descuento'];
+        $cantdescuento = $_REQUEST['cantdescuento'];
+
+        //actualizamos los datos del empleado:
+        $crudModel->actualizarDetalle($iddetalle, $idproducto, $idfactura, $cantidadproducto, $unidades, $descuento, $cantdescuento);
+        //actualizamos lista de empleados:
+        $listaDetalle = $crudModel->getDetalles();
+        $_SESSION['listaDetalles'] = serialize($listaDetalle);
+        //redireccionamos a una nueva pagina para visualizar el cambio:
+        header('Location: ../view/facturas_1.php');
+        break;
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:
