@@ -229,7 +229,7 @@ switch ($opcion) {
         //y los guardamos en session
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redireccionamos a una nueva pagina para visualizar
-        header('Location: ../view/crearusuario.php');
+        header('Location: ../view/gg.php');
         break;
 
     //------------------------------ELIMINAR-----------------------
