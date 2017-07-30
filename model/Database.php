@@ -8,11 +8,11 @@
 class Database {
 
     //Propiedades estaticas con la informacion de la conexion (DSN):
-    private static $dbName = 'compras';
-    private static $dbHost = 'localhost';
+    private static $dbName = 'ddbn3kjciqjl77';
+    private static $dbHost = 'ec2-107-21-248-129.compute-1.amazonaws.com';
     private static $port = '5432';
-    private static $dbUsername = 'postgres';
-    private static $dbUserPassword = 'cat221995';
+    private static $dbUsername = 'pgiwwetdzvyeoo';
+    private static $dbUserPassword = 'f675480f9a6851bea0fb98a055e79dc112b51176847bec600b596a35af69fa89';
     //Propiedad para control de la conexion:
     private static $conexion = null;
 
