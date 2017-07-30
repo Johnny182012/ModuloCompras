@@ -335,6 +335,72 @@ switch ($opcion) {
         
         break;
     
+    // obtiene los datos de los login de la base de datos
+    case "listar_logins":
+        //obtenemos la lista de los logins:
+        $listaLogins = $crudModel->getLogins();
+        //y los guardamos en sesion:
+        $_SESSION['listaLogins'] = serialize($listaLogins);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/logins.php');
+        break;
+    // crea un nuevo login
+    case "crear_login":
+        //obtenemos los parametros del formulario login:
+        $idusuario = $_REQUEST['idusuario'];
+        $passwordlogin = $_REQUEST['passwordlogin'];
+        //creamos el nuevo registro:
+        $crudModel->insertarLogin($idusuario, $passwordlogin);
+        //actualizamos el listado:
+        $listaLogins = $crudModel->getLogins();
+        //y los guardamos en sesion:
+        $_SESSION['listaLogins'] = serialize($listaLogins);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/logins.php');
+        break;
+    //elimina un login especifico
+    case "eliminar_login":
+        //obtenemos el codigo del login a eliminar:
+        $idlogin = $_REQUEST['idlogin'];
+        //eliminamos del formulario:
+        try {
+            $crudModel->eliminarLogin($idlogin);
+        } catch (Exception $e) {
+            //colocamos el mensaje de la excepcion en sesion:
+            $_SESSION['mensaje'] = $e->getMessage();
+        }
+        //actualizamos la lista de logins para grabar en sesion:
+        $listaLogins = $crudModel->getLogins();
+        $_SESSION['listaLogins'] = serialize($listaLogins);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/logins.php');
+        break;
+    //edita los datos de un login especifico
+    case "editar_login":
+        //obtenemos los parametros del formulario login:
+        $idlogin = $_REQUEST['idlogin'];
+        //Buscamos los datos
+        $listaLogins = $crudModel->getLogin($idlogin);
+        //guardamos en sesion para edicion posterior:
+        $_SESSION['listaLogins'] = serialize($listaLogins);
+        //redirigimos la navegación al formulario de edicion login:
+        header('Location: ../view/editarLogin.php');
+        break;
+    //actualiza los datos de un login especifico
+    case "actualizar_login":
+        //obtenemos los parametros del formulario login:
+        $idusuario = $_REQUEST['idusuario'];
+        $passwordlogin = $_REQUEST['passwordlogin'];
+        $idlogin = $_REQUEST['idlogin'];
+
+        //actualizamos los datos del login:
+        $crudModel->actualizarLogin($idusuario, $passwordlogin, $idlogin);
+        //actualizamos lista de login:
+        $listaLogins = $crudModel->getLogins();
+        $_SESSION['listaLogins'] = serialize($listaLogins);
+        //redireccionamos a una nueva pagina para visualizar el cambio:
+        header('Location: ../view/logins.php');
+        break;
     
     default:
         //si no existe la opcion recibida por el controlador, siempre
