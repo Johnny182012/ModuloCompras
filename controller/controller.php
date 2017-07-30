@@ -194,6 +194,26 @@ switch ($opcion) {
         header('Location: ../view/proveedor.php');
         break;
 //        PAGINAS DE LA FACTURA
+//        //    -------------------LISTAR---------------------
+    // obtiene los datos de los clientes de la base de datos
+    case "listar_facturas":
+        //obtenemos la lista de los clientes:
+        $listaFacturas = $crudModel->getFacturas();
+        //y los guardamos en sesion:
+        $_SESSION['listaFacturas'] = serialize($listaFacturas);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/facturas.php');
+        break;
+    // obtiene los datos de los empleados de la base de datos
+    case "listar_Detalle":
+        //obtenemos la lista de empleados:
+        $listaDetalle = $crudModel->getDetalles();
+        //y los guardamos en sesion:
+        $_SESSION['listaFacturas'] = serialize($listaDetalle);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/facturas_1.php');
+        break;
+    
         // crea un nuevo factura
     case "crear_facturas":
         //obtenemos los parametros del formulario cliente:
