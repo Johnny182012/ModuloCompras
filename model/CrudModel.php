@@ -236,4 +236,100 @@ class CrudModel {
         //retornamos el listado resultante:
         return $listado;
     }
+    
+    //////////////////////////
+    //CRUD: PRODUCTOS      //
+    /////////////////////////
+
+    /**
+     * Retorna la lista de productos de la bdd.
+     * @return array
+     */
+    public function getProductos() {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from productos";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $listado = array();
+        foreach ($resultado as $res) {
+            $producto = new Producto($res['idproducto'], $res['nombreproducto'], $res['ivaproducto'], $res['pvpproducto']);
+            array_push($listado, $producto);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+
+    /**
+     * Busca la informacion de un login en especifico.
+     * @param type $idproducto El numero de $idproducto del productos.
+     * @return type
+     */
+    public function getProducto($idproducto) {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from productos where idproducto=?";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array($idproducto));
+        //obtenemos el registro especifico:
+        $res = $consulta->fetch(PDO::FETCH_ASSOC);
+        $producto = new Producto($res['idproducto'], $res['nombreproducto'], $res['ivaproducto'], $res['pvpproducto']);
+        Database::disconnect();
+        //retornamos el objeto encontrado:
+        return $producto;
+    }
+
+    /**
+     * Inserta un nuevo producto en la bdd.
+     * 
+     */
+    public function insertarProducto($idproducto, $nombreproducto, $ivaproducto, $pvpproducto) {
+        $pdo = Database::connect();
+        $sql = "insert into productos(idproducto,nombreproducto,ivaproducto,pvpproducto) values(?,?,?,?)";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos y pasamos los parametros:
+        try {
+            $consulta->execute(array($idproducto, $nombreproducto, $ivaproducto, $pvpproducto));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+
+    /**
+     * Actualiza un producto existente.
+     * 
+     */
+    public function actualizarProducto($idproducto, $nombreproducto, $ivaproducto, $pvpproducto) {
+        //Preparamos la conexión a la bdd:
+        $pdo = Database::connect();
+        $sql = "update productos set nombreproducto=?,ivaproducto=?,pvpproducto=? where idproducto=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        $consulta->execute(array($nombreproducto, $ivaproducto, $pvpproducto, $idproducto));
+        Database::disconnect();
+    }
+
+    /**
+     * Elimina un producto especifico de la bdd.
+     * @param type $idproducto
+     */
+    public function eliminarProducto($idproducto) {
+        //Preparamos la conexion a la bdd:
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "delete from productos where idproducto=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        try {
+            $consulta->execute(array($idproducto));
+        } catch (PDOException $e) {
+            Database::disconnect();
+            throw new Exception($e->getMessage());
+        }
+        Database::disconnect();
+    }
+
 }
