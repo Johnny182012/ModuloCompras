@@ -402,6 +402,76 @@ switch ($opcion) {
         header('Location: ../view/logins.php');
         break;
     
+     // obtiene los datos de los productos de la base de datos
+    case "listar_productos":
+        //obtenemos la lista de productos:
+        $listaProductos = $crudModel->getProductos();
+        //y los guardamos en sesion:
+        $_SESSION['listaProductos'] = serialize($listaProductos);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/productos.php');
+        break;
+    //crea un nuevo producto
+    case "crear_producto":
+        //obtenemos los parametros del formulario producto:
+        $idproducto = $_REQUEST['idproducto'];
+        $nombreproducto = $_REQUEST['nombreproducto'];
+        $ivaproducto = $_REQUEST['ivaproducto'];
+        $pvpproducto = $_REQUEST['pvpproducto'];
+        //creamos el nuevo registro:
+        $crudModel->insertarProducto($idproducto, $nombreproducto, $ivaproducto, $pvpproducto);
+        //actualizamos el listado:
+        $listaProductos = $crudModel->getProductos();
+        //y los guardamos en sesion:
+        $_SESSION['listaProductos'] = serialize($listaProductos);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/productos.php');
+        break;
+    //elimina un producto especifico
+    case "eliminar_producto":
+        //obtenemos el codigo del producto a eliminar:
+        $idproducto = $_REQUEST['idproducto'];
+        //eliminamos del formulario:
+        try {
+            $crudModel->eliminarProducto($idproducto);
+        } catch (Exception $e) {
+            //colocamos el mensaje de la excepcion en sesion:
+            $_SESSION['mensaje1'] = $e->getMessage();
+        }
+        //actualizamos la lista de producto para grabar en sesion:
+        $listaProductos = $crudModel->getProductos();
+        $_SESSION['listaProductos'] = serialize($listaProductos);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/productos.php');
+        break;
+    //edita los datos de un producto especifico
+    case "editar_producto":
+        //obtenemos los parametros del formulario producto:
+        $idproducto = $_REQUEST['idproducto'];
+        //Buscamos los datos
+        $listaProductos = $crudModel->getProducto($idproducto);
+        //guardamos en sesion para edicion posterior:
+        $_SESSION['listaProductos'] = serialize($listaProductos);
+        echo $listaProductos->getNombreproducto();
+        //redirigimos la navegación al formulario de edicion producto:
+        header('Location: ../view/editarProducto.php');
+        break;
+    case "actualizar_producto":
+        //obtenemos los parametros del formulario producto:
+        $idproducto = $_REQUEST['idproducto'];
+        $nombreproducto = $_REQUEST['nombreproducto'];
+        $ivaproducto = $_REQUEST['ivaproducto'];
+        $pvpproducto = $_REQUEST['pvpproducto'];
+
+        //actualizamos los datos del producto:
+        $crudModel->actualizarProducto($idproducto, $nombreproducto, $ivaproducto, $pvpproducto);
+        //actualizamos lista de producto:
+        $listaProductos = $crudModel->getProductos();
+        $_SESSION['listaProductos'] = serialize($listaProductos);
+        //redireccionamos a una nueva pagina para visualizar el cambio:
+        header('Location: ../view/productos.php');
+        break;
+    
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:
