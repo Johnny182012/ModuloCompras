@@ -26,7 +26,7 @@ switch ($opcion) {
         //y los guardamos en sesion:
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/usuarios.php');
+        header('Location: ../view/gg.php');
         break;
 
     case "crear_usuario":
@@ -48,7 +48,7 @@ switch ($opcion) {
         //y los guardamos en session
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redireccionamos a una nueva pagina para visualizar
-        header('Location: ../view/usuarios.php');
+        header('Location: ../view/gg.php');
         break;
     
     //elimina un usuario especifico
@@ -66,7 +66,7 @@ switch ($opcion) {
         $listaUsuarios = $crudModel->getUsuarios();
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/usuarios.php');
+        header('Location: ../view/gg.php');
         break;
     //edita los datos de un usuario especifico
     case "editar_usuario":
@@ -77,7 +77,7 @@ switch ($opcion) {
         //guardamos en sesion para edicion posterior:
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redirigimos la navegación al formulario de edicion usuario:
-        header('Location: ../view/editarUsuario.php');
+        header('Location: ../view/ggeditarusuario.php');
         break;
     //actualiza los datos de un usuario especifico
     case "actualizar_usuario":
@@ -99,7 +99,7 @@ switch ($opcion) {
         $listaUsuarios = $crudModel->getUsuarios();
         $_SESSION['listaUsuarios'] = serialize($listaUsuarios);
         //redireccionamos a una nueva pagina para visualizar el cambio:
-        header('Location: ../view/usuarios.php');
+        header('Location: ../view/gg.php');
         break;
     
     default:
