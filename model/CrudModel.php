@@ -427,12 +427,12 @@ class CrudModel {
     public function getProveedoresCredito() {
         //obtenemos la informacion de la bdd:
         $pdo = Database::connect();
-        $sql = "select nombreproveedor, tipoproveedor, valorfactura from proveedor p left join facturas f on p.idproveedor=f.idproveedor";
+        $sql = "select nombreproveedor, tipoproveedor, idfactura, valorfactura from proveedor p left join facturas f on p.idproveedor=f.idproveedor";
         $resultado = $pdo->query($sql);
         //transformamos los registros en objetos:
         $listado = array();
         foreach ($resultado as $res) {
-            $preveedoresc = new ProveedoresCredito($res['nombreproveedor'], $res['tipoproveedor'], $res['valorfactura']);
+            $preveedoresc = new ProveedoresCredito($res['nombreproveedor'], $res['tipoproveedor'], $res['idfactura'], $res['valorfactura']);
             array_push($listado, $preveedoresc);
         }
         Database::disconnect();

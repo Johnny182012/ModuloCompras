@@ -14,11 +14,13 @@
 class ProveedoresCredito {
     private $nombreproveedor;
     private $tipoproveedor;
+    private $idfactura;
     private $valorfactura;
     
-    function __construct($nombreproveedor, $tipoproveedor, $valorfactura) {
+    function __construct($nombreproveedor, $tipoproveedor, $idfactura, $valorfactura) {
         $this->nombreproveedor = $nombreproveedor;
         $this->tipoproveedor = $tipoproveedor;
+        $this->idfactura = $idfactura;
         $this->valorfactura = $valorfactura;
     }
 
@@ -28,6 +30,10 @@ class ProveedoresCredito {
 
     function getTipoproveedor() {
         return $this->tipoproveedor;
+    }
+
+    function getIdfactura() {
+        return $this->idfactura;
     }
 
     function getValorfactura() {
@@ -42,8 +48,13 @@ class ProveedoresCredito {
         $this->tipoproveedor = $tipoproveedor;
     }
 
+    function setIdfactura($idfactura) {
+        $this->idfactura = $idfactura;
+    }
+
     function setValorfactura($valorfactura) {
         $this->valorfactura = $valorfactura;
     }
+
 
 }
