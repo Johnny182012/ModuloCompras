@@ -132,10 +132,7 @@ if (!isset($_SESSION['bandera'])) {
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                             <ul id="nav" class="nav navbar-nav">
-                                <li class="current"><a href="#body">Inicio</a></li>
-                                <li><a href="#about">Acerca de Nosotros</a></li>
-                                <li><a href="#services">Servicios</a></li>
-                                <li><a href="#our-team">Equipo de trabajo</a></li>
+                                <li class="current"><a href="../index.html">Inicio</a></li>
                                 <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>
                                         <li><a href="../controller/controller.php?opcion=segundoReporteC">Reporte Proveedores</a></li>

@@ -253,6 +253,7 @@ if (!isset($_SESSION['bandera'])) {
                                 </li>
                                 <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
                                 <li><a href="#contact-us">Contactos</a></li>
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
                             </ul>
                         </nav>
                         <!-- /main nav -->

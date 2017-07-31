@@ -243,6 +243,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="controller/controller.php?opcion=listar_facturasC">Facturas</a>
                                 </li>
                                 <li><a href="controller/controller.php?opcion=primerReporteC">Cajeros</a></li>
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
                             </ul>
                         </nav>
                         <!-- /main nav -->
