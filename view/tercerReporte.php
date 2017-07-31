@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../model/Facturas1.php';
+//include_once '../model/Facturas1.php';
 require_once '../model/CrudModel.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
@@ -14,7 +14,7 @@ require_once '../model/CrudModel.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Cajeros</title>
+        <title>Facturas</title>
 
         <meta name="description" content="description">
 
@@ -87,18 +87,22 @@ require_once '../model/CrudModel.php';
                     </a>
                 </div>
 
-                <nav class="collapse navbar-collapse navbar-right" >
+                <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#our-team">Team</a></li>
-                        <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="index.html#showcase">Portfolio</a></li>
-                        <li><a href="index.html#blog">Blog</a></li>
-                        <li><a href="index.html#contact-us">Contact</a></li>
+                        <li class="current"><a href="#body">Inicio</a></li>
+                        <li><a href="#about">Acerca de Nosotros</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#our-team">Equipo de trabajo</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                        <li><a href="controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                        <li><a href="controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                        <li><a href="controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact-us">Contactos</a></li>
                     </ul>
-
                 </nav><!-- /.navbar-collapse -->
             </div>
         </header>
@@ -118,7 +122,7 @@ require_once '../model/CrudModel.php';
                             <i class="fa fa-book fa-4x"></i>
                         </div>
                         <div class="title text-center">
-                            <h2>Tercer<span class="color">Reporte</span></h2>
+                            <h2>Buscar <span class="color">Facturas</span></h2>
                             <div class="border"></div>
                         </div>
 

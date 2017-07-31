@@ -86,18 +86,22 @@ require_once '../model/Login.php';
                     </a>
                 </div>
 
-                <nav class="collapse navbar-collapse navbar-right" >
+                <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#our-team">Team</a></li>
-                        <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="index.html#showcase">Portfolio</a></li>
-                        <li><a href="index.html#blog">Blog</a></li>
-                        <li><a href="index.html#contact-us">Contact</a></li>
+                        <li class="current"><a href="#body">Inicio</a></li>
+                        <li><a href="#about">Acerca de Nosotros</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#our-team">Equipo de trabajo</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a></li>
+                        <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                        <li><a href="controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                        <li><a href="controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                        <li><a href="controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact-us">Contactos</a></li>
                     </ul>
-
                 </nav><!-- /.navbar-collapse -->
             </div>
         </header>
