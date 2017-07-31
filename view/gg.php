@@ -391,6 +391,7 @@ require_once '../model/Usuario.php';
                                         </tbody >                    
 
                                     </table >
+                                    <a class="btn btn-success" href="../view/pdfusuarios.php">IMPRIMIR</a>
 
                                 </div>
                             </div>     <!-- End col-lg-12 -->
