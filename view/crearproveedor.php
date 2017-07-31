@@ -172,7 +172,7 @@ require_once '../model/Proveedor.php';
                             <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
-                                    <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR PROVEEDOR</a></li>
+                                    <li><a class="filter" data-toggle="modal" data-target="#myModal"><h3><span class='glyphicon glyphicon-folder-open'></span>&nbsp;&nbsp;&nbsp;INGRESAR PROVEEDOR</h3></a></li>
 
                                     <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
                                 </ul></div>
@@ -189,12 +189,12 @@ require_once '../model/Proveedor.php';
                                             <!--permite ingresar un nuevo proveedor-->
                                             <form action="../controller/controller.php" style=" width: 100%;">
                                                 <input type="hidden" name="opcion" value="crear_proveedor">
-                                                <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
+                                                <center><table style=" width: 100%;   border-collapse: collapse;width: 100%;">                                                                                    
                                                         <tr>
-                                                            <td><br>Identificación Proveedor:</br></td>
-                                                            <td><br><input type="text" name="idproveedor" maxlength="13" required="true"></br></td>
-                                                            <td><br>Tipo Identificación</br></td>
-                                                            <td><select name="tipoidproveedor">
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Identificación Proveedor:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idproveedor" maxlength="13" required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Tipo Identificación</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><select name="tipoidproveedor">
                                                                     <option value="C">IDENTICACION CEDULA</option>
                                                                     <option value="R">IDENTIFICACION RUC</option>
                                                                     <option value="P">IDENTIFICACION PASAPORTE</option>
@@ -202,16 +202,16 @@ require_once '../model/Proveedor.php';
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Nombres:</br></td>
-                                                            <td><br><input title="Se necesita un nombre" placeholder="Ej: Luis" pattern="[A-Za-z ]+"  type="text" name="nombreproveedor" maxlength="100" required="true">  </br></td>                      
-                                                            <td><br>Fecha Nacimiento:</br></td>
-                                                            <td><br><input type="date" name="fecnacproveedor" required="true" autocomplete="off" required="true" max="today" min="01-01-1800"  value="<?php echo date('d-m-Y'); ?>"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Nombres:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input title="Se necesita un nombre" placeholder="Ej: Luis" pattern="[A-Za-z ]+"  type="text" name="nombreproveedor" maxlength="100" required="true">  </br></td>                      
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Fecha Nacimiento:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="date" name="fecnacproveedor" required="true" autocomplete="off" required="true" max="today" min="01-01-1800"  value="<?php echo date('d-m-Y'); ?>"></br></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Ciudad Nacimiento:</br></td>
-                                                            <td><br><input placeholder="Ej: Quito" pattern="[A-Za-z ]+" type="text" name="ciudnacproveedor" maxlength="50" required="true">                    </br></td>
-                                                            <td><br>Tipo proveedor:</br></td>
-                                                            <td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Ciudad Nacimiento:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input placeholder="Ej: Quito" pattern="[A-Za-z ]+" type="text" name="ciudnacproveedor" maxlength="50" required="true">                    </br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Tipo proveedor:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
                                                                 <table>
                                                                     <tr>
                                                                         <td><input type="radio" name="tipoproveedor" value='true' required="true">Credito</td>
@@ -222,33 +222,33 @@ require_once '../model/Proveedor.php';
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Direccion:</br></td>
-                                                            <td><br><input placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" type="text" name="direccionproveedor" maxlength="100" required="true"></br></td>
-                                                            <td><br>Telefono:</br></td>
-                                                            <td><br><input placeholder="Ej: 0909785967" pattern="[0-9]+" type="tel" name="telefonoproveedor" maxlength="10" required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Direccion:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" type="text" name="direccionproveedor" maxlength="100" required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Telefono:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input placeholder="Ej: 0909785967" pattern="[0-9]+" type="tel" name="telefonoproveedor" maxlength="10" required="true"></br></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Email:</br></td>
-                                                            <td><br><input type="text" name="emailproveedor" maxlength="50" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"  required="true"></br></td>
-                                                            <td><br>Estado:</br></td>
-                                                            <td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Email:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="emailproveedor" maxlength="50" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"  required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Estado:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
                                                                 <table>
                                                                     <tr>
-                                                                        <td><input type="radio" name="estadoproveedor" value='true' required="true">Activo</td>
+                                                                        <td style="text-align: left;padding: 8px;color: black;"><input type="radio" name="estadoproveedor" value='true' required="true">Activo</td>
                                                                         <td width="20"></td>
-                                                                        <td><input type="radio" name="estadoproveedor" value='false' required="true">Inactivo</td>
+                                                                        <td style="text-align: left;padding: 8px;color: black;"><input type="radio" name="estadoproveedor" value='false' required="true">Inactivo</td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
                                                         </tr>
                                                         <td>
-                                                        <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
+                                                        <td style="padding: 8px;color: black;" colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
                                                         </td>
                                                     </table></center>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button  style="color: #000; font-size: medium;border-radius: 0 50% / 0 100%;" type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                            <button  style="color: #000; font-size: medium;border-radius: 0 50% / 0 100%;" type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -258,31 +258,14 @@ require_once '../model/Proveedor.php';
                         <br>
                         <br>
                         <div style="overflow-x:auto;">
-                            <!--ESTILO DE LA TABLA-->
-                            <style>
-                                table {
-                                    border-collapse: collapse;
-                                    width: 100%;
+                            <div id="cuadro">
+                                <center>
+                                    <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                </center>
 
-                                }
-
-                                th, td {
-                                    text-align: left;
-                                    padding: 8px;
-                                    color: black;
-
-                                }
-
-                                tr:nth-child(even){background-color: #cccccc}
-                                tr:nth-child(odd){background-color: whitesmoke}
-
-                                th {
-                                    background-color: #4CAF50;
-                                    color: white;
-                                }
-                            </style>
-                            <table id="example">    
-                                <tr>
+                                <div class="datagrid">
+                                    <table class="order-table table">   
+                                        <tr class="titulo" style="font-size: 1em">
                                     <th>IDENTIFICACION</th>
                                     <th>TIPO IDENTIFICACION</th>
                                     <th>NOMBRES</th>
@@ -313,8 +296,8 @@ require_once '../model/Proveedor.php';
                                             echo "<td>" . $proveedor->getTelefonoproveedor() . "</td>";
                                             echo "<td>" . $proveedor->getEmailproveedor() . "</td>";
                                             echo "<td>" . $proveedor->getEstadoproveedor() . "</td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
-                                            echo "<td><a title='Actualizar dato' href='../controller/controller.php?opcion=editar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
+                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></center></td>";
+                                            echo "<td><center><a title='Actualizar dato' href='../controller/controller.php?opcion=editar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></center></td>";
                                             echo "</tr>";
                                         }
                                     } else {
