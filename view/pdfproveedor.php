@@ -9,7 +9,7 @@ class PDF extends FPDF {
     //Cabecera de página
     function Header() {
 
-        $this->Image('../img/logoup.png');
+        $this->Image('../img/logoho.png');
 //        $this->SetFont('Arial', 'B', 12);
         $this->Ln(10);
     }
