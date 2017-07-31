@@ -124,16 +124,16 @@ if (!isset($_SESSION['bandera'])) {
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="../index.html">
+                            <a class="navbar-brand" href="../index.php">
                                 <h1 id="logo">
-                                    <img src="img/logo-meghna.png" alt="Meghna" />
+                                    <img src="../img/logos/meghuna1.gif" alt="Meghna" />
                                 </h1>
                             </a>
                         </div>
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                             <ul id="nav" class="nav navbar-nav">
-                                <li class="current"><a href="../index.html">Inicio</a></li>
+                                <li class="current"><a href="../index.php">Inicio</a></li>
                                 <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>
                                         <li><a href="../controller/controller.php?opcion=segundoReporteC">Reporte Proveedores</a></li>

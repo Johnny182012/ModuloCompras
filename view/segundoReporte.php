@@ -240,6 +240,7 @@ if (!isset($_SESSION['bandera'])) {
                                         </tbody >                    
 
                                     </table >
+                                    <a class="btn btn-success" href="../view/pdfreporteproveedor.php">IMPRIMIR</a>
 
                                 </div>
                             </div>     <!-- End col-lg-12 -->

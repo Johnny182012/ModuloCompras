@@ -236,8 +236,8 @@ if (!isset($_SESSION['bandera'])) {
                                             ?>
                                         </tbody >                    
 
-                                    </table >
-
+                           <a class="btn btn-success" href="../view/pdfcajeros.php">IMPRIMIR</a>            </table >
+                                 
                                 </div>
                             </div>     <!-- End col-lg-12 -->
                         </div>	    <!-- End row -->
