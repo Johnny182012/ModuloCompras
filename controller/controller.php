@@ -472,9 +472,9 @@ switch ($opcion) {
         header('Location: ../view/productos.php');
         break;
     
-    default:
-        //si no existe la opcion recibida por el controlador, siempre
-        //redirigimos la navegacion a la pagina index:
-        header('Location: ../view/index.php');
+//    default:
+//        //si no existe la opcion recibida por el controlador, siempre
+//        //redirigimos la navegacion a la pagina index:
+//        header('Location: ../view/index.php');
         break;
 }
