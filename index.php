@@ -5,21 +5,21 @@
 <!--[if gt IE 8]><!-->
 
 <?php
-//session_start();
-//$rolusuario = unserialize($_SESSION['rolusuario']);
-//if (!isset($_SESSION['bandera'])) {
-//    session_destroy();
-//    header('Location: /view/indexLogin.php');
-//} else if (isset($_SESSION['bandera']) && $rolusuario == "C") {
-//    session_destroy();
-//    header('Location: /view/indexLogin.php');
-//} else {
-//    $bandera = unserialize($_SESSION['bandera']);
-//    if ($bandera == 'N') {
-//        session_destroy();
-//        header('Location: ../view/indexLogin.php');
-//    } else if ($bandera == 'S') {
-//        ?>
+session_start();
+$rolusuario = unserialize($_SESSION['rolusuario']);
+if (!isset($_SESSION['bandera'])) {
+    session_destroy();
+    header('Location: /view/indexLogin.php');
+} else if (isset($_SESSION['bandera']) && $rolusuario == "C") {
+    session_destroy();
+    header('Location: /view/indexLogin.php');
+} else {
+    $bandera = unserialize($_SESSION['bandera']);
+    if ($bandera == 'N') {
+        session_destroy();
+        header('Location: ../view/indexLogin.php');
+    } else if ($bandera == 'S') {
+        ?>
         <html class="no-js"> <!--<![endif]-->
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1064,6 +1064,6 @@
         </html>
 
         <?php
-//    }
-//}
-?>
+    }
+        }
+        ?>
