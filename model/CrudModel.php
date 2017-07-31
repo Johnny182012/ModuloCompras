@@ -6,6 +6,8 @@ include_once 'Proveedor.php';
 include_once 'Usuario.php';
 include_once 'Facturas.php';
 include_once 'DetalleFactura.php';
+include_once 'Cajero.php';
+include_once 'ProveedoresCredito.php';
 
 /**
  * Clase para el manejo CRUD de clientes,empleado,buses y pedidos
@@ -18,9 +20,8 @@ class CrudModel {
      * Retorna la lista de clientes de la bdd.
      * @return array
      */
-
     //56456456465456465456456
-     //////////////////////////
+    //////////////////////////
     // CRUD PROVEEDORES:      //
     //////////////////////////
     /**
@@ -110,7 +111,7 @@ class CrudModel {
         $sql = "update proveedor set tipoidproveedor=?,nombreproveedor=?,fecnacproveedor=?,ciudnacproveedor=?,tipoproveedor=?,direccionproveedor=?,telefonoproveedor=?,emailproveedor=?,estadoproveedor=?  where idproveedor=?";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos la sentencia incluyendo a los parametros:
-        $consulta->execute(array( $tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor,$idproveedor));
+        $consulta->execute(array($tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor, $idproveedor));
         Database::disconnect();
     }
 
@@ -130,9 +131,7 @@ class CrudModel {
         //transformamos los registros en objetos:
         $listado = array();
         foreach ($resultado as $res) {
-            $usuario = new Usuario($res['idusuario'], $res['tipoidusuario'], $res['rolusuario'], $res['nombreusuario'],
-                    $res['fecnacusuario'],$res['ciunacusuario'], $res['direccionusuario'], $res['telefonousuario'], 
-                    $res['emailusuario'], $res['estadousuario']);
+            $usuario = new Usuario($res['idusuario'], $res['tipoidusuario'], $res['rolusuario'], $res['nombreusuario'], $res['fecnacusuario'], $res['ciunacusuario'], $res['direccionusuario'], $res['telefonousuario'], $res['emailusuario'], $res['estadousuario']);
             array_push($listado, $usuario);
         }
         Database::disconnect();
@@ -153,9 +152,7 @@ class CrudModel {
         $consulta->execute(array($idusuario));
         //obtenemos el registro especifico:
         $res = $consulta->fetch(PDO::FETCH_ASSOC);
-        $usuario = new Usuario($res['idusuario'], $res['tipoidusuario'], $res['rolusuario'], $res['nombreusuario'],
-                    $res['fecnacusuario'],$res['ciunacusuario'], $res['direccionusuario'], $res['telefonousuario'], 
-                    $res['emailusuario'], $res['estadousuario']);
+        $usuario = new Usuario($res['idusuario'], $res['tipoidusuario'], $res['rolusuario'], $res['nombreusuario'], $res['fecnacusuario'], $res['ciunacusuario'], $res['direccionusuario'], $res['telefonousuario'], $res['emailusuario'], $res['estadousuario']);
         Database::disconnect();
         //retornamos el objeto encontrado:
         return $usuario;
@@ -189,32 +186,32 @@ class CrudModel {
         $sql = "update usuario set tipoidusuario=?,rolusuario=?,nombreusuario=?,fecnacusuario=?,ciunacusuario=?,direccionusuario=?,telefonousuario=?,emailusuario=?,estadousuario=? where idusuario=?";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos la sentencia incluyendo a los parametros:
-        $consulta->execute(array($tipoidusuario, $rolusuario, $nombreusuario, $fecnacusuario, $ciunacusuario, $direccionusuario, $telefonousuario, $emailusuario, $estadousuario,$idusuario));
+        $consulta->execute(array($tipoidusuario, $rolusuario, $nombreusuario, $fecnacusuario, $ciunacusuario, $direccionusuario, $telefonousuario, $emailusuario, $estadousuario, $idusuario));
         Database::disconnect();
     }
-    
+
     /**
      * Elimina un usuario especifico de la bdd.
      * @param type $idusuario
      */
-    public function eliminarUsuario($idusuario){
+    public function eliminarUsuario($idusuario) {
         //Preparamos la conexion a la bdd:
-        $pdo=Database::connect();
+        $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql="delete from usuario where idusuario=?";
-        $consulta=$pdo->prepare($sql);
+        $sql = "delete from usuario where idusuario=?";
+        $consulta = $pdo->prepare($sql);
         //Ejecutamos la sentencia incluyendo a los parametros:
-                try{
+        try {
             $consulta->execute(array($idusuario));
-        }  catch (PDOException $e){
+        } catch (PDOException $e) {
             Database::disconnect();
             throw new Exception($e->getMessage());
         }
         Database::disconnect();
     }
-    
+
     ///facturas lista
-    public function getFacturas(){
+    public function getFacturas() {
         //obtenemos la informacion de la bdd:
         $pdo = Database::connect();
         $sql = "select * from facturas order by idfactura desc";
@@ -229,14 +226,14 @@ class CrudModel {
             $factura->setValorfactura($res['valorfactura']);
             $factura->setFechafactura($res['fechafactura']);
             $factura->setIvafactura($res['ivafactura']);
-            
+
             array_push($listado, $factura);
         }
         Database::disconnect();
         //retornamos el listado resultante:
         return $listado;
     }
-    
+
     //////////////////////////
     //CRUD: PRODUCTOS      //
     /////////////////////////
@@ -332,7 +329,6 @@ class CrudModel {
         Database::disconnect();
     }
 
-    
     //////////////////////////
     //CRUD: LOGIN          //
     /////////////////////////
@@ -427,4 +423,21 @@ class CrudModel {
         }
         Database::disconnect();
     }
+
+    public function getProveedoresCredito() {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select nombreproveedor, tipoproveedor, valorfactura from proveedor p left join facturas f on p.idproveedor=f.idproveedor";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $listado = array();
+        foreach ($resultado as $res) {
+            $preveedoresc = new ProveedoresCredito($res['nombreproveedor'], $res['tipoproveedor'], $res['valorfactura']);
+            array_push($listado, $preveedoresc);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+
 }

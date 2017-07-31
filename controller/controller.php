@@ -484,9 +484,21 @@ switch ($opcion) {
         header('Location: ../view/primerReporte.php');
         break;
     
+    case "segundoReporte":
+        header('Location: ../view/segundoReporte.php');
+        break;
+    case "segundoReporteListar":
+        //obtenemos la lista de productos:
+        $listaSR = $crudModel->getProveedoresCredito();
+        //y los guardamos en sesion:
+        $_SESSION['listaSR'] = serialize($listaSR);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/segundoReporte.php');
+        break;
+    
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:
 //        header('Location: ../view/index.php');
-        break;
+//        break;
 }
