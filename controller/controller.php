@@ -609,10 +609,36 @@ switch ($opcion) {
         $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
         header('Location: ../view/FacturasIngresar.php');
         break;
+    
+     case "guardar_factura":
+        //obtenemos los parametros del formulario:
+        $idproveedor=$_REQUEST['idproveedor'];
+        if(isset($_SESSION['listaFacturaDet'])){
+            $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
+            try {
+                $facturaCab=$facturaModel->guardarFactura($listaFacturaDet, $idproveedor,$ID);
+                $_SESSION['facturaCab']=$facturaCab;
+                header('Location: ../view/factura_reporte.php');
+                break;
+            } catch (Exception $e) {
+                $mensajeError=$e->getMessage();
+                $_SESSION['mensajeError']=$mensajeError;
+            }
+        }
+        //actualizamos lista de facturas:
+        //$listado = $gastosModel->getFacturas();
+        //$_SESSION['listado'] = serialize($listado);
+        header('Location: ../view/factura.php');
+        break;
+    
+    
      case "nueva_factura":
         unset($_SESSION['listaFacturaDet']);
         header('Location: ../view/FacturasIngresar.php');
         break;
+    
+    
+    
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:

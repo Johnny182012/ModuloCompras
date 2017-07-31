@@ -198,7 +198,7 @@ require_once '../model/Producto.php';
                                                 <input type="hidden" name="opcion" value="guardar_factura">
                                                             
                                                             Proveedor:
-                                                            <select name="idproveedor">                                        
+                                                                <select name="idproveedor">                                        
                                                                     <?php
                                                                     $listaProveedores = $crudModel->getProveedores();
 //                                                                    echo $listaProveedores;
