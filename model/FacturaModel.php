@@ -34,9 +34,10 @@ class FacturaModel {
         $facturaDet->setIdProducto($producto->getIdProducto());
         $facturaDet->setNombreProducto($producto->getNombreproducto());
         $facturaDet->setcantidadproducto($cantidad);
+        $facturaDet->setPrecio($producto->getPvpproducto());
         
         if ($producto->getIvaproducto()==true) {
-            $facturaDet->setPrecio(0.12);
+            $facturaDet->setPorcentajeIva(0.12);
         }else{
         $facturaDet->setPorcentajeIva(0);
         }

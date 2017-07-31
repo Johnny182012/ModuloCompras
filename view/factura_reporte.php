@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
-require_once '../model/Proveedor.php';
 require_once '../model/Producto.php';
+require_once '../model/Facturas.php';
+
 require_once '../model/DetalleFactura.php';
 require_once '../model/CrudModel.php';
 require_once '../model/FacturaModel.php';
@@ -32,28 +33,14 @@ $facturaCab=$_SESSION['facturaCab'];
             <table>
                 <tr>
                     <td>Nro. factura:</td>
-                    <td><?php echo $facturaCab->getIdFacturaCab(); ?></td>
+                    <td><?php echo $facturaCab->getIdfacturass(); ?></td>
                 </tr>
                 <tr>
                     <td>Fecha:</td>
-                    <td><?php echo $facturaCab->getFecha(); ?></td>
+                    <td><?php echo $facturaCab->getFechafactura(); ?></td>
                 </tr>
                 <tr>
-                    <td>Estado de la factura:</td>
-                    <td><?php echo $facturaCab->getEstado(); ?></td>
-                </tr>
-                <tr>
-                    <td>Cédula:</td>
-                    <td><?php echo $facturaCab->getCedula(); ?></td>
-                </tr>
-                <tr>
-                    <td>Cliente:</td>
-                    <td><?php echo $facturaCab->getNombresCliente(); ?></td>
-                </tr>
-                <tr>
-                    <td>Dirección:</td>
-                    <td><?php echo $facturaCab->getDireccionCliente(); ?></td>
-                </tr>
+                        
             </table>
             
     </p>
@@ -75,10 +62,10 @@ $facturaCab=$_SESSION['facturaCab'];
                 $listado = unserialize($_SESSION['listaFacturaDet']);
                 foreach ($listado as $facturaDet) {
                     echo "<tr>";
-                    echo "<td>" . $facturaDet->getIdProducto() . "</td>";
-                    echo "<td>" . $facturaDet->getNombreProducto() . "</td>";
+                    echo "<td>" . $facturaDet->getIdProductoss() . "</td>";
+                    echo "<td>" . $facturaDet->getNombreProductosss() . "</td>";
                     echo "<td>" . $facturaDet->getPrecio() . "</td>";
-                    echo "<td>" . $facturaDet->getCantidad() . "</td>";
+                    echo "<td>" . $facturaDet->getCantidadproducto() . "</td>";
                     echo "<td>" . $facturaDet->getPorcentajeIva() . "</td>";
                     echo "<td>" . $facturaDet->getSubtotal() . "</td>";
                     echo "</tr>";
@@ -105,7 +92,7 @@ $facturaCab=$_SESSION['facturaCab'];
                 echo "<td></td>";
                 echo "<td></td>";
                 echo "<td></td>";
-                echo "<td>" . $facturaCab->getValorIva() . "</td>";
+                echo "<td>" . $facturaCab->getIvafactura() . "</td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td> </td>";
@@ -113,7 +100,7 @@ $facturaCab=$_SESSION['facturaCab'];
                 echo "<td></td>";
                 echo "<td></td>";
                 echo "<td></td>";
-                echo "<td>" . $facturaCab->getTotal() . "</td>";
+                echo "<td>" . $facturaCab->getValorfacturassss() . "</td>";
                 echo "</tr>";
             } else {
                 echo "No se han cargado datos.";

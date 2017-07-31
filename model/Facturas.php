@@ -43,6 +43,11 @@ class Facturas {
         return $this->idfactura;
     }
 
+     function getIdfacturass() {
+        return $this->idfactura;
+    }
+
+    
     function getIdproveedor() {
         return $this->idproveedor;
     }
@@ -52,6 +57,9 @@ class Facturas {
     }
 
     function getValorfactura() {
+        return $this->valorfactura;
+    }
+  function getValorfacturassss() {
         return $this->valorfactura;
     }
 
