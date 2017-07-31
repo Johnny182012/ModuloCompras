@@ -10,8 +10,16 @@ class Producto {
     private $nombreproducto;//nombre del producto
     private $ivaproducto;//campo para saber si grava o no grava iva
     private $pvpproducto;//precio de venta publica sugerida del producto
-    
-    function __construct($idproducto, $nombreproducto, $ivaproducto, $pvpproducto) {//constuctor clase producto
+    private $valorIva=0.12;//precio de venta publica sugerida del producto
+    function getValorIva() {
+        return $this->valorIva;
+    }
+
+    function setValorIva($valorIva) {
+        $this->valorIva = $valorIva;
+    }
+
+        function __construct($idproducto, $nombreproducto, $ivaproducto, $pvpproducto) {//constuctor clase producto
         $this->idproducto = $idproducto;
         $this->nombreproducto = $nombreproducto;
         $this->ivaproducto = $ivaproducto;

@@ -1,9 +1,7 @@
 <?php
 include_once 'Database.php';
-include_once 'Facturas.php.php';
+include_once 'Facturas.php';
 include_once 'Producto.php';
-include_once 'FacturaCab.php';
-include_once 'FacturaDet.php';
 include_once 'CrudModel.php';
 /**
  * Clase que implementa la logica de facturacion.
@@ -28,11 +26,11 @@ class FacturaModel {
         $crudModel=new CrudModel();
         $producto=$crudModel->getProducto($idProducto);
         //creamos un nuevo detalle FacturaDet:
-        $facturaDet=new FacturaDet();
+        $facturaDet=new DetalleFactura();
         $facturaDet->setIdProducto($producto->getIdProducto());
         $facturaDet->setNombreProducto($producto->getNombre());
-        $facturaDet->setCantidad($cantidad);
-        $facturaDet->setPrecio($producto->getPrecio());
+        $facturaDet->setcantidadproducto($cantidad);
+        $facturaDet->setPrecio($producto->getPvpproducto());
         $facturaDet->setPorcentajeIva($producto->getPorcentajeIva());
         $facturaDet->setSubtotal($cantidad * $producto->getPrecio());
         //adicionamos el nuevo detalle al array en memoria:

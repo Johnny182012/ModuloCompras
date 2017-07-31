@@ -20,8 +20,44 @@ class DetalleFactura {
     private $unidades;
     private $descuento;
     private $cantdescuento;
-    
-    function __construct($iddetalle, $idproducto, $idfactura, $cantidadproducto, $unidades, $descuento, $cantdescuento) {
+    private $NombreProducto;
+    private $precio;
+    private $porcentajeIva;
+    private $Subtotal;
+    function getSubtotal() {
+        return $this->Subtotal;
+    }
+
+    function setSubtotal($Subtotal) {
+        $this->Subtotal = $Subtotal;
+    }
+
+        function getPorcentajeIva() {
+        return $this->porcentajeIva;
+    }
+
+    function setPorcentajeIva($porcentajeIva) {
+        $this->porcentajeIva = $porcentajeIva;
+    }
+
+        function getNombreProducto() {
+        
+        return $this->NombreProducto;
+    }
+
+    function getPrecio() {
+        return $this->precio;
+    }
+
+    function setNombreProducto($NombreProducto) {
+        $this->NombreProducto = $NombreProducto;
+    }
+
+    function setPrecio($precio) {
+        $this->precio = $precio;
+    }
+
+        function __construct($iddetalle, $idproducto, $idfactura, $cantidadproducto, $unidades, $descuento, $cantdescuento) {
         $this->iddetalle = $iddetalle;
         $this->idproducto = $idproducto;
         $this->idfactura = $idfactura;
