@@ -92,13 +92,13 @@ require_once '../model/Usuario.php';
                         <li><a href="#about">Acerca de Nosotros</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#our-team">Equipo de trabajo</a></li>
-                        <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
-                        <li><a href="controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
-                        <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a></li>
-                        <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                        <li><a href="controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
-                        <li><a href="controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
-                        <li><a href="controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                        <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                        <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#contact-us">Contactos</a></li>
                     </ul>
