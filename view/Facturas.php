@@ -235,76 +235,7 @@ require_once '../model/Producto.php';
                                                     </table></center>
                                                                                                         </form>
 
-                                                
-                                                 </p>
-    <table data-toggle="table">
-        <thead>
-            <tr>
-                <th>ID PRODUCTO</th>
-                <th>NOMBRE</th>
-                <th>PRECIO</th>
-                <th>CANTIDAD</th>
-                <th>IVA</th>
-                <th>SUBTOTAL</th>
-                <th>OPCIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            //verificamos si existe en sesion el listado de clientes:
-            if (isset($_SESSION['listaFacturaDet'])) {
-                $listado = unserialize($_SESSION['listaFacturaDet']);
-                foreach ($listado as $facturaDet) {
-                    echo "<tr>";
-                    echo "<td>" . $facturaDet->getIdProducto() . "</td>";
-                    echo "<td>" . $facturaDet->getNombreProducto() . "</td>";
-                    echo "<td>" . $facturaDet->getPrecio() . "</td>";
-                    echo "<td>" . $facturaDet->getCantidad() . "</td>";
-                    echo "<td>" . $facturaDet->getPorcentajeIva() . "</td>";
-                    echo "<td>" . $facturaDet->getSubtotal() . "</td>";
-                    echo "<td><a href='../controller/controller.php?opcion=eliminar_detalle&idProducto=" . $facturaDet->getIdProducto() . "'>Eliminar</a></td>";
-                    echo "</tr>";
-                }
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>BASE IMPONIBLE</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularBaseImponible($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>BASE NO IMPONIBLE</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularBaseNoImponible($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>IVA</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularIva($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>TOTAL</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-            } else {
-                echo "No se han cargado datos.";
-            }
-            ?>
+             
         </tbody>
     </table>
                                             </form>

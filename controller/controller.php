@@ -611,7 +611,7 @@ switch ($opcion) {
         break;
      case "nueva_factura":
         unset($_SESSION['listaFacturaDet']);
-        header('Location: ../view/factura.php');
+        header('Location: ../view/FacturasIngresar.php');
         break;
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre

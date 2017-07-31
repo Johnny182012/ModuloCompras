@@ -6,6 +6,7 @@ require_once '../model/Producto.php';
         require_once '../model/CrudModel.php';
         require_once '../model/FacturaModel.php';
            $crudModel = new CrudModel();
+           $facturaModel = new FacturaModel();
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -269,14 +270,42 @@ require_once '../model/Producto.php';
                     echo "<td><a href='../controller/controller.php?opcion=eliminar_detalle&idProducto=" . $facturaDet->getIdProductoss() . "'>Eliminar</a></td>";
                     echo "</tr>";
                 }
-               echo "<tr>";
+                 echo "<tr>";
                 echo "<td> </td>";
                 echo "<td>BASE IMPONIBLE</td>";
                 echo "<td></td>";
                 echo "<td></td>";
                 echo "<td></td>";
-                 echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
-                
+                echo "<td>" . $facturaModel->calcularBaseImponible($listado) . "</td>";
+                echo "<td></td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td> </td>";
+                echo "<td>BASE NO IMPONIBLE</td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td>" . $facturaModel->calcularBaseNoImponible($listado) . "</td>";
+                echo "<td></td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td> </td>";
+                echo "<td>IVA</td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td>" . $facturaModel->calcularIva($listado) . "</td>";
+                echo "<td></td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td> </td>";
+                echo "<td>TOTAL</td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
+                echo "<td></td>";
+                echo "</tr>";
             } else {
                 echo "No se han cargado datos.";
             }

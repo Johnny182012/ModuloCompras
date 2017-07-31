@@ -1,8 +1,10 @@
 <?php
 include_once 'Database.php';
 include_once 'Facturas.php';
+include_once 'DetalleFactura.php';
 include_once 'Producto.php';
 include_once 'CrudModel.php';
+
 /**
  * Clase que implementa la logica de facturacion.
  *
@@ -18,6 +20,7 @@ class FacturaModel {
      * @throws Exception
      * @return array
      */
+    
     public function adicionarDetalle($listaFacturaDet,$idProducto,$cantidad){
         if($cantidad<=0){
             throw new Exception ("La cantidad debe ser mayor a cero.");
@@ -61,6 +64,7 @@ class FacturaModel {
     }
     
     public function calcularBaseImponible($listaFacturaDet){
+        $facturaDet=new DetalleFactura();
         if(!isset($listaFacturaDet)){
             return 0;
         }
@@ -74,6 +78,7 @@ class FacturaModel {
     }
     
     public function calcularBaseNoImponible($listaFacturaDet){
+        $facturaDet=new DetalleFactura();
         if(!isset($listaFacturaDet)){
             return 0;
         }
@@ -87,28 +92,27 @@ class FacturaModel {
     }
     
     public function calcularIva($listaFacturaDet){
+        $facturaDet=new DetalleFactura();
         if(!isset($listaFacturaDet)){
             return 0;
         }
         $iva=0;
         foreach ($listaFacturaDet as $facturaDet) {
             if($facturaDet->getPorcentajeIva()>0){
-                $iva+=$facturaDet->getSubtotal()*$facturaDet->getPorcentajeIva()/100;
+                $iva+=$facturaDet->getSubtotal()*$facturaDet->getPorcentajeIva();
             }
         }
         return round($iva,2);
     }
     
     public function calcularTotal($listaFacturaDet){
-        $total=100;
-//        if(!isset($listaFacturaDet)){
-//            return 0;
-//        }
-//        $total= 
-//                //$this->calcularBaseImponible($listaFacturaDet)+
-//                $this->calcularBaseNoImponible($listaFacturaDet) ;
-//        echo $total;
-//                $this->calcularIva($listaFacturaDet);
+        
+        if(!isset($listaFacturaDet)){
+            return 0;
+        }
+        $total= $this->calcularBaseImponible($listaFacturaDet)+
+                $this->calcularBaseNoImponible($listaFacturaDet)+
+                $this->calcularIva($listaFacturaDet);
         return $total;
     }
     
@@ -144,7 +148,7 @@ class FacturaModel {
 
         //obtenemos los datos completos del cliente:
         $crudModel=new CrudModel();
-        $cliente=$crudModel->getCliente($cedula);
+        $prob=$crudModel->getProveedor($idprov);
         //creamos la nueva factura:
         $facturaCab = new Facturas();
         $facturaCab->setIdproveedor($idprov);
