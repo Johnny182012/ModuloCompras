@@ -235,6 +235,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="#about">Acerca de Nosotros</a></li>
                                 <li><a href="#services">Servicios</a></li>
                                 <li><a href="#our-team">Equipo de trabajo</a></li>
+                                <li><a href="#contact-us">Contactos</a></li>
                                 <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a>
                                     <ul>
                                         <li><a href="controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
@@ -252,7 +253,6 @@ if (!isset($_SESSION['bandera'])) {
                                     </ul>
                                 </li>
                                 <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                                <li><a href="#contact-us">Contactos</a></li>
                                 <li><a href='controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
                             </ul>
                         </nav>
@@ -488,7 +488,7 @@ if (!isset($_SESSION['bandera'])) {
                     <!-- skill set -->
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms">
                         <div class="skill-chart text-center">
-                            <span class="chart" data-percent="42.5">
+                            <span class="chart" data-percent="53.7">
                                 <span class="percent"></span>
                             </span>
                             <h3><i class="fa fa-wordpress"></i> PHP</h3>
@@ -500,7 +500,7 @@ if (!isset($_SESSION['bandera'])) {
                     <!-- skill set -->
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="200ms">
                         <div class="skill-chart text-center">
-                            <span class="chart" data-percent="31.7">
+                            <span class="chart" data-percent="27.3">
                                 <span class="percent">86</span>
                             </span>
                             <h3><i class="fa fa-joomla"></i> JavaScript</h3>
@@ -512,7 +512,7 @@ if (!isset($_SESSION['bandera'])) {
                     <!-- skill set -->
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="400ms">
                         <div class="skill-chart text-center">
-                            <span class="chart" data-percent="15.8">
+                            <span class="chart" data-percent="10.4">
                                 <span class="percent"></span>
                             </span>
                             <h3><i class="fa fa-html5"></i> HTML</h3>
@@ -524,7 +524,7 @@ if (!isset($_SESSION['bandera'])) {
                     <!-- skill set -->
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
                         <div class="skill-chart text-center">
-                            <span class="chart" data-percent="10.0">
+                            <span class="chart" data-percent="8.6">
                                 <span class="percent"></span>
                             </span>
                             <h3><i class="fa fa-css3"></i> CSS</h3>
@@ -1064,7 +1064,7 @@ if (!isset($_SESSION['bandera'])) {
         </body>
         </html>
 
-                <?php
-            }
-        }
-        ?>
+        <?php
+    }
+}
+?>
