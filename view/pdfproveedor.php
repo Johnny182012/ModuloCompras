@@ -26,11 +26,11 @@ class PDF extends FPDF {
 }
 
 $lista = array(
-    "ID", "TIPO_ID", "NOMBRE", "FECHA", "CIUDAD", "TIPO", "DIRECCION", "TELEFONO", "EMAIL"
+    "ID", "TIPO_ID", "NOMBRE", "FECHA", "CIUDAD", "TIPO", "DIRECCION", "TELEFONO", "EMAIL","ESTADO"
 );
 
 $pdf = new PDF();
-$pdf->AddPage('L','Legal');
+$pdf->AddPage('L','A3');
 
 for ($i = 0; $i < count($lista); $i++) {
     $pdf->SetFont('Times', '', 12);
@@ -43,8 +43,7 @@ $resultado = $pdo->query($sql);
 //transformamos los registros en objetos:
 $listado = array();
 foreach ($resultado as $res) {
-    $proveedor = new Proveedor($res['idproveedor'], $res['tipoidproveedor'], $res['nombreproveedor'], $res['fecnacproveedor'], $res['ciudnacproveedor'], $res['tipoproveedor'], $res['direccionproveedor'], $res['telefonoproveedor'], $res['emailproveedor'], $res['estadoproveedor']);
-
+   
     $idproveedor = $res['idproveedor'];
     $tipoidproveedor = $res['tipoidproveedor'];
     $nombreproveedor = $res['nombreproveedor'];
@@ -55,6 +54,19 @@ foreach ($resultado as $res) {
     $telefonoproveedor = $res['telefonoproveedor'];
     $emailproveedor = $res['emailproveedor'];
     $estadoproveedor = $res['estadoproveedor'];
+    
+     if($tipoproveedor==1){
+        $tipoproveedor="SI";        
+    }
+    else{
+        $tipoproveedor="NO";        
+    }
+    if($estadoproveedor==1){
+        $estadoproveedor="ACTIVO";        
+    }
+    else{
+        $estadoproveedor="INACTIVO";        
+    }
 //Aquí escribimos lo que deseamos mostrar...
     $pdf->Cell(37, 30, $idproveedor, 1, 0, 'C');
     $pdf->Cell(37, 30, $tipoidproveedor, 1, 0, 'C');
@@ -65,6 +77,7 @@ foreach ($resultado as $res) {
     $pdf->Cell(37, 30, $direccionproveedor, 1, 0, 'C');
     $pdf->Cell(37, 30, $telefonoproveedor, 1, 0, 'C');
     $pdf->Cell(37, 30, $emailproveedor, 1, 0, 'C');
+    $pdf->Cell(37, 30, $estadoproveedor, 1, 0, 'C');
     $pdf->Ln( 10);
 }
 Database::disconnect();
