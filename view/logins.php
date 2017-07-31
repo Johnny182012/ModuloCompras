@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/Proveedor.php';
+require_once '../model/Login.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -117,7 +117,7 @@ require_once '../model/Proveedor.php';
                             <i class="fa fa-book fa-4x"></i>
                         </div>
                         <div class="title text-center">
-                            <h2>Registros de<span class="color">Inicios de Sesión</span></h2>
+                            <h2>Registros de <span class="color">Inicios de Sesión</span></h2>
                             <div class="border"></div>
                         </div>
 
@@ -129,7 +129,7 @@ require_once '../model/Proveedor.php';
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
                                     <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR INICIO DE SESIóN</a></li>
-                                    <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
+                                    <!--<li><a href="controller/controller.php?opcion=listar_logins" class="filter">LISTAR INICIO DE SESIóN</a></li>-->
                                 </ul></div>
                             <!-- Modal -->
                             <div class="modal fade" id="myModal" role="dialog">
@@ -141,7 +141,7 @@ require_once '../model/Proveedor.php';
                                         </div>
                                         <div class="modal-body" >
 
-                                            <!--permite ingresar un nuevo proveedor-->
+                                            <!--permite ingresar un nuevo login-->
                                             <form action="../controller/controller.php" style=" width: 100%;">
                                                 <input type="hidden" name="opcion" value="crear_login">
                                                 <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
