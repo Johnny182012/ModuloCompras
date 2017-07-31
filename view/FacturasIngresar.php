@@ -212,7 +212,7 @@ require_once '../model/Producto.php';
                                                                 
                                                             
                                                         
-                                                        <input type="submit" value="Guardar">
+                                                         <center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center>
                                                         </form>
                                                         
                                                             <form action="../controller/controller.php">
@@ -248,7 +248,6 @@ require_once '../model/Producto.php';
             <tr>
                 <th>ID PRODUCTO</th>
                 <th>NOMBRE</th>
-                <th>PRECIO</th>
                 <th>CANTIDAD</th>
                 <th>IVA</th>
                 <th>SUBTOTAL</th>
@@ -264,13 +263,20 @@ require_once '../model/Producto.php';
                     echo "<tr>";
                     echo "<td>" . $facturaDet->getIdproductoss() . "</td>";
                     echo "<td>" . $facturaDet->getNombreProductosss() . "</td>";
-                    echo "<td>" . $facturaDet->getPrecio() . "</td>";
+                        echo "<td>" . $facturaDet->getCantidadproducto() . "</td>";
                     echo "<td>" . $facturaDet->getPorcentajeIva() . "</td>";
                     echo "<td>" . $facturaDet->getSubtotal() . "</td>";
                     echo "<td><a href='../controller/controller.php?opcion=eliminar_detalle&idProducto=" . $facturaDet->getIdProductoss() . "'>Eliminar</a></td>";
                     echo "</tr>";
                 }
-              
+               echo "<tr>";
+                echo "<td> </td>";
+                echo "<td>BASE IMPONIBLE</td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                echo "<td></td>";
+                 echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
+                
             } else {
                 echo "No se han cargado datos.";
             }

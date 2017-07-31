@@ -609,7 +609,10 @@ switch ($opcion) {
         $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
         header('Location: ../view/FacturasIngresar.php');
         break;
-    
+     case "nueva_factura":
+        unset($_SESSION['listaFacturaDet']);
+        header('Location: ../view/factura.php');
+        break;
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:

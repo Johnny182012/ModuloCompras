@@ -22,7 +22,7 @@ class DetalleFactura {
     private $cantdescuento;
     private $NombreProducto;
     private $precio;
-    private $porcentajeIva;
+    private $porcentajeIva=0.12;
     private $Subtotal;
     function getSubtotal() {
         return $this->Subtotal;

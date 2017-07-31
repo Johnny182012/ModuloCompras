@@ -100,12 +100,15 @@ class FacturaModel {
     }
     
     public function calcularTotal($listaFacturaDet){
-        if(!isset($listaFacturaDet)){
-            return 0;
-        }
-        $total= $this->calcularBaseImponible($listaFacturaDet) +
-                $this->calcularBaseNoImponible($listaFacturaDet) +
-                $this->calcularIva($listaFacturaDet);
+        $total=100;
+//        if(!isset($listaFacturaDet)){
+//            return 0;
+//        }
+//        $total= 
+//                //$this->calcularBaseImponible($listaFacturaDet)+
+//                $this->calcularBaseNoImponible($listaFacturaDet) ;
+//        echo $total;
+//                $this->calcularIva($listaFacturaDet);
         return $total;
     }
     
