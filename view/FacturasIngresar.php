@@ -264,14 +264,17 @@ require_once '../model/Producto.php';
                                             </form>
         </table>
                                         </div>  
-                                                            
+                                              <br>
+                                <br>
+                                <div style="overflow-x:auto;">
+                                    <div id="cuadro">
+                                        <center>
+                                            <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                        </center>
 
-                                                
-                                                 </p>
-
-                                          <table data-toggle="table">
-        <thead>
-            <tr>
+                                        <div class="datagrid">
+                                            <table class="order-table table">   
+                                                <tr class="titulo" style="font-size: 1em">
                 <th>ID PRODUCTO</th>
                 <th>NOMBRE</th>
                 <th>CANTIDAD</th>
@@ -334,9 +337,14 @@ require_once '../model/Producto.php';
             } else {
                 echo "No se han cargado datos.";
             }
-            ?>
-        </tbody>
-    </table>
+            ?> </tbody >                    
+
+                                            </table >
+                                            <a class="btn btn-success" href="../view/pdffacturadetalle.php">IMPRIMIR</a>
+
+                                        </div>
+                                    </div>     <!-- End col-lg-12 -->
+                                </div>	    <!-- End row -->
 
 
         <!-- Start Blog Post Section
