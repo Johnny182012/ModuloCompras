@@ -40,7 +40,7 @@ class DetalleFactura {
         $this->porcentajeIva = $porcentajeIva;
     }
 
-        function getNombreProducto() {
+        function getNombreProductosss() {
         
         return $this->NombreProducto;
     }
@@ -62,9 +62,10 @@ class DetalleFactura {
         return $this->iddetalle;
     }
 
-    function getIdproducto() {
+    function getIdproductoss() {
         return $this->idproducto;
     }
+    
 
     function getIdfactura() {
         return $this->idfactura;

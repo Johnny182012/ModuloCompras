@@ -49,7 +49,7 @@ class FacturaModel {
         //buscamos el producto:
         $cont=0;
         foreach ($listaFacturaDet as $det) {
-            if($det->getIdProducto()==$idProducto){
+            if($det->getIdProductoss()==$idProducto){
                 unset($listaFacturaDet[$cont]);
                 //reindexamos el array para eliminar el lugar vacio:
                 $listaFacturaDet=  array_values($listaFacturaDet);

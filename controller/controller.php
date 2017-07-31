@@ -529,7 +529,16 @@ switch ($opcion) {
             $mensajeError=$e->getMessage();
             $_SESSION['mensajeError']=$mensajeError;
         }
-       // header('Location: ../view/Facturas.php');
+        header('Location: ../view/FacturasIngresar.php');
+        break;
+        
+         case "eliminar_detalle":
+        //obtenemos los parametros del formulario:
+        $idProducto=$_REQUEST['idProducto'];
+        $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
+        $listaFacturaDet=$facturaModel->eliminarDetalle($listaFacturaDet, $idProducto);
+        $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
+        header('Location: ../view/FacturasIngresar.php');
         break;
     
 //    default:

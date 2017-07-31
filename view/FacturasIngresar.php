@@ -5,6 +5,7 @@ require_once '../model/DetalleFactura.php';
 require_once '../model/Producto.php';
         require_once '../model/CrudModel.php';
         require_once '../model/FacturaModel.php';
+           $crudModel = new CrudModel();
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -198,7 +199,6 @@ require_once '../model/Producto.php';
                                                             Proveedor:
                                                             <select name="idproveedor">                                        
                                                                     <?php
-                                                                    $crudModel = new CrudModel();
                                                                     $listaProveedores = $crudModel->getProveedores();
 //                                                                    echo $listaProveedores;
                                                                     foreach ($listaProveedores as $proveedor) {
@@ -219,9 +219,9 @@ require_once '../model/Producto.php';
                                                                 <input type="hidden" name="opcion" value="adicionar_detalle">
                                                             Producto:
                                                         
-                                                        <select name="idProducto">                                        
+                                                            <select name="idProducto">                                        
                                                                 <?php
-                                                                $crudModel = new CrudModel();
+                                                             
                                                                 $listaProductos = $crudModel->getProductos();
 //                                                                    echo $listaProductos;
                                                                 foreach ($listaProductos as $producto) {
@@ -243,7 +243,40 @@ require_once '../model/Producto.php';
                                                 
                                                  </p>
 
-                                          
+                                          <table data-toggle="table">
+        <thead>
+            <tr>
+                <th>ID PRODUCTO</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>CANTIDAD</th>
+                <th>IVA</th>
+                <th>SUBTOTAL</th>
+                <th>OPCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            //verificamos si existe en sesion el listado de clientes:
+            if (isset($_SESSION['listaFacturaDet'])) {
+                $listado = unserialize($_SESSION['listaFacturaDet']);
+                foreach ($listado as $facturaDet) {
+                    echo "<tr>";
+                    echo "<td>" . $facturaDet->getIdproductoss() . "</td>";
+                    echo "<td>" . $facturaDet->getNombreProductosss() . "</td>";
+                    echo "<td>" . $facturaDet->getPrecio() . "</td>";
+                    echo "<td>" . $facturaDet->getPorcentajeIva() . "</td>";
+                    echo "<td>" . $facturaDet->getSubtotal() . "</td>";
+                    echo "<td><a href='../controller/controller.php?opcion=eliminar_detalle&idProducto=" . $facturaDet->getIdProductoss() . "'>Eliminar</a></td>";
+                    echo "</tr>";
+                }
+              
+            } else {
+                echo "No se han cargado datos.";
+            }
+            ?>
+        </tbody>
+    </table>
 
 
         <!-- Start Blog Post Section
