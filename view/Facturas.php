@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once '../model/Facturas.php';
+require_once '../model/Producto.php';
+        require_once '../model/CrudModel.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -190,56 +192,43 @@ require_once '../model/Facturas.php';
                                                 <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
                                                         <tr>
                                                             <td style="#cccccc"><br>Proveedor:</br></td>
-                                                            <td><br><input type="text" name="idusuario" maxlength="13" required="true"></br></td>
-                                                            <td><br>Tipo:</br></td>
+                                                            <td><br><select name="idproveedor">                                        
+                                                                    <?php
+                                                                    $crudModel = new CrudModel();
+                                                                    $listaProveedores = $crudModel->getProveedores();
+//                                                                    echo $listaProveedores;
+                                                                    foreach ($listaProveedores as $proveedor) {
+                                                                        echo "<option value='" . $proveedor->getIdproveedor() . "'>" . $proveedor->getNombreproveedor() . "</option>";
+                                                                    }
+                                                                    ?>
+                                                                </select></td>
+                                                            <td><br>Fecha:</br></td>
                                                             <td>
-                                                                <select name="tipoidusuario">
-                                                                    <option value="C">CEDULA</option>
-                                                                    <option value="P">PASAPORTE</option>
-                                                                    <option value="R">RUC</option>
-                                                                </select>
+                                                                <input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo getdate(); ?>">
                                                             </td>
                                                         </tr>
+                                                        </form>
                                                         <tr>
-                                                            <td><br>Rol:</br></td>
-                                                            <td>
-                                                                <select name="rolusuario">
-                                                                    <option value="C">CAJERO</option>
-                                                                    <option value="A">ADMINISTRADOR</option>
-                                                                </select>
-                                                            </td>
-                                                            <td ><br>Nombre:</br></td>
-                                                            <td><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="[A-Za-z ]+"></br></td>
-                                                        <tr>
-                                                            <td><br>Fecha de Nacimiento:</br></td>
-                                                            <td><br><input type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></br></td>
-                                                            <td><br>Ciudad de Nacimiento:</br></td>
-                                                            <td><br><input type="text" name="ciunacusuario" maxlength="50" placeholder="Ej: Quito" required="true" pattern="[A-Za-z ]+"></br></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><br>Dirección:</br></td>
-                                                            <td><br><input type="text" name="direccionusuario" maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" required="true"></br></td>
-                                                            <td><br>Teléfono:</br></td>
-                                                            <td><br><input type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="[0-9]+"></br></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><br>Email:</br></td>
-                                                            <td><br><input type="email"  autocomplete="on" name="emailusuario" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" maxlength="50" required="true"></br></td>
-                                                            <td><br>Estado:</br></td>
-                                                            <td>
-                                                                <table>
-                                                                    <tr>
-                                                                        <td><input type="radio" name="estadousuario" value='true'>Activo</td>
-                                                                        <td width="20"></td>
-                                                                        <td><input type="radio" name="estadousuario" value='false'>Inactivo</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
-                                                        </tr>
-
+                                                            <td><br>Producto:</br></td>
+                                                        <input type="hidden" name="opcion" value="adicionar_detalle">
+                                                        <td><br><select name="idproducto">                                        
+                                                                <?php
+                                                                $crudModel = new CrudModel();
+                                                                $listaProductos = $crudModel->getProductos();
+//                                                                    echo $listaProductos;
+                                                                foreach ($listaProductos as $producto) {
+                                                                    echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select></br></td>
+                                                        <td ><br>Cantidad:</br></td>
+                                                        <td><br><input style="" type="text" name="cantidadProducto" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></br></td>
+                                                    </table>
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
+                                                    </tr>
                                                     </table></center>
                                             </form>
                                         </div>
@@ -251,7 +240,6 @@ require_once '../model/Facturas.php';
                             </div>
                         </div>
                         <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
-                        <br>
                         <br>
                         <div style="overflow-x:auto;">
                             <!--ESTILO DE LA TABLA-->
