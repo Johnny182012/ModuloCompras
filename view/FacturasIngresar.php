@@ -219,10 +219,8 @@ require_once '../model/Producto.php';
                                 }
                                         </style>
                                             <table>
-                                        <form action="../controller/controller.php" style=" width: 100%;">
-                                                      
+                                        <form action="../controller/controller.php" >
                                                 <input type="hidden" name="opcion" value="guardar_factura">
-                                        
                                             <tr>
                                                 <td>Proveedor:</td>
                                                 <td>
@@ -239,12 +237,11 @@ require_once '../model/Producto.php';
                                                 <td>Fecha:</td>
                                                 <td><input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo date('d-m-Y'); ?>"></td>
                                                 <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center></td>
-                                            </tr>
-                                                                                              
+                                            </tr>                                    
                                       </form>
                                         
         <!--FIN INGRESO FACTURA PARTE UNO-->
-                                            <form action="../controller/controller.php" style=" width: 100%;">          
+                                            <form action="../controller/controller.php">          
                                                     <input type="hidden" name="opcion" value="adicionar_detalle">
                                                 
                                                     <tr>
