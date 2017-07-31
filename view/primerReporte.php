@@ -15,7 +15,38 @@ require_once '../model/CrudModel.php';
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Cajeros</title>
+<style type="text/css">
+            *{
+                padding:0px;
+                margin: 0px;
+            }
 
+            .nav li a:hover{
+                background-color:#A4A4A4; 
+            }
+
+            .nav > li{
+                float:left;
+            }
+
+            .nav li a {
+                background-color: #585858;
+                color:#fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: block;
+            }
+
+            .nav li ul {
+                display:none;
+                position:absolute; 
+                min-width: 140px;
+            }
+
+            .nav li:hover > ul{
+                display:block;
+            }
+        </style>
         <meta name="description" content="description">
 
         <!-- Mobile Specific Meta
@@ -93,13 +124,22 @@ require_once '../model/CrudModel.php';
                         <li><a href="#about">Acerca de Nosotros</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#our-team">Equipo de trabajo</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                            </ul>
+                        </li>                        
+                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                            </ul>
+                        </li>
                         <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                        <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
-                        <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#contact-us">Contactos</a></li>
                     </ul>

@@ -6,92 +6,92 @@ require_once '../model/Usuario.php';
     <head>
         <!--inicio del método búsqueda inteligente-->
         <script type="text/javascript">
-(function(document) {
-  'use strict';
+            (function (document) {
+                'use strict';
 
-  var LightTableFilter = (function(Arr) {
+                var LightTableFilter = (function (Arr) {
 
-    var _input;
+                    var _input;
 
-    function _onInputEvent(e) {
-      _input = e.target;
-      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-      Arr.forEach.call(tables, function(table) {
-        Arr.forEach.call(table.tBodies, function(tbody) {
-          Arr.forEach.call(tbody.rows, _filter);
-        });
-      });
-    }
+                    function _onInputEvent(e) {
+                        _input = e.target;
+                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                        Arr.forEach.call(tables, function (table) {
+                            Arr.forEach.call(table.tBodies, function (tbody) {
+                                Arr.forEach.call(tbody.rows, _filter);
+                            });
+                        });
+                    }
 
-    function _filter(row) {
-      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-    }
+                    function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                    }
 
-    return {
-      init: function() {
-        var inputs = document.getElementsByClassName('light-table-filter');
-        Arr.forEach.call(inputs, function(input) {
-          input.oninput = _onInputEvent;
-        });
-      }
-    };
-  })(Array.prototype);
+                    return {
+                        init: function () {
+                            var inputs = document.getElementsByClassName('light-table-filter');
+                            Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                            });
+                        }
+                    };
+                })(Array.prototype);
 
-  document.addEventListener('readystatechange', function() {
-    if (document.readyState === 'complete') {
-      LightTableFilter.init();
-    }
-  });
+                document.addEventListener('readystatechange', function () {
+                    if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                    }
+                });
 
-})(document);
-</script>		
-<style type="text/css">
-	body {
-  font: normal medium/1.4 sans-serif;
-}
-			table {
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-  margin: auto;
-  
-}
-th, td {
-            text-align: left;
-            padding: 20px ;
-            color: black;
-            
-}
-tr:nth-child(even){background-color: #cccccc}
-tr:nth-child(odd){background-color: whitesmoke}
-th {
-background-color: #4CAF50;
-color: white;
-    }
+            })(document);
+        </script>		
+        <style type="text/css">
+            body {
+                font: normal medium/1.4 sans-serif;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: center;
+                margin: auto;
 
-.titulo{
-  padding: 0.5rem;
-  background: #FD0808 ;
-  color: red;
-  text-align: center;
-  font-size: 21px;
-}
+            }
+            th, td {
+                text-align: left;
+                padding: 20px ;
+                color: black;
 
-#buscar{
-	width: 650px;
-	font-size: 18px;
-	color: #fff;
-        background: transparent ;
-	padding-left: 20px ;
-	text-align: center;
-	border-radius: 5px;
-	padding: 10px;
-	margin:10px; 
-        border: 4px solid #006633;
-}
+            }
+            tr:nth-child(even){background-color: #cccccc}
+            tr:nth-child(odd){background-color: whitesmoke}
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
 
-	</style>	
+            .titulo{
+                padding: 0.5rem;
+                background: #FD0808 ;
+                color: red;
+                text-align: center;
+                font-size: 21px;
+            }
+
+            #buscar{
+                width: 650px;
+                font-size: 18px;
+                color: #fff;
+                background: transparent ;
+                padding-left: 20px ;
+                text-align: center;
+                border-radius: 5px;
+                padding: 10px;
+                margin:10px; 
+                border: 4px solid #006633;
+            }
+
+        </style>	
         <!--fin búsqueda-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -103,7 +103,38 @@ color: white;
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Usuarios</title>
+        <style type="text/css">
+            *{
+                padding:0px;
+                margin: 0px;
+            }
 
+            .nav li a:hover{
+                background-color:#A4A4A4; 
+            }
+
+            .nav > li{
+                float:left;
+            }
+
+            .nav li a {
+                background-color: #585858;
+                color:#fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: block;
+            }
+
+            .nav li ul {
+                display:none;
+                position:absolute; 
+                min-width: 140px;
+            }
+
+            .nav li:hover > ul{
+                display:block;
+            }
+        </style>
         <meta name="description" content="description">
 
         <!-- Mobile Specific Meta
@@ -175,19 +206,28 @@ color: white;
                     </a>
                 </div>
 
-               <nav class="collapse navbar-collapse navbar-right" role="Navigation">
+                <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
                         <li class="current"><a href="#body">Inicio</a></li>
                         <li><a href="#about">Acerca de Nosotros</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#our-team">Equipo de trabajo</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                            </ul>
+                        </li>                        
+                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                            </ul>
+                        </li>
                         <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                        <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
-                        <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#contact-us">Contactos</a></li>
                     </ul>
@@ -221,8 +261,8 @@ color: white;
                             <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
-                           <li><a class="filter" data-toggle="modal" data-target="#myModal"><h3><span class='glyphicon glyphicon-folder-open'></span>&nbsp;&nbsp;&nbsp;INGRESAR USUARIO</h3></a></li>
-                                  
+                                    <li><a class="filter" data-toggle="modal" data-target="#myModal"><h3><span class='glyphicon glyphicon-folder-open'></span>&nbsp;&nbsp;&nbsp;INGRESAR USUARIO</h3></a></li>
+
                                     <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
                                 </ul></div>
                             <!-- Modal -->
@@ -305,146 +345,146 @@ color: white;
                         <br>
                         <div style="overflow-x:auto;">
                             <div id="cuadro">
-			<center>
-                            <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
-	</center>
+                                <center>
+                                    <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                </center>
 
-		<div class="datagrid">
-			<table class="order-table table">   
-                                <tr class="titulo" style="font-size: 1em">
-                                    <th>ID USUARIO</th>
-                                    <th>TIPO ID</th>
-                                    <th>ROL</th>
-                                    <th>NOMBRE</th>
-                                    <th>FECHA NAC.</th>
-                                    <th>CIUDAD NAC.</th>
-                                    <th>DIRECCIÓN</th>
-                                    <th>TELÉFONO</th>
-                                    <th>EMAIL</th>
-                                    <th>ESTADO</th>
-                                    <th>ELIMINAR</th>
-                                    <th>EDITAR</th>
-                                </tr>
+                                <div class="datagrid">
+                                    <table class="order-table table">   
+                                        <tr class="titulo" style="font-size: 1em">
+                                            <th>ID USUARIO</th>
+                                            <th>TIPO ID</th>
+                                            <th>ROL</th>
+                                            <th>NOMBRE</th>
+                                            <th>FECHA NAC.</th>
+                                            <th>CIUDAD NAC.</th>
+                                            <th>DIRECCIÓN</th>
+                                            <th>TELÉFONO</th>
+                                            <th>EMAIL</th>
+                                            <th>ESTADO</th>
+                                            <th>ELIMINAR</th>
+                                            <th>EDITAR</th>
+                                        </tr>
 
-                                <tbody >                    
+                                        <tbody >                    
 
-                                    <?php
-                                    //verificamos si existe en sesion el listado de login:
-                                    if (isset($_SESSION['listaUsuarios'])) {
-                                        $listado = unserialize($_SESSION['listaUsuarios']);
-                                        foreach ($listado as $usu) {
-                                            echo "<tr>";
-                                            echo "<td>" . $usu->getIdusuario() . "</td>";
-                                            echo "<td>" . $usu->getTipoidusuario() . "</td>";
-                                            echo "<td>" . $usu->getRolusuario() . "</td>";
-                                            echo "<td>" . $usu->getNombreusuario() . "</td>";
-                                            echo "<td>" . $usu->getFecnacusuario() . "</td>";
-                                            echo "<td>" . $usu->getCiunacusuario() . "</td>";
-                                            echo "<td>" . $usu->getDireccionusuario() . "</td>";
-                                            echo "<td>" . $usu->getTelefonousuario() . "</td>";
-                                            echo "<td>" . $usu->getEmailusuario() . "</td>";
-                                            echo "<td>" . $usu->getEstadousuario() . "</td>";
-                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a><center></td>";
-                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a><center></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "No se han cargado datos.";
-                                    }
-                                    ?>
-                                </tbody >                    
+                                            <?php
+                                            //verificamos si existe en sesion el listado de login:
+                                            if (isset($_SESSION['listaUsuarios'])) {
+                                                $listado = unserialize($_SESSION['listaUsuarios']);
+                                                foreach ($listado as $usu) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $usu->getIdusuario() . "</td>";
+                                                    echo "<td>" . $usu->getTipoidusuario() . "</td>";
+                                                    echo "<td>" . $usu->getRolusuario() . "</td>";
+                                                    echo "<td>" . $usu->getNombreusuario() . "</td>";
+                                                    echo "<td>" . $usu->getFecnacusuario() . "</td>";
+                                                    echo "<td>" . $usu->getCiunacusuario() . "</td>";
+                                                    echo "<td>" . $usu->getDireccionusuario() . "</td>";
+                                                    echo "<td>" . $usu->getTelefonousuario() . "</td>";
+                                                    echo "<td>" . $usu->getEmailusuario() . "</td>";
+                                                    echo "<td>" . $usu->getEstadousuario() . "</td>";
+                                                    echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a><center></td>";
+                                                    echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a><center></td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "No se han cargado datos.";
+                                            }
+                                            ?>
+                                        </tbody >                    
 
-                            </table >
+                                    </table >
 
-                        </div>
-                    </div>     <!-- End col-lg-12 -->
-                </div>	    <!-- End row -->
-            </div>       <!-- End container -->
-        </section>    <!-- End Section -->
+                                </div>
+                            </div>     <!-- End col-lg-12 -->
+                        </div>	    <!-- End row -->
+                    </div>       <!-- End container -->
+                    </section>    <!-- End Section -->
 
-        <!-- Start Blog Post Section
-        ==================================== -->
-        <section id="blog-page">
-            <div class="container">
-                <div class="row">
+                    <!-- Start Blog Post Section
+                    ==================================== -->
+                    <section id="blog-page">
+                        <div class="container">
+                            <div class="row">
 
-                    <div id="blog-posts" class="col-md-8 col-sm-8">
-                        <div class="post-item">
-
-
+                                <div id="blog-posts" class="col-md-8 col-sm-8">
+                                    <div class="post-item">
 
 
-                        </div>
-                    </div>
-
-                </div>	    <!-- End row -->
-            </div>       <!-- End container -->
-        </section>    <!-- End Section -->
 
 
-        <!-- Start Footer Section
-        ========================================== -->
-        <footer id="footer" class="bg-one">
-            <div class="container">
-                <div class="row wow fadeInUp" data-wow-duration="500ms">
-                    <div class="col-lg-12">
+                                    </div>
+                                </div>
 
-                        <!-- Footer Social Links -->
-                        <div class="social-icon">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <!--/. End Footer Social Links -->
+                            </div>	    <!-- End row -->
+                        </div>       <!-- End container -->
+                    </section>    <!-- End Section -->
 
-                        <!-- copyright -->
-                        <div class="copyright text-center">
-                            <img src="img/logo-meghna.png" alt="Meghna" /> <br />
-                            <p>Copyright &copy; 2014. All Rights Reserved.</p>
-                        </div>
-                        <!-- /copyright -->
 
-                    </div> <!-- end col lg 12 -->
-                </div> <!-- end row -->
-            </div> <!-- end container -->
-        </footer> <!-- end footer -->
+                    <!-- Start Footer Section
+                    ========================================== -->
+                    <footer id="footer" class="bg-one">
+                        <div class="container">
+                            <div class="row wow fadeInUp" data-wow-duration="500ms">
+                                <div class="col-lg-12">
 
-        <!-- Back to Top
-        ============================== -->
-        <a href="#" id="scrollUp"><i class="fa fa-angle-up fa-2x"></i></a>
+                                    <!-- Footer Social Links -->
+                                    <div class="social-icon">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!--/. End Footer Social Links -->
 
-        <!-- end Footer Area
-        ========================================== -->
+                                    <!-- copyright -->
+                                    <div class="copyright text-center">
+                                        <img src="img/logo-meghna.png" alt="Meghna" /> <br />
+                                        <p>Copyright &copy; 2014. All Rights Reserved.</p>
+                                    </div>
+                                    <!-- /copyright -->
 
-        <!-- 
-        Essential Scripts
-        =====================================-->
+                                </div> <!-- end col lg 12 -->
+                            </div> <!-- end row -->
+                        </div> <!-- end container -->
+                    </footer> <!-- end footer -->
 
-        <!-- Main jQuery -->
-        <script src="js/jquery-1.11.0.min.js"></script>
-        <!-- Bootstrap 3.1 -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Back to Top -->
-        <script src="js/jquery.scrollUp.min.js"></script>
-        <script src="js/classie.js"></script>
-        <!-- Owl Carousel -->
-        <script src="js/owl.carousel.min.js"></script>
-        <!-- Custom Scrollbar -->
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <!-- jQuery Easing -->
-        <script src="js/jquery.easing-1.3.pack.js"></script>
-        <!-- wow.min Script -->
-        <script src="js/wow.min.js"></script>
-        <!-- For video responsive -->
-        <script src="js/jquery.fitvids.js"></script>
-        <!-- Custom js -->
-        <script src="js/custom.js"></script>
+                    <!-- Back to Top
+                    ============================== -->
+                    <a href="#" id="scrollUp"><i class="fa fa-angle-up fa-2x"></i></a>
 
-    </body>
-</html>
+                    <!-- end Footer Area
+                    ========================================== -->
+
+                    <!-- 
+                    Essential Scripts
+                    =====================================-->
+
+                    <!-- Main jQuery -->
+                    <script src="js/jquery-1.11.0.min.js"></script>
+                    <!-- Bootstrap 3.1 -->
+                    <script src="js/bootstrap.min.js"></script>
+                    <!-- Back to Top -->
+                    <script src="js/jquery.scrollUp.min.js"></script>
+                    <script src="js/classie.js"></script>
+                    <!-- Owl Carousel -->
+                    <script src="js/owl.carousel.min.js"></script>
+                    <!-- Custom Scrollbar -->
+                    <script src="js/jquery.nicescroll.min.js"></script>
+                    <!-- jQuery Easing -->
+                    <script src="js/jquery.easing-1.3.pack.js"></script>
+                    <!-- wow.min Script -->
+                    <script src="js/wow.min.js"></script>
+                    <!-- For video responsive -->
+                    <script src="js/jquery.fitvids.js"></script>
+                    <!-- Custom js -->
+                    <script src="js/custom.js"></script>
+
+                    </body>
+                    </html>

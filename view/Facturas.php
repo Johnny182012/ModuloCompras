@@ -14,7 +14,38 @@ require_once '../model/Facturas.php';
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Usuarios</title>
+        <style type="text/css">
+            *{
+                padding:0px;
+                margin: 0px;
+            }
 
+            .nav li a:hover{
+                background-color:#A4A4A4; 
+            }
+
+            .nav > li{
+                float:left;
+            }
+
+            .nav li a {
+                background-color: #585858;
+                color:#fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: block;
+            }
+
+            .nav li ul {
+                display:none;
+                position:absolute; 
+                min-width: 140px;
+            }
+
+            .nav li:hover > ul{
+                display:block;
+            }
+        </style>
         <meta name="description" content="description">
 
         <!-- Mobile Specific Meta
@@ -88,13 +119,26 @@ require_once '../model/Facturas.php';
 
                 <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="../index.html">Inicio</a></li>
-                        <li><a href="#about">Acerca de nosotros</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
+                        <li class="current"><a href="#body">Inicio</a></li>
+                        <li><a href="#about">Acerca de Nosotros</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#our-team">Equipo de trabajo</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
+                            </ul>
+                        </li>                        
+                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#contact-us">Contactos</a></li>
                     </ul>
@@ -252,9 +296,9 @@ require_once '../model/Facturas.php';
                                     if (isset($_SESSION['listaFacturas'])) {
                                         $listado = unserialize($_SESSION['listaFacturas']);
                                         foreach ($listado as $usu) {
-                                            
+
                                             echo "<tr>";
-                                            echo "<td>" . $usu->getIdfactura(). "</td>";
+                                            echo "<td>" . $usu->getIdfactura() . "</td>";
                                             echo "<td>" . $usu->getIdproveedor() . "</td>";
                                             echo "<td>" . $usu->getIdusuario() . "</td>";
                                             echo "<td>" . $usu->getValorfactura() . "</td>";

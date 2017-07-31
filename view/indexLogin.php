@@ -14,7 +14,38 @@ require_once '../model/Proveedor.php';
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title> Index Login</title>
+        <style type="text/css">
+            *{
+                padding:0px;
+                margin: 0px;
+            }
 
+            .nav li a:hover{
+                background-color:#A4A4A4; 
+            }
+
+            .nav > li{
+                float:left;
+            }
+
+            .nav li a {
+                background-color: #585858;
+                color:#fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: block;
+            }
+
+            .nav li ul {
+                display:none;
+                position:absolute; 
+                min-width: 140px;
+            }
+
+            .nav li:hover > ul{
+                display:block;
+            }
+        </style>
         <meta name="description" content="description">
 
         <!-- Mobile Specific Meta
@@ -86,23 +117,7 @@ require_once '../model/Proveedor.php';
                     </a>
                 </div>
 
-                <nav class="collapse navbar-collapse navbar-right" role="Navigation">
-                    <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="#body">Inicio</a></li>
-                        <li><a href="#about">Acerca de Nosotros</a></li>
-                        <li><a href="#services">Servicios</a></li>
-                        <li><a href="#our-team">Equipo de trabajo</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a></li>
-                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                        <li><a href="../controller/controller.php?opcion=primerReporte">Ver Cajeros</a></li>
-                        <li><a href="../controller/controller.php?opcion=segundoReporte">Ver Proveedores</a></li>
-                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#contact-us">Contactos</a></li>
-                    </ul>
-                </nav><!-- /.navbar-collapse -->
+
             </div>
         </header>
 
