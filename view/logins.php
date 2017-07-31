@@ -13,7 +13,7 @@ require_once '../model/Proveedor.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Proveedores</title>
+        <title>Inicios de Sesión</title>
 
         <meta name="description" content="description">
 
@@ -117,7 +117,7 @@ require_once '../model/Proveedor.php';
                             <i class="fa fa-book fa-4x"></i>
                         </div>
                         <div class="title text-center">
-                            <h2>Registros de<span class="color">Inicio de Sesión</span></h2>
+                            <h2>Registros de<span class="color">Inicios de Sesión</span></h2>
                             <div class="border"></div>
                         </div>
 
@@ -137,65 +137,23 @@ require_once '../model/Proveedor.php';
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Proveedor</h2>
+                                            <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Inicio de Sesión</h2>
                                         </div>
                                         <div class="modal-body" >
 
                                             <!--permite ingresar un nuevo proveedor-->
                                             <form action="../controller/controller.php" style=" width: 100%;">
-                                                <input type="hidden" name="opcion" value="crear_proveedor">
+                                                <input type="hidden" name="opcion" value="crear_login">
                                                 <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
                                                         <tr>
-                                                            <td><br>Identificación Proveedor:</br></td>
-                                                            <td><br><input type="text" name="idproveedor" maxlength="13" required="true"></br></td>
-                                                            <td><br>Tipo Identificación</br></td>
-                                                            <td><select name="tipoidproveedor">
-                                                                    <option value="C">IDENTICACION CEDULA</option>
-                                                                    <option value="R">IDENTIFICACION RUC</option>
-                                                                    <option value="P">IDENTIFICACION PASAPORTE</option>
-                                                                </select>
-                                                            </td>
+                                                            <td><br>Identificación Ususario:</br></td>
+                                                            <td><br><input type="text" name="idusuario" maxlength="80" required="true"></br></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td><br>Nombres:</br></td>
-                                                            <td><br><input title="Se necesita un nombre" placeholder="Ej: Luis" pattern="[A-Za-z ]+"  type="text" name="nombreproveedor" maxlength="100" required="true">  </br></td>                      
-                                                            <td><br>Fecha Nacimiento:</br></td>
-                                                            <td><br><input type="date" name="fecnacproveedor" required="true" autocomplete="off" required="true" max="today" min="01-01-1800"  value="<?php echo date('d-m-Y'); ?>"></br></td>
+                                                        <tr>    
+                                                            <td><br>Contraseña: </br></td>
+                                                            <td><br><input type="password" name="passwordlogin" maxlength="11" required="true"></br></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td><br>Ciudad Nacimiento:</br></td>
-                                                            <td><br><input placeholder="Ej: Quito" pattern="[A-Za-z ]+" type="text" name="ciudnacproveedor" maxlength="50" required="true">                    </br></td>
-                                                            <td><br>Tipo proveedor:</br></td>
-                                                            <td>
-                                                                <table>
-                                                                    <tr>
-                                                                        <td><input type="radio" name="tipoproveedor" value='true' required="true">Credito</td>
-                                                                        <td width="20"></td>
-                                                                        <td><input type="radio" name="tipoproveedor" value='false' required="true">Efectivo</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><br>Direccion:</br></td>
-                                                            <td><br><input placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" type="text" name="direccionproveedor" maxlength="100" required="true"></br></td>
-                                                            <td><br>Telefono:</br></td>
-                                                            <td><br><input placeholder="Ej: 0909785967" pattern="[0-9]+" type="tel" name="telefonoproveedor" maxlength="10" required="true"></br></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><br>Email:</br></td>
-                                                            <td><br><input type="text" name="emailproveedor" maxlength="50" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"  required="true"></br></td>
-                                                            <td><br>Estado:</br></td>
-                                                            <td>
-                                                                <table>
-                                                                    <tr>
-                                                                        <td><input type="radio" name="estadoproveedor" value='true' required="true">Activo</td>
-                                                                        <td width="20"></td>
-                                                                        <td><input type="radio" name="estadoproveedor" value='false' required="true">Inactivo</td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
+                                                        
                                                         <td>
                                                         <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
                                                         </td>
@@ -238,44 +196,30 @@ require_once '../model/Proveedor.php';
                             </style>
                             <table id="example">    
                                 <tr>
-                                    <th>IDENTIFICACION</th>
-                                    <th>TIPO IDENTIFICACION</th>
-                                    <th>NOMBRES</th>
-                                    <th>FECHA NACIMIENTO</th>                        
-                                    <th>CIUDAD NACIMIENTO</th>
-                                    <th>TIPO PROVEEDOR</th>
-                                    <th>DIRECCION</th>
-                                    <th>TELEFONO</th>
-                                    <th>EMAIL</th>
-                                    <th>ESTADO</th>
+                                    <th>ID LOGIN</th>
+                                    <th>USUARIO</th>
+                                    <th>PASSWORD</th>
                                     <th>ELIMINAR</th>
                                     <th>EDITAR</th>
                                 </tr>
                                 <tbody >                    
                                     <?php
-                                    //verificamos si existe en sesion el listado de proveedores:
-                                    if (isset($_SESSION['listaProveedores'])) {
-                                        $listado = unserialize($_SESSION['listaProveedores']);
-                                        foreach ($listado as $proveedor) {
-                                            echo "<tr>";
-                                            echo "<td>" . $proveedor->getIdproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTipoidproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getNombreproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getFecnacproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getCiudnacproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTipoproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getDireccionproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTelefonoproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getEmailproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getEstadoproveedor() . "</td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
-                                            echo "<td><a title='Actualizar dato' href='../controller/controller.php?opcion=editar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "No se han cargado datos.";
+                                //verificamos si existe en sesion el listado de login:
+                                if (isset($_SESSION['listaLogins'])) {
+                                    $listado = unserialize($_SESSION['listaLogins']);
+                                    foreach ($listado as $log) {
+                                        echo "<tr>";
+                                        echo "<td>" . $log->getIdlogin() . "</td>";
+                                        echo "<td>" . $log->getIdusuario() . "</td>";
+                                        echo "<td>" . $log->getPasswordlogin() . "</td>";
+                                        echo "<td><a href='../controller/controller.php?opcion=eliminar_login&idlogin=" . $log->getIdlogin() . "'><span class='glyphicon glyphicon-pencil '> Eliminar </span></a></td>";
+                                        echo "<td><a href='../controller/controller.php?opcion=editar_login&idlogin=" . $log->getIdlogin() . "'><span class='glyphicon glyphicon-pencil'> Editar </span></a></td>";
+                                        echo "</tr>";
                                     }
-                                    ?>
+                                } else {
+                                    echo "No se han cargado datos.";
+                                }
+                                ?>
                                 </tbody >                    
 
                             </table >
