@@ -311,7 +311,7 @@ color: white;
 
 		<div class="datagrid">
 			<table class="order-table table">   
-                                <tr class="titulo">
+                                <tr class="titulo" style="font-size: 1em">
                                     <th>ID USUARIO</th>
                                     <th>TIPO ID</th>
                                     <th>ROL</th>
