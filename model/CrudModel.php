@@ -281,13 +281,14 @@ class CrudModel {
      * Inserta un nuevo producto en la bdd.
      * 
      */
-    public function insertarProducto($idproducto, $nombreproducto, $ivaproducto, $pvpproducto) {
+ public function insertarProducto($idproducto, $nombreproducto, $pvpproducto,$ivaproducto) {
         $pdo = Database::connect();
-        $sql = "insert into productos(idproducto,nombreproducto,ivaproducto,pvpproducto) values(?,?,?,?)";
+        $sql = "insert into productos(idproducto,nombreproducto,pvpproducto, ivaproducto) values(?,?,?,?)";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos y pasamos los parametros:
         try {
-            $consulta->execute(array($idproducto, $nombreproducto, $ivaproducto, $pvpproducto));
+            $consulta->execute(array($idproducto, $nombreproducto,  $pvpproducto,$ivaproducto));
+            echo $consulta;
         } catch (PDOException $e) {
             Database::disconnect();
             throw new Exception($e->getMessage());
