@@ -696,10 +696,11 @@ switch ($opcion) {
     case "guardar_factura":
         //obtenemos los parametros del formulario:
         $idproveedor = $_REQUEST['idproveedor'];
+        $idusuario = "1009892333ED";
         if (isset($_SESSION['listaFacturaDet'])) {
             $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
             try {
-                $facturaCab = $facturaModel->guardarFactura($listaFacturaDet, $idproveedor, $ID);
+                $facturaCab = $facturaModel->guardarFactura($listaFacturaDet, $idproveedor, $idusuario);
                 print_r($facturaCab);
                 
                 $_SESSION['facturaCab'] = $facturaCab;

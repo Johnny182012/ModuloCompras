@@ -133,7 +133,7 @@ class FacturaModel {
         return $numero;
     }
 
-    public function guardarFactura($listaFacturaDet,$idprov,$idusuario,$fecha){
+    public function guardarFactura($listaFacturaDet,$idprov,$idusuario){
         $idusuario="1009892333ED";    
         if(!isset($listaFacturaDet)){
             throw new Exception("Debe por lo menos registrar un producto.");
@@ -154,8 +154,8 @@ echo $fecha;
         //creamos la nueva factura:
         $facturaCab = new Facturas();
         $facturaCab->setIdproveedor($idprov);
-        $facturaCab->setFechafactura($fecha);
-        $facturaCab->setFechafactura($fecha);
+        $facturaCab->setFechafactura(date("Y-m-d"));
+        $facturaCab->setIdusuario($idusuario);
         $facturaCab->setIvafactura($this->calcularIva($listaFacturaDet));
         $facturaCab->setValorfactura($this->calcularTotal($listaFacturaDet));
         $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
@@ -175,9 +175,9 @@ echo $fecha;
         try {
             $consulta->execute(array($facturaCab->getIdFactura(),
                                      $facturaCab->getIdproveedor(),
-                                     $idusuario,
-                                     $facturaCab->getFechafactura(),
+                                     $facturaCab->getIdusuario(),
                                      $facturaCab->getValorfactura(),
+                                     $facturaCab->getFechafactura(),
                                      $facturaCab->getIvafactura()));
             
             //guardamos los detalles:
