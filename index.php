@@ -9,10 +9,10 @@ session_start();
 $rolusuario = unserialize($_SESSION['rolusuario']);
 if (!isset($_SESSION['bandera'])) {
     session_destroy();
-    header('Location: /view/indexLogin.php');
+    header('Location: view/indexLogin.php');
 } else if (isset($_SESSION['bandera']) && $rolusuario == "C") {
     session_destroy();
-    header('Location: /view/indexLogin.php');
+    header('Location: view/indexLogin.php');
 } else {
     $bandera = unserialize($_SESSION['bandera']);
     if ($bandera == 'N') {
@@ -1063,7 +1063,7 @@ if (!isset($_SESSION['bandera'])) {
         </body>
         </html>
 
-        <?php
-    }
+                <?php
+            }
         }
         ?>

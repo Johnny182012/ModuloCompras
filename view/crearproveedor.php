@@ -1,7 +1,19 @@
 <?php
 session_start();
 require_once '../model/Proveedor.php';
-
+$rolusuario = unserialize($_SESSION['rolusuario']);
+if (!isset($_SESSION['bandera'])) {
+    session_destroy();
+    header('Location: ../view/indexLogin.php');
+} else if (isset($_SESSION['bandera']) && $rolusuario == "C") {
+    session_destroy();
+    header('Location: ../view/indexLogin.php');
+} else {
+    $bandera = unserialize($_SESSION['bandera']);
+    if ($bandera == 'N') {
+        session_destroy();
+        header('Location: ../view/indexLogin.php');
+    } else if ($bandera == 'S') {
         ?>
         <html class="no-js"> <!--<![endif]-->
             <head>
@@ -503,4 +515,7 @@ require_once '../model/Proveedor.php';
 
                             </body>
                             </html>
-                    
+                            <?php
+                        }
+                    }
+                    ?>                    
