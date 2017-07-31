@@ -196,6 +196,7 @@ require_once '../model/Producto.php';
         
         <!--INICIO DE INGRESAR FACTURA-->
                                         <div class="panel-body">
+                                            <table>
                                         <form action="../controller/controller.php" style=" width: 100%;">
                                                       
                                                 <input type="hidden" name="opcion" value="guardar_factura">
@@ -220,7 +221,7 @@ require_once '../model/Producto.php';
                                     background-color: #4CAF50;
                                     color: white;
                                 }
-                                        </style><table>
+                                        </style>
                                             <tr>
                                                 <td>Proveedor:</td>
                                                 <td>
@@ -238,13 +239,13 @@ require_once '../model/Producto.php';
                                                 <td><input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo date('d-m-Y'); ?>"></td>
                                                 <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center></td>
                                             </tr>
-                                        </table>                                                         
+                                                                                              
                                       </form>
                                         
         <!--FIN INGRESO FACTURA PARTE UNO-->
                                             <form action="../controller/controller.php" style=" width: 100%;">          
                                                     <input type="hidden" name="opcion" value="adicionar_detalle">
-                                                <table>
+                                                
                                                     <tr>
                                                         <td>Producto:</td>
                                                         <td><select name="idProducto">                                        
@@ -261,8 +262,9 @@ require_once '../model/Producto.php';
                                                             <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
                                                             <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
                                             </tr>
-                                                </table>            
+                                                          
                                             </form>
+        </table>
                                         </div>  
                                                             
 
