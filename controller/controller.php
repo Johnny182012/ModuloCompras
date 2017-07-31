@@ -20,7 +20,7 @@ unset($_SESSION['mensaje1']);
 unset($_SESSION['mensaje2']);
 
 switch ($opcion) {
-    
+
     case "iniciarSesion":
         $idusuario = $_REQUEST['idusuario'];
         $passwordlogin = $_REQUEST['passwordlogin'];
@@ -46,7 +46,7 @@ switch ($opcion) {
                 $bandera = 'S';
                 $_SESSION["bandera"] = serialize($bandera);
                 $_SESSION["rolusuario"] = serialize($rolusuario);
-                header('Location: ../view/index.php');
+                header('Location: ../index.php');
             } else {
                 $bandera = 'N';
                 $_SESSION["bandera"] = serialize($bandera);
@@ -58,7 +58,7 @@ switch ($opcion) {
                 $bandera = 'S';
                 $_SESSION["bandera"] = serialize($bandera);
                 $_SESSION["rolusuario"] = serialize($rolusuario);
-                header('Location: ../view/indexC.php');
+                header('Location: ../indexC.php');
             } else {
                 $bandera = 'N';
                 $_SESSION["bandera"] = serialize($bandera);
@@ -189,7 +189,14 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/crearproveedor.php');
         break;
-
+    case "listar_proveedoresC":
+        //obtenemos la lista de empleados:
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/crearproveedorC.php');
+        break;
     //crea un nuevo proveedor
     case "crear_proveedor":
         //obtenemos los parametros del formulario proveedor:
@@ -211,7 +218,30 @@ switch ($opcion) {
         //y los guardamos en sesion:
         $_SESSION['listaProveedores'] = serialize($listaProveedores);
         //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/proveedor.php');
+        header('Location: ../view/crearproveedor.php');
+        break;
+
+    case "crear_proveedorC":
+        //obtenemos los parametros del formulario proveedor:
+        $idproveedor = $_REQUEST['idproveedor'];
+        $tipoidproveedor = $_REQUEST['tipoidproveedor'];
+        $nombreproveedor = $_REQUEST['nombreproveedor'];
+        $fecnacproveedor = $_REQUEST['fecnacproveedor'];
+        $ciudnacproveedor = $_REQUEST['ciudnacproveedor'];
+        $tipoproveedor = $_REQUEST['tipoproveedor'];
+        $direccionproveedor = $_REQUEST['direccionproveedor'];
+        $telefonoproveedor = $_REQUEST['telefonoproveedor'];
+        $emailproveedor = $_REQUEST['emailproveedor'];
+        $estadoproveedor = $_REQUEST['estadoproveedor'];
+
+        //creamos el nuevo registro:
+        $crudModel->insertarProveedor($idproveedor, $tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor);
+        //actualizamos el listado:
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/crearproveedorC.php');
         break;
     case "actualizar_proveedor":
         //obtenemos los parametros del formulario proveedor:
@@ -232,7 +262,28 @@ switch ($opcion) {
         //y los guardamos en sesion:
         $_SESSION['listaProveedores'] = serialize($listaProveedores);
         //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/crearproveedor.php');
+        header('Location: ../view/crearproveedorC.php');
+        break;
+    case "actualizar_proveedorC":
+        //obtenemos los parametros del formulario proveedor:
+        $idproveedor = $_REQUEST['idproveedor'];
+        $tipoidproveedor = $_REQUEST['tipoidproveedor'];
+        $nombreproveedor = $_REQUEST['nombreproveedor'];
+        $fecnacproveedor = $_REQUEST['fecnacproveedor'];
+        $ciudnacproveedor = $_REQUEST['ciudnacproveedor'];
+        $tipoproveedor = $_REQUEST['tipoproveedor'];
+        $direccionproveedor = $_REQUEST['direccionproveedor'];
+        $telefonoproveedor = $_REQUEST['telefonoproveedor'];
+        $emailproveedor = $_REQUEST['emailproveedor'];
+        $estadoproveedor = $_REQUEST['estadoproveedor'];
+        //creamos el nuevo registro:
+        $crudModel->actualizarProveedor($idproveedor, $tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor);
+        //actualizamos el listado:
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/crearproveedorC.php');
         break;
     //elimina un empleado especifico
     case "eliminar_proveedor":
@@ -262,6 +313,16 @@ switch ($opcion) {
         $_SESSION['listaProveedores'] = serialize($listaProveedores);
         //redirigimos la navegación al formulario de edicion profeedor:
         header('Location: ../view/editarProveedor.php');
+        break;
+    case "editar_proveedorC":
+        //obtenemos los parametros del formulario:
+        $idproveedor = $_REQUEST['idproveedor'];
+        //Buscamos los datos
+        $listaProveedores = $crudModel->getProveedor($idproveedor);
+        //guardamos en sesion para edicion posterior:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+        //redirigimos la navegación al formulario de edicion profeedor:
+        header('Location: ../view/editarProveedorC.php');
         break;
 
     case "guardar_proveedor":
@@ -402,7 +463,7 @@ switch ($opcion) {
         $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
         $vec = $crudModel->getFacturas();
         $crudModel->getws();
-                header('Location: ../view/COnsumoWS.php');
+        header('Location: ../view/COnsumoWS.php');
 
         break;
 
@@ -554,6 +615,17 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/primerReporte.php');
         break;
+    case "primerReporteC":
+        header('Location: ../view/primerReporteC.php');
+        break;
+    case "primerReporteListarC":
+        //obtenemos la lista de productos:
+        $listaPR = $crudModel->getCajeros();
+        //y los guardamos en sesion:
+        $_SESSION['listaPR'] = serialize($listaPR);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/primerReporteC.php');
+        break;
 
     case "segundoReporte":
         header('Location: ../view/segundoReporte.php');
@@ -565,6 +637,17 @@ switch ($opcion) {
         $_SESSION['listaSR'] = serialize($listaSR);
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/segundoReporte.php');
+        break;
+    case "segundoReporteC":
+        header('Location: ../view/segundoReporteC.php');
+        break;
+    case "segundoReporteListarC":
+        //obtenemos la lista de productos:
+        $listaSR = $crudModel->getProveedoresCredito();
+        //y los guardamos en sesion:
+        $_SESSION['listaSR'] = serialize($listaSR);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/segundoReporteC.php');
         break;
 
     case "tercerReporte":
@@ -578,51 +661,51 @@ switch ($opcion) {
         //y los guardamos en sesion:
         $_SESSION['listaTR'] = serialize($listaTR);
         //redireccionamos a una nueva pagina para visualizar:
-        
+
         header('Location: ../view/tercerReporte.php');
         break;
 
     case "adicionar_detalle":
         //obtenemos los parametros del formulario:
-        $idProducto=$_REQUEST['idProducto'];
-        $cantidad=$_REQUEST['cantidad'];
-        if(!isset($_SESSION['listaFacturaDet'])){
-            $listaFacturaDet=array();
-        }else{
-            $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
+        $idProducto = $_REQUEST['idProducto'];
+        $cantidad = $_REQUEST['cantidad'];
+        if (!isset($_SESSION['listaFacturaDet'])) {
+            $listaFacturaDet = array();
+        } else {
+            $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
         }
-        try{
-            $listaFacturaDet=$facturaModel->adicionarDetalle($listaFacturaDet, $idProducto, $cantidad);
-            $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
-        }catch(Exception $e){
-            $mensajeError=$e->getMessage();
-            $_SESSION['mensajeError']=$mensajeError;
+        try {
+            $listaFacturaDet = $facturaModel->adicionarDetalle($listaFacturaDet, $idProducto, $cantidad);
+            $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
+        } catch (Exception $e) {
+            $mensajeError = $e->getMessage();
+            $_SESSION['mensajeError'] = $mensajeError;
         }
         header('Location: ../view/FacturasIngresar.php');
         break;
-        
-         case "eliminar_detalle":
+
+    case "eliminar_detalle":
         //obtenemos los parametros del formulario:
-        $idProducto=$_REQUEST['idProducto'];
-        $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
-        $listaFacturaDet=$facturaModel->eliminarDetalle($listaFacturaDet, $idProducto);
-        $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
+        $idProducto = $_REQUEST['idProducto'];
+        $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
+        $listaFacturaDet = $facturaModel->eliminarDetalle($listaFacturaDet, $idProducto);
+        $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
         header('Location: ../view/FacturasIngresar.php');
         break;
-    
-     case "guardar_factura":
+
+    case "guardar_factura":
         //obtenemos los parametros del formulario:
-        $idproveedor=$_REQUEST['idproveedor'];
-        if(isset($_SESSION['listaFacturaDet'])){
-            $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
+        $idproveedor = $_REQUEST['idproveedor'];
+        if (isset($_SESSION['listaFacturaDet'])) {
+            $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
             try {
-                $facturaCab=$facturaModel->guardarFactura($listaFacturaDet, $idproveedor,$ID);
-                $_SESSION['facturaCab']=$facturaCab;
+                $facturaCab = $facturaModel->guardarFactura($listaFacturaDet, $idproveedor, $ID);
+                $_SESSION['facturaCab'] = $facturaCab;
                 header('Location: ../view/factura_reporte.php');
                 break;
             } catch (Exception $e) {
-                $mensajeError=$e->getMessage();
-                $_SESSION['mensajeError']=$mensajeError;
+                $mensajeError = $e->getMessage();
+                $_SESSION['mensajeError'] = $mensajeError;
             }
         }
         //actualizamos lista de facturas:
@@ -630,15 +713,15 @@ switch ($opcion) {
         //$_SESSION['listado'] = serialize($listado);
         header('Location: ../view/factura.php');
         break;
-    
-    
-     case "nueva_factura":
+
+
+    case "nueva_factura":
         unset($_SESSION['listaFacturaDet']);
         header('Location: ../view/FacturasIngresar.php');
         break;
-    
-    
-    
+
+
+
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:

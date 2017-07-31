@@ -9,15 +9,15 @@ session_start();
 $rolusuario = unserialize($_SESSION['rolusuario']);
 if (!isset($_SESSION['bandera'])) {
     session_destroy();
-    header('Location: ../view/indexLogin.php');
+    header('Location: view/indexLogin.php');
 } else if (isset($_SESSION['bandera']) && $rolusuario == "A") {
     session_destroy();
-    header('Location: ../view/indexLogin.php');
+    header('Location: view/indexLogin.php');
 } else {
     $bandera = unserialize($_SESSION['bandera']);
     if ($bandera == 'N') {
         session_destroy();
-        header('Location: ../view/indexLogin.php');
+        header('Location: view/indexLogin.php');
     } else if ($bandera == 'S') {
         ?>
         <html class="no-js"> <!--<![endif]-->
@@ -235,14 +235,14 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="#about">Acerca de Nosotros</a></li>
                                 <li><a href="#services">Servicios</a></li>
                                 <li><a href="#our-team">Equipo de trabajo</a></li>
-                                <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a>
+                                <li><a href="controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>
-                                        <li><a href="controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                                        <li><a href="controller/controller.php?opcion=segundoReporteC">Reporte Proveedores</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a>
+                                <li><a href="controller/controller.php?opcion=listar_facturasC">Facturas</a>
                                 </li>
-                                <li><a href="controller/controller.php?opcion=primerReporte">Cajeros</a></li>
+                                <li><a href="controller/controller.php?opcion=primerReporteC">Cajeros</a></li>
                             </ul>
                         </nav>
                         <!-- /main nav -->
