@@ -280,9 +280,9 @@ require_once '../model/Usuario.php';
                                                             <td style="text-align: left;padding: 8px;color: black;"><br>Tipo:</br></td>
                                                             <td style="text-align: left;padding: 8px;color: black;">
                                                                 <select name="tipoidusuario">
-                                                                    <option>CEDULA</option>
-                                                                    <option>PASAPORTE</option>
-                                                                    <option>RUC</option>
+                                                                    <option value="CEDULA">CÉDULA</option>
+                                                                    <option value="PASAPORTE">PASAPORTE</option>
+                                                                    <option value="RUC">RUC</option>
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -371,15 +371,29 @@ require_once '../model/Usuario.php';
                                                 foreach ($listado as $usu) {
                                                     echo "<tr>";
                                                     echo "<td>" . $usu->getIdusuario() . "</td>";
-                                                    echo "<td>" . $usu->getTipoidusuario() . "</td>";
-                                                    echo "<td>" . $usu->getRolusuario() . "</td>";
+                                                    if ($usu->getTipoidusuario() == 'Cedula' || $usu->getTipoidusuario() == 'c' || $usu->getTipoidusuario() == 'C' || $usu->getTipoidusuario() == 'cedula' || $usu->getTipoidusuario() == 'CEDULA') {
+                                                        echo "<td>CÉDULA</td>";
+                                                    } else if ($usu->getTipoidusuario() == 'ruc' ||$usu->getTipoidusuario() == 'r' || $usu->getTipoidusuario() == 'R' ||  $usu->getTipoidusuario() == 'Ruc' || $usu->getTipoidusuario() == 'RUC') {
+                                                        echo "<td>RUC</td>";
+                                                    } else if ($usu->getTipoidusuario() == 'pasaporte' ||$usu->getTipoidusuario() == 'p' || $usu->getTipoidusuario() == 'P' ||  $usu->getTipoidusuario() == 'Pasaporte' || $usu->getTipoidusuario() == 'PASAPORTE') {
+                                                        echo "<td>PASAPORTE</td>";
+                                                    }
+                                                    if ($usu->getRolusuario() == 'C') {
+                                                        echo "<td>CAJERO</td>";
+                                                    } else if ($usu->getRolusuario() == 'A') {
+                                                        echo "<td>ADMINISTRADOR</td>";
+                                                    }
                                                     echo "<td>" . $usu->getNombreusuario() . "</td>";
                                                     echo "<td>" . $usu->getFecnacusuario() . "</td>";
                                                     echo "<td>" . $usu->getCiunacusuario() . "</td>";
                                                     echo "<td>" . $usu->getDireccionusuario() . "</td>";
                                                     echo "<td>" . $usu->getTelefonousuario() . "</td>";
                                                     echo "<td>" . $usu->getEmailusuario() . "</td>";
-                                                    echo "<td>" . $usu->getEstadousuario() . "</td>";
+                                                    if ($usu->getEstadousuario() == 1) {
+                                                        echo "<td>ACTIVO</td>";
+                                                    } else {
+                                                        echo "<td>INACTIVO</td>";
+                                                    }
                                                     echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a><center></td>";
                                                     echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a><center></td>";
                                                     echo "</tr>";

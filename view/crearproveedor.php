@@ -280,10 +280,11 @@ require_once '../model/Proveedor.php';
                                                             <td style="text-align: left;padding: 8px;color: black;"><br>Identificación Proveedor:</br></td>
                                                             <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idproveedor" maxlength="13" required="true"></br></td>
                                                             <td style="text-align: left;padding: 8px;color: black;"><br>Tipo Identificación</br></td>
-                                                            <td style="text-align: left;padding: 8px;color: black;"><select name="tipoidproveedor">
-                                                                    <option value="C">IDENTICACION CEDULA</option>
-                                                                    <option value="R">IDENTIFICACION RUC</option>
-                                                                    <option value="P">IDENTIFICACION PASAPORTE</option>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
+                                                                <select name="tipoidproveedor">
+                                                                    <option value="CEDULA">CÉDULA</option>
+                                                                    <option value="PASAPORTE">PASAPORTE</option>
+                                                                    <option value="RUC">RUC</option>
                                                                 </select>
                                                             </td>
                                                         </tr>
@@ -367,29 +368,43 @@ require_once '../model/Proveedor.php';
                                 </tr>
                                 <tbody >                    
                                     <?php
-                                    //verificamos si existe en sesion el listado de proveedores:
-                                    if (isset($_SESSION['listaProveedores'])) {
-                                        $listado = unserialize($_SESSION['listaProveedores']);
-                                        foreach ($listado as $proveedor) {
-                                            echo "<tr>";
-                                            echo "<td>" . $proveedor->getIdproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTipoidproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getNombreproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getFecnacproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getCiudnacproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTipoproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getDireccionproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getTelefonoproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getEmailproveedor() . "</td>";
-                                            echo "<td>" . $proveedor->getEstadoproveedor() . "</td>";
-                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></center></td>";
-                                            echo "<td><center><a title='Actualizar dato' href='../controller/controller.php?opcion=editar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></center></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "No se han cargado datos.";
-                                    }
-                                    ?>
+                                            //verificamos si existe en sesion el listado de proveedores:
+                                            if (isset($_SESSION['listaProveedores'])) {
+                                                $listado = unserialize($_SESSION['listaProveedores']);
+                                                foreach ($listado as $proveedor) {
+                                                    echo "<tr>";
+                                                    echo "<td>" . $proveedor->getIdproveedor() . "</td>";
+                                                    if ($proveedor->getTipoidproveedor() == 'Cedula' || $proveedor->getTipoidproveedor() == 'c' || $proveedor->getTipoidproveedor() == 'C' || $proveedor->getTipoidproveedor() == 'cedula' || $proveedor->getTipoidproveedor() == 'CEDULA') {
+                                                        echo "<td>CÉDULA</td>";
+                                                    } else if ($proveedor->getTipoidproveedor() == 'ruc' || $proveedor->getTipoidproveedor() == 'r' || $proveedor->getTipoidproveedor() == 'R' || $proveedor->getTipoidproveedor() == 'Ruc' || $proveedor->getTipoidproveedor() == 'RUC') {
+                                                        echo "<td>RUC</td>";
+                                                    } else if ($proveedor->getTipoidproveedor() == 'pasaporte' || $proveedor->getTipoidproveedor() == 'p' || $proveedor->getTipoidproveedor() == 'P' || $proveedor->getTipoidproveedor() == 'Pasaporte' || $proveedor->getTipoidproveedor() == 'PASAPORTE') {
+                                                        echo "<td>PASAPORTE</td>";
+                                                    }
+                                                    echo "<td>" . $proveedor->getNombreproveedor() . "</td>";
+                                                    echo "<td>" . $proveedor->getFecnacproveedor() . "</td>";
+                                                    echo "<td>" . $proveedor->getCiudnacproveedor() . "</td>";
+                                                    if ($proveedor->getTipoproveedor() == 1) {
+                                                        echo "<td>SI</td>";
+                                                    } else {
+                                                        echo "<td>NO</td>";
+                                                    }
+                                                    echo "<td>" . $proveedor->getDireccionproveedor() . "</td>";
+                                                    echo "<td>" . $proveedor->getTelefonoproveedor() . "</td>";
+                                                    echo "<td>" . $proveedor->getEmailproveedor() . "</td>";
+                                                    if ($proveedor->getEstadoproveedor() == 1) {
+                                                        echo "<td>ACTIVO</td>";
+                                                    } else {
+                                                        echo "<td>INACTIVO</td>";
+                                                    }
+                                                    echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></center></td>";
+                                                    echo "<td><center><a title='Actualizar dato' href='../controller/controller.php?opcion=editar_proveedor&idproveedor=" . $proveedor->getIdproveedor() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></center></td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "No se han cargado datos.";
+                                            }
+                                            ?>
                                 </tbody >                    
 
                             </table >

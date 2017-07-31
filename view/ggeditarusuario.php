@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../model/Usuario.php';
+include_once '../model/CrudModel.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -136,7 +137,7 @@ require_once '../model/Usuario.php';
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                     
+
                     </ul>
                 </nav><!-- /.navbar-collapse -->
             </div>
@@ -171,30 +172,30 @@ require_once '../model/Usuario.php';
                             <form action="../controller/controller.php">
                                 <input type="hidden" name="opcion" value="actualizar_usuario">
                                 <div class="panel panel-info">
-                                    
+
                                     <div class="panel-body">
                                         <style>
-                                table {
-                                    border-collapse: collapse;
-                                    width: 100%;
+                                            table {
+                                                border-collapse: collapse;
+                                                width: 100%;
 
-                                }
+                                            }
 
-                                th, td {
-                                    text-align: left;
-                                    padding: 8px;
-                                    color: black;
+                                            th, td {
+                                                text-align: left;
+                                                padding: 8px;
+                                                color: black;
 
-                                }
+                                            }
 
-                                tr:nth-child(even){background-color: #cccccc}
-                                tr:nth-child(odd){background-color: whitesmoke}
+                                            tr:nth-child(even){background-color: #cccccc}
+                                            tr:nth-child(odd){background-color: whitesmoke}
 
-                                th {
-                                    background-color: #4CAF50;
-                                    color: white;
-                                }
-                            </style>
+                                            th {
+                                                background-color: #4CAF50;
+                                                color: white;
+                                            }
+                                        </style>
                                         <table>
                                             <tr>
                                                 <td>Identificación: </td>
@@ -203,12 +204,24 @@ require_once '../model/Usuario.php';
                                                     ?>
                                                     <input type="hidden" name="idusuario" value="<?php echo $listaUsuarios->getIdusuario(); ?>" />
                                                 </td>
-                                                <td>Tipo de usuario:</td>
+                                                <td>Tipo de Identificación:</td>
                                                 <td>
                                                     <select name="tipoidusuario">
-                                                        <option value="<?php echo $listaUsuarios->getTipoidusuario(); ?>">CEDULA</option>
-                                                        <option value="<?php echo $listaUsuarios->getTipoidusuario(); ?>">PASAPORTE</option>
-                                                        <option value="<?php echo $listaUsuarios->getTipoidusuario(); ?>">RUC</option>
+                                                        <?php
+                                                        if ($listaUsuarios->getTipoidusuario() == 'Cedula' || $listaUsuarios->getTipoidusuario() == 'c' || $listaUsuarios->getTipoidusuario() == 'C' || $listaUsuarios->getTipoidusuario() == 'cedula' || $listaUsuarios->getTipoidusuario() == 'CEDULA') {
+                                                            echo"<option select=true>CÉDULA</option>";
+                                                            echo"<option>PASAPORTE</option>";
+                                                            echo"<option>RUC</option>";
+                                                        } else if ($listaUsuarios->getTipoidusuario() == 'ruc' || $listaUsuarios->getTipoidusuario() == 'r' || $listaUsuarios->getTipoidusuario() == 'R' || $listaUsuarios->getTipoidusuario() == 'Ruc' || $listaUsuarios->getTipoidusuario() == 'RUC') {
+                                                            echo"<option select=true>RUC</option>";
+                                                            echo"<option>CÉDULA</option>";
+                                                            echo"<option>PASAPORTE</option>";
+                                                        } else if ($listaUsuarios->getTipoidusuario() == 'pasaporte' || $listaUsuarios->getTipoidusuario() == 'p' || $listaUsuarios->getTipoidusuario() == 'P' || $listaUsuarios->getTipoidusuario() == 'Pasaporte' || $listaUsuarios->getTipoidusuario() == 'PASAPORTE') {
+                                                            echo"<option select=true>PASAPORTE</option>";
+                                                            echo"<option >CÉDULA</option>";
+                                                            echo"<option>RUC</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -216,8 +229,15 @@ require_once '../model/Usuario.php';
                                                 <td>Rol usuario:</td>
                                                 <td>
                                                     <select name="rolusuario" >
-                                                        <option value="C">CAJERO</option>
-                                                        <option value="A">ADMINISTRADOR</option>
+                                                        <?php
+                                                        if ($listaUsuarios->getRolusuario() == 'C') {
+                                                            echo "<option value='C' selected=true >CAJERO</option>";
+                                                            echo "<option value='A'>ADMINISTRADOR</option>";
+                                                        } else if ($listaUsuarios->getRolusuario() == 'A') {
+                                                            echo "<option value='A' >ADMINISTRADOR</option>";
+                                                            echo "<option value='C' >CAJERO</option>";
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </td>
                                                 <td>Nombre:</td>
@@ -253,10 +273,19 @@ require_once '../model/Usuario.php';
                                                 <td>
                                                     <table>
                                                         <tr>   
-                                                            <td><input type="radio" name="estadousuario" value="true" type="text" required="true">Activo</td>
-                                                            <td width="20"></td>
-                                                            <td><input type="radio" name="estadousuario" value="false" type="text" required="true">Inactivo</td>
+                                                            <?php
+                                                            if ($listaUsuarios->getEstadousuario() == true) {
+                                                                echo "<td><input type = 'radio' name = 'estadousuario' value = 'true' required = 'true' checked=true>Activo</td>";
+                                                                echo "<td><input type = 'radio' name = 'estadousuario' value = 'false' required = 'true' >Inactivo</td>";
+                                                            } else if ($listaUsuarios->getEstadousuario() == false) {
+                                                                echo "<td><input type = 'radio' name = 'estadousuario' value = 'true' required = 'true' >Activo</td>";
+                                                                echo "<td><input type = 'radio' name = 'estadousuario' value = 'false' required = 'true' checked=true>Inactivo</td>";
+                                                            }
+                                                            ?>
                                                         </tr>
+<!--                                                        <td><input type = 'radio' name = "estadousuario" value = "true" type = "text" required = "true">Activo</td>
+                                                            <td width = "20"></td>
+                                                            <td><input type = "radio" name = "estadousuario" value = "false" type = "text" required = "true">Inactivo</td>-->
                                                     </table>
                                                 </td>
                                             </tr>
@@ -264,7 +293,7 @@ require_once '../model/Usuario.php';
                                                 <td colspan="2"><center><input 
                                                     style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;"
                                                     type="submit" value="Actualizar Usuario" class="btn btn-sm" ></center></td>
-                                                    <td colspan="2"><center><input  
+                                            <td colspan="2"><center><input  
                                                     style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;"
                                                     type="submit" value="Cancelar" class="btn btn-sm" ><a href="controller/controller.php?opcion=listar_usuarios"></a></center></td>
                                             </tr>

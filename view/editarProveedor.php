@@ -136,7 +136,7 @@ require_once '../model/Proveedor.php';
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                       
+
                     </ul>
                 </nav><!-- /.navbar-collapse -->
             </div>
@@ -204,10 +204,22 @@ require_once '../model/Proveedor.php';
                                                 <td>Tipo de identificación:</td>
                                                 <td>
                                                     <select name="tipoidproveedor">
-                                                        <option value="C">IDENTICACION CEDULA</option>
-                                                        <option value="R">IDENTIFICACION RUC</option>
-                                                        <option value="P">IDENTIFICACION PASAPORTE</option>
-                                                    </select> 
+                                                        <?php
+                                                        if ($listaProveedores->getTipoidproveedor() == 'Cedula' || $listaProveedores->getTipoidproveedor() == 'c' || $listaProveedores->getTipoidproveedor() == 'C' || $listaProveedores->getTipoidproveedor() == 'cedula' || $listaProveedores->getTipoidproveedor() == 'CEDULA') {
+                                                            echo"<option select=true>CÉDULA</option>";
+                                                            echo"<option >PASAPORTE</option>";
+                                                            echo"<option >RUC</option>";
+                                                        } else if ($listaProveedores->getTipoidproveedor() == 'ruc' || $listaProveedores->getTipoidproveedor() == 'r' || $listaProveedores->getTipoidproveedor() == 'R' || $listaProveedores->getTipoidproveedor() == 'Ruc' || $listaProveedores->getTipoidproveedor() == 'RUC') {
+                                                            echo"<option select=true>RUC</option>";
+                                                            echo"<option >CÉDULA</option>";
+                                                            echo"<option >PASAPORTE</option>";
+                                                        } else if ($listaProveedores->getTipoidproveedor() == 'pasaporte' || $listaProveedores->getTipoidproveedor() == 'p' || $listaProveedores->getTipoidproveedor() == 'P' || $listaProveedores->getTipoidproveedor() == 'Pasaporte' || $listaProveedores->getTipoidproveedor() == 'PASAPORTE') {
+                                                            echo"<option select=true>PASAPORTE</option>";
+                                                            echo"<option >CÉDULA</option>";
+                                                            echo"<option >RUC</option>";
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -229,9 +241,18 @@ require_once '../model/Proveedor.php';
                                                 <td>
                                                     <table>
                                                         <tr>
-                                                            <td><input type="radio" name="tipoproveedor" value='true' required="true">Credito</td>
-                                                            <td width="20"></td>
-                                                            <td><input type="radio" name="tipoproveedor" value='false' required="true">Efectivo</td>
+                                                            <?php
+                                                            if ($listaProveedores->getTipoproveedor() == true) {
+                                                                echo "<td><input type = 'radio' name = 'tipoproveedor' value = 'true' required = 'true' checked=true>Crédito</td>";
+                                                                echo "<td><input type = 'radio' name = 'tipoproveedor' value = 'false' required = 'true' >Efectivo</td>";
+                                                            } else if ($listaProveedores->getTipoproveedor() == false) {
+                                                                echo "<td><input type = 'radio' name = 'tipoproveedor' value = 'false' required = 'true' >Crédito</td>";
+                                                                echo "<td><input type = 'radio' name = 'tipoproveedor' value = 'true' required = 'true' checked=true>Efectivo</td>";
+                                                            }
+                                                            //                                                            <td><input type = "radio" name = "tipoproveedor" value = 'true' required = "true">Credito</td>
+                                                            //                                                            <td width = "20"></td>
+                                                            //                                                            <td><input type = "radio" name = "tipoproveedor" value = 'false' required = "true">Efectivo</td>
+                                                            ?>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -239,7 +260,7 @@ require_once '../model/Proveedor.php';
                                             <tr>
                                                 <td>Dirección:</td>
                                                 <td>
-                                                    <input value="<?php echo $listaProveedores->getDireccionproveedor(); ?>" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" type="text" name="direccionproveedor" maxlength="100" required="true">
+                                                    <input value="<?php echo $listaProveedores->getDireccionproveedor(); ?>" placeholder="Ej: Quito y Via. Amazonas" type="text" name="direccionproveedor" maxlength="100" required="true">
                                                 </td>
                                                 <td>Teléfono:</td>
                                                 <td>
@@ -254,11 +275,21 @@ require_once '../model/Proveedor.php';
                                                 <td>Estado</td>
                                                 <td>
                                                     <table>
-                                                        <tr>
-                                                            <td><input type="radio" name="estadoproveedor" value='true' required="true">Activo</td>
-                                                            <td width="20"></td>
-                                                            <td><input type="radio" name="estadoproveedor" value='false' required="true">Inactivo</td>
-                                                        </tr>
+                                                        <?php
+                                                        if ($listaProveedores->getEstadoproveedor() == true) {
+                                                            echo "<td><input type = 'radio' name = 'estadoproveedor' value = 'true' required = 'true' checked=true>Activo</td>";
+                                                            echo "<td><input type = 'radio' name = 'estadoproveedor' value = 'false' required = 'true' >Inactivo</td>";
+                                                        } else if ($listaProveedores->getEstadoproveedor() == false) {
+                                                            echo "<td><input type = 'radio' name = 'estadoproveedor' value = 'false' required = 'true' >Activo</td>";
+                                                            echo "<td><input type = 'radio' name = 'estadoproveedor' value = 'true' required = 'true' checked=true>Inactivo</td>";
+                                                        }
+
+//                                                        <tr>
+//                                                        <td><input type = "radio" name = "estadoproveedor" value = 'true' required = "true">Activo</td>
+//                                                        <td width = "20"></td>
+//                                                        <td><input type = "radio" name = "estadoproveedor" value = 'false' required = "true">Inactivo</td>
+//                                                        </tr>
+                                                        ?>
                                                     </table>
                                                 </td>
                                             </tr>
