@@ -330,6 +330,7 @@ switch ($opcion) {
         //obtenemos la lista de facturas y subimos a sesion:
         $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
         $vec = $crudModel->getFacturas();
+        $crudModel->getWs();
         header('Location: ../view/Facturas.php');
 
         break;

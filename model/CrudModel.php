@@ -455,5 +455,34 @@ class CrudModel {
         //retornamos el listado resultante:
         return $listado;
     }
-    
+    public function getws(){
+        $inventario_URL = "https://wsinventario.herokuapp.com/product";
+$inventario_json = file_get_contents($inventario_URL);
+$inventario_array = json_decode($inventario_json, true);
+var_dump($inventario_array["data"][3]["id_prod"]);
+//print_r($inventario_array);
+session_start();
+require_once '../model/CrudModel.php';
+$crudModel = new CrudModel();
+for ($i=0;$i<count($inventario_array);$i++) {
+                    if($inventario_array["data"][$i]["graba_iva_prod"] == "S"){
+                      
+                        
+                        $iva="true";
+                    } else {
+                        $iva="false";
+                    }
+                    if ($inventario_array["data"][$i]["estado_prod"] == "A"){
+                        $estado="Activo";
+                    } else {
+                        $estado="Inactivo";
+                    }
+                    
+                      $crudModel->insertarProducto($inventario_array["data"][$i]["id_prod"],
+                                $inventario_array["data"][$i]["nombre_prod"], 
+                                $inventario_array["data"][$i]["costo_prod"],
+                                $iva);
+                 
+                }
+    }
 }
