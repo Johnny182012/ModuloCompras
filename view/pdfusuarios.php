@@ -25,14 +25,14 @@ class PDF extends FPDF {
 }
 
 $lista = array(
-    "ID", "TIPOID", "ROL", "NOMBRE", "FECHANAC", "CIUDADNAC", "DIRECCION", "TELF", "EMAIL","ESTADO"
+    "ID USUARIO", "TIPO ID", "ROL", "NOMBRE", "FECHA NAC.", "CIUDAD NAC.", "DIRECCION", "TELF", "EMAIL","ESTADO"
 );
 
 $pdf = new PDF();
 $pdf->AddPage('L','Legal');
 
 for ($i = 0; $i < count($lista); $i++) {
-    $pdf->SetFont('Times', '', 10.5);
+    $pdf->SetFont('Times', '', 10);
     $pdf->Cell(35, 30, $lista[$i], 1, 0, 'C');
 }
 $pdf->Ln( 10);
@@ -56,6 +56,19 @@ foreach ($resultado as $res) {
     $telefonousuario = $res['telefonousuario'];
     $emailusuario = $res['emailusuario'];
     $estadousuario = $res['estadousuario'];
+    
+    if($rolusuario=='C'){
+        $rolusuario="CAJERO";        
+    }
+    else{
+        $rolusuario="ADMINISTRADOR"; 
+    }
+    if($estadousuario==1){
+        $estadousuario="ACTIVO";        
+    }
+    else{
+        $estadousuario="INACTIVO"; 
+    }
 //Aquí escribimos lo que deseamos mostrar...
     $pdf->Cell(35, 30, $idusuario, 1, 0, 'C');
     $pdf->Cell(35, 30, $tipoidusuario, 1, 0, 'C');
