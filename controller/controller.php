@@ -472,6 +472,18 @@ switch ($opcion) {
         header('Location: ../view/productos.php');
         break;
     
+    case "primerReporte":
+        header('Location: ../view/primerReporte.php');
+        break;
+    case "primerReporteListar":
+        //obtenemos la lista de productos:
+        $listaPR = $crudModel->getCajeros();
+        //y los guardamos en sesion:
+        $_SESSION['listaPR'] = serialize($listaPR);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/primerReporte.php');
+        break;
+    
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:
