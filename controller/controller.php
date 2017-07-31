@@ -50,7 +50,7 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar
         header('Location: ../view/gg.php');
         break;
-    
+
     //elimina un usuario especifico
     case "eliminar_usuario":
         //obtenemos el codigo del usuario a eliminar:
@@ -101,14 +101,14 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/gg.php');
         break;
-    
+
     default:
         //si no existe la opcion recibida por el controlador, siempre
         //redirigimos la navegacion a la pagina index:
         header('Location: ../view/indexLogin.php');
-        
-        
-                //    -------------------LISTAR---------------------
+
+
+    //    -------------------LISTAR---------------------
     // obtiene los datos de los proveedores de la base de datos
     case "listar_proveedores":
         //obtenemos la lista de empleados:
@@ -132,9 +132,9 @@ switch ($opcion) {
         $telefonoproveedor = $_REQUEST['telefonoproveedor'];
         $emailproveedor = $_REQUEST['emailproveedor'];
         $estadoproveedor = $_REQUEST['estadoproveedor'];
-        
+
         //creamos el nuevo registro:
-        $crudModel->insertarProveedor($idproveedor, $tipoidproveedor, $nombreproveedor,$fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor,$emailproveedor,$estadoproveedor);
+        $crudModel->insertarProveedor($idproveedor, $tipoidproveedor, $nombreproveedor, $fecnacproveedor, $ciudnacproveedor, $tipoproveedor, $direccionproveedor, $telefonoproveedor, $emailproveedor, $estadoproveedor);
         //actualizamos el listado:
         $listaProveedores = $crudModel->getProveedores();
         //y los guardamos en sesion:
@@ -163,16 +163,16 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/crearproveedor.php');
         break;
-     //elimina un empleado especifico
+    //elimina un empleado especifico
     case "eliminar_proveedor":
         //obtenemos el codigo del empleado a eliminar:
         $idproveedor = $_REQUEST['idproveedor'];
         //eliminamos del formulario:
-         try{
+        try {
             $crudModel->eliminarProveedor($idproveedor);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             //colocamos el mensaje de la excepcion en sesion:
-            $_SESSION['mensaje1']=$e->getMessage();
+            $_SESSION['mensaje1'] = $e->getMessage();
         }
         //actualizamos la lista de empleados para grabar en sesion:
         $listaProveedores = $crudModel->getProveedores();
@@ -180,8 +180,8 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/crearproveedor.php');
         break;
-    
-     //edita los datos de un empleado especifico
+
+    //edita los datos de un empleado especifico
     case "editar_proveedor":
         //obtenemos los parametros del formulario:
         $idproveedor = $_REQUEST['idproveedor'];
@@ -192,20 +192,20 @@ switch ($opcion) {
         //redirigimos la navegación al formulario de edicion profeedor:
         header('Location: ../view/editarProveedor.php');
         break;
-    
+
     case "guardar_proveedor":
         //obtenemos los parametros del formulario:
-        $idproveedor=$_REQUEST['idproveedor'];
-        if(isset($_SESSION['listaProveedores'])){
-            $listaProveedores=unserialize($_SESSION['listaProveedores']);
+        $idproveedor = $_REQUEST['idproveedor'];
+        if (isset($_SESSION['listaProveedores'])) {
+            $listaProveedores = unserialize($_SESSION['listaProveedores']);
             try {
-                $listaProveedores=$crudModel->guardarProveedor($listaProveedores, $idproveedor);
-                $_SESSION['listaProveedores']=$listaProveedores;
+                $listaProveedores = $crudModel->guardarProveedor($listaProveedores, $idproveedor);
+                $_SESSION['listaProveedores'] = $listaProveedores;
                 header('Location: ../view/proveedor_reporte.php');
                 break;
             } catch (Exception $e) {
-                $mensajeError=$e->getMessage();
-                $_SESSION['mensajeError']=$mensajeError;
+                $mensajeError = $e->getMessage();
+                $_SESSION['mensajeError'] = $mensajeError;
             }
         }
         //actualizamos lista de facturas:
@@ -215,7 +215,6 @@ switch ($opcion) {
         break;
 //        PAGINAS DE LA FACTURA
 //        //    -------------------LISTAR---------------------
-
     // obtiene los datos de los empleados de la base de datos
     case "listar_Detalle":
         //obtenemos la lista de empleados:
@@ -225,8 +224,8 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/facturas_1.php');
         break;
-    
-        // crea un nuevo factura
+
+    // crea un nuevo factura
     case "crear_facturas":
         //obtenemos los parametros del formulario cliente:
         $idfactura = $_REQUEST['idfactura'];
@@ -263,7 +262,7 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/facturas_1.php');
         break;
-    
+
     //---------------------------EDTTA----------------------------
     //edita los datos de un cliente especifico
     case "editar_facturas":
@@ -287,7 +286,7 @@ switch ($opcion) {
         //redirigimos la navegación al formulario de edicion empleado:
         header('Location: ../view/editarDetalle.php');
         break;
-        
+
 //----------------------ACTUALIZA------------------
     //actualiza los datos de un cliente especifico
     case "actualizar_facturas":
@@ -326,15 +325,15 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/facturas_1.php');
         break;
-    
+
     case "listar_facturas":
         //obtenemos la lista de facturas y subimos a sesion:
-        $_SESSION['listaFacturas']=serialize($crudModel->getFacturas());
-         $vec=$crudModel->getFacturas();
+        $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
+        $vec = $crudModel->getFacturas();
         header('Location: ../view/Facturas.php');
-        
+
         break;
-    
+
     // obtiene los datos de los login de la base de datos
     case "listar_logins":
         //obtenemos la lista de los logins:
@@ -401,8 +400,8 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/logins.php');
         break;
-    
-     // obtiene los datos de los productos de la base de datos
+
+    // obtiene los datos de los productos de la base de datos
     case "listar_productos":
         //obtenemos la lista de productos:
         $listaProductos = $crudModel->getProductos();
@@ -471,7 +470,7 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/productos.php');
         break;
-    
+
     case "primerReporte":
         header('Location: ../view/primerReporte.php');
         break;
@@ -483,7 +482,7 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/primerReporte.php');
         break;
-    
+
     case "segundoReporte":
         header('Location: ../view/segundoReporte.php');
         break;
@@ -495,7 +494,21 @@ switch ($opcion) {
         //redireccionamos a una nueva pagina para visualizar:
         header('Location: ../view/segundoReporte.php');
         break;
-    
+
+    case "tercerReporte":
+        header('Location: ../view/tercerReporte.php');
+        break;
+    case "tercerReporteListar":
+        //obtenemos la lista de productos:
+        $fechainicio = $_REQUEST['fechainicio'];
+        $fechafin = $_REQUEST['fechafin'];
+        $listaTR = $crudModel->getFacturasFecha($fechainicio, $fechafin);
+        //y los guardamos en sesion:
+        $_SESSION['listaTR'] = serialize($listaTR);
+        //redireccionamos a una nueva pagina para visualizar:
+        header('Location: ../view/tercerReporte.php');
+        break;
+
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:
