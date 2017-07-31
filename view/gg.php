@@ -129,7 +129,7 @@ require_once '../model/Usuario.php';
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
                                     <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR USUARIO</a></li>
-                                    <a class="btn btn-success" href="../view/pdfusuario.php">IMPRIMIR</a>
+                                  
                                     <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
                                 </ul></div>
                             <!-- Modal -->
