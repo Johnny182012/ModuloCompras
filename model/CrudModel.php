@@ -288,7 +288,6 @@ class CrudModel {
         //Ejecutamos y pasamos los parametros:
         try {
             $consulta->execute(array($idproducto, $nombreproducto,  $pvpproducto,$ivaproducto));
-            echo $consulta;
         } catch (PDOException $e) {
             Database::disconnect();
             throw new Exception($e->getMessage());
