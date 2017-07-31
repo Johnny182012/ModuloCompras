@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 
-//<?php
+<?php
 //session_start();
 //$rolusuario = unserialize($_SESSION['rolusuario']);
 //if (!isset($_SESSION['bandera'])) {
