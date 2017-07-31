@@ -264,30 +264,7 @@ require_once '../model/Producto.php';
                                                 </table>            
                                             </form>
                                         </div>  
-                                                            <form action="../controller/controller.php">
-                                                                <input type="hidden" name="opcion" value="adicionar_detalle">
-                                                            Producto:
-                                                        
-                                                            <select name="idProducto">                                        
-                                                                <?php
-                                                             
-                                                                $listaProductos = $crudModel->getProductos();
-//                                                                    echo $listaProductos;
-                                                                foreach ($listaProductos as $producto) {
-                                                                    echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        Cantidad:
-                                                        <input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+">
                                                             
-                                                    </table>
-                                                    
-                                                    </tr>
-                                                    <tr>
-                                                        <center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center>
-
-                                                                                                        </form>
 
                                                 
                                                  </p>
