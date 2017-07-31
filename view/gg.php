@@ -151,9 +151,9 @@ require_once '../model/Usuario.php';
                                                             <td><br>Tipo:</br></td>
                                                             <td>
                                                                 <select name="tipoidusuario">
-                                                                    <option>CEDULA</option>
-                                                                    <option>PASAPORTE</option>
-                                                                    <option>RUC</option>
+                                                                    <option value="C">CEDULA</option>
+                                                                    <option value="P">PASAPORTE</option>
+                                                                    <option value="R">RUC</option>
                                                                 </select>
                                                             </td>
                                                         </tr>
