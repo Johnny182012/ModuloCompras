@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once '../model/Facturas.php';
+require_once '../model/DetalleFactura.php';
 require_once '../model/Producto.php';
         require_once '../model/CrudModel.php';
+        require_once '../model/FacturaModel.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -181,16 +183,20 @@ require_once '../model/Producto.php';
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Usuarios</h2>
                                         </div>
-                                        <div class="modal-body" >
+                                        
 
-                                         <form action="../controller/controller.php" style=" width: 100%;">
-                                                <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
-                                                       
+                                       
+                        
+                    </div>     <!-- End col-lg-12 -->
+                </div>	    <!-- End row -->
+            </div>       <!-- End container -->
+        </section>    <!-- End Section -->
+          <form action="../controller/controller.php" style=" width: 100%;">
+                                                      
                                                 <input type="hidden" name="opcion" value="guardar_factura">
-                                                        <tr>
                                                             
-                                                            <td style="#cccccc"><br>Proveedor:</br></td>
-                                                            <td><br><select name="idproveedor">                                        
+                                                            Proveedor:
+                                                            <select name="idproveedor">                                        
                                                                     <?php
                                                                     $crudModel = new CrudModel();
                                                                     $listaProveedores = $crudModel->getProveedores();
@@ -199,21 +205,21 @@ require_once '../model/Producto.php';
                                                                         echo "<option value='" . $proveedor->getIdproveedor() . "'>" . $proveedor->getNombreproveedor() . "</option>";
                                                                     }
                                                                     ?>
-                                                                </select></td>
-                                                            <td><br>Fecha:</br></td>
-                                                            <td>
+                                                                </select>
+                                                            Fecha:
+                                                            
                                                                 <input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo getdate(); ?>">
                                                                 
-                                                            </td>
-                                                        </tr>
+                                                            
+                                                        
                                                         <input type="submit" value="Guardar">
                                                         </form>
-                                                        <tr>
+                                                        
                                                             <form action="../controller/controller.php">
                                                                 <input type="hidden" name="opcion" value="adicionar_detalle">
-                                                            <td>Producto:</td>
+                                                            Producto:
                                                         
-                                                        <td><select name="idProducto">                                        
+                                                        <select name="idProducto">                                        
                                                                 <?php
                                                                 $crudModel = new CrudModel();
                                                                 $listaProductos = $crudModel->getProductos();
@@ -222,170 +228,23 @@ require_once '../model/Producto.php';
                                                                     echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
                                                                 }
                                                                 ?>
-                                                            </select></td>
-                                                        <td >Cantidad:</td>
-                                                        <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
-                                                            </form>
+                                                            </select>
+                                                        Cantidad:
+                                                        <input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+">
+                                                            
                                                     </table>
                                                     
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
-                                                    </tr>
-                                                    </table></center>
+                                                        <center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center>
+
                                                                                                         </form>
 
                                                 
                                                  </p>
-    <table data-toggle="table">
-        <thead>
-            <tr>
-                <th>ID PRODUCTO</th>
-                <th>NOMBRE</th>
-                <th>PRECIO</th>
-                <th>CANTIDAD</th>
-                <th>IVA</th>
-                <th>SUBTOTAL</th>
-                <th>OPCIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            //verificamos si existe en sesion el listado de clientes:
-            if (isset($_SESSION['listaFacturaDet'])) {
-                $listado = unserialize($_SESSION['listaFacturaDet']);
-                foreach ($listado as $facturaDet) {
-                    echo "<tr>";
-                    echo "<td>" . $facturaDet->getIdProducto() . "</td>";
-                    echo "<td>" . $facturaDet->getNombreProducto() . "</td>";
-                    echo "<td>" . $facturaDet->getPrecio() . "</td>";
-                    echo "<td>" . $facturaDet->getCantidad() . "</td>";
-                    echo "<td>" . $facturaDet->getPorcentajeIva() . "</td>";
-                    echo "<td>" . $facturaDet->getSubtotal() . "</td>";
-                    echo "<td><a href='../controller/controller.php?opcion=eliminar_detalle&idProducto=" . $facturaDet->getIdProducto() . "'>Eliminar</a></td>";
-                    echo "</tr>";
-                }
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>BASE IMPONIBLE</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularBaseImponible($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>BASE NO IMPONIBLE</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularBaseNoImponible($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>IVA</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularIva($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> </td>";
-                echo "<td>TOTAL</td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td></td>";
-                echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
-                echo "<td></td>";
-                echo "</tr>";
-            } else {
-                echo "No se han cargado datos.";
-            }
-            ?>
-        </tbody>
-    </table>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button  style="color: #000; font-size: medium;border-radius: 0 50% / 0 100%;" type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
-                        <br>
-                        <div style="overflow-x:auto;">
-                            <!--ESTILO DE LA TABLA-->
-                            <style>
-                                table {
-                                    border-collapse: collapse;
-                                    width: 100%;
 
-                                }
+                                          
 
-                                th, td {
-                                    text-align: left;
-                                    padding: 8px;
-                                    color: black;
-
-                                }
-
-                                tr:nth-child(even){background-color: #cccccc}
-                                tr:nth-child(odd){background-color: whitesmoke}
-
-                                th {
-                                    background-color: #4CAF50;
-                                    color: white;
-                                }
-                            </style>
-                            <table id="example">    
-                                <tr>
-                                    <th>NUMERO FACTURA</th>
-                                    <th>PROVEEDOR</th>
-                                    <th>USUARIO</th>
-                                    <th>VALOR FACTURA</th>
-                                    <th>FECHA FACTURA</th>
-                                    <th>IVA FACTURA</th>
-                                    <th>ELIMINAR</th>
-                                    <th>EDITAR</th>
-                                </tr>
-
-                                <tbody >                    
-
-                                    <?php
-                                    //verificamos si existe en sesion el listado de login:
-                                    if (isset($_SESSION['listaFacturas'])) {
-                                        $listado = unserialize($_SESSION['listaFacturas']);
-                                        foreach ($listado as $usu) {
-
-                                            echo "<tr>";
-                                            echo "<td>" . $usu->getIdfactura() . "</td>";
-                                            echo "<td>" . $usu->getIdproveedor() . "</td>";
-                                            echo "<td>" . $usu->getIdusuario() . "</td>";
-                                            echo "<td>" . $usu->getValorfactura() . "</td>";
-                                            echo "<td>" . $usu->getFechafactura() . "</td>";
-                                            echo "<td>" . $usu->getIvafactura() . "</td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "No se han cargado datos.";
-                                    }
-                                    ?>
-                                </tbody >                    
-
-                            </table >
-
-                        </div>
-                    </div>     <!-- End col-lg-12 -->
-                </div>	    <!-- End row -->
-            </div>       <!-- End container -->
-        </section>    <!-- End Section -->
 
         <!-- Start Blog Post Section
         ==================================== -->

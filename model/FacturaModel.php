@@ -28,11 +28,15 @@ class FacturaModel {
         //creamos un nuevo detalle FacturaDet:
         $facturaDet=new DetalleFactura();
         $facturaDet->setIdProducto($producto->getIdProducto());
-        $facturaDet->setNombreProducto($producto->getNombre());
+        $facturaDet->setNombreProducto($producto->getNombreproducto());
         $facturaDet->setcantidadproducto($cantidad);
-        $facturaDet->setPrecio($producto->getPvpproducto());
-        $facturaDet->setPorcentajeIva($producto->getPorcentajeIva());
-        $facturaDet->setSubtotal($cantidad * $producto->getPrecio());
+        
+        if ($producto->getIvaproducto()==true) {
+            $facturaDet->setPrecio(0.12);
+        }else{
+        $facturaDet->setPorcentajeIva(0);
+        }
+        $facturaDet->setSubtotal($cantidad * $producto->getPvpproducto());
         //adicionamos el nuevo detalle al array en memoria:
         if(!isset($listaFacturaDet)){
             $listaFacturaDet=array();

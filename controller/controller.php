@@ -5,10 +5,12 @@
 //por el usuario, ejecuta el modelo y enruta la navegacion de paginas//
 ///////////////////////////////////////////////////////////////////////
 require_once '../model/CrudModel.php';
+require_once '../model/FacturaModel.php';
 
 session_start();
 //instanciamos los objetos del pedido:
 $crudModel = new CrudModel();
+$facturaModel = new FacturaModel();
 
 //recibimos la opcion desde la vista:
 $opcion = $_REQUEST['opcion'];
@@ -511,6 +513,25 @@ switch ($opcion) {
         header('Location: ../view/tercerReporte.php');
         break;
 
+    case "adicionar_detalle":
+        //obtenemos los parametros del formulario:
+        $idProducto=$_REQUEST['idProducto'];
+        $cantidad=$_REQUEST['cantidad'];
+        if(!isset($_SESSION['listaFacturaDet'])){
+            $listaFacturaDet=array();
+        }else{
+            $listaFacturaDet=unserialize($_SESSION['listaFacturaDet']);
+        }
+        try{
+            $listaFacturaDet=$facturaModel->adicionarDetalle($listaFacturaDet, $idProducto, $cantidad);
+            $_SESSION['listaFacturaDet']=serialize($listaFacturaDet);
+        }catch(Exception $e){
+            $mensajeError=$e->getMessage();
+            $_SESSION['mensajeError']=$mensajeError;
+        }
+       // header('Location: ../view/Facturas.php');
+        break;
+    
 //    default:
 //        //si no existe la opcion recibida por el controlador, siempre
 //        //redirigimos la navegacion a la pagina index:

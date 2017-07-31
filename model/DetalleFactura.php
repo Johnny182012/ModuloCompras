@@ -57,15 +57,6 @@ class DetalleFactura {
         $this->precio = $precio;
     }
 
-        function __construct($iddetalle, $idproducto, $idfactura, $cantidadproducto, $unidades, $descuento, $cantdescuento) {
-        $this->iddetalle = $iddetalle;
-        $this->idproducto = $idproducto;
-        $this->idfactura = $idfactura;
-        $this->cantidadproducto = $cantidadproducto;
-        $this->unidades = $unidades;
-        $this->descuento = $descuento;
-        $this->cantdescuento = $cantdescuento;
-    }
     
     function getIddetalle() {
         return $this->iddetalle;
