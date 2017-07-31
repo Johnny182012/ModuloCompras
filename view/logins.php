@@ -198,7 +198,6 @@ require_once '../model/Login.php';
                                 <tr>
                                     <th>ID LOGIN</th>
                                     <th>USUARIO</th>
-                                    <th>PASSWORD</th>
                                     <th>ELIMINAR</th>
                                     <th>EDITAR</th>
                                 </tr>
@@ -211,7 +210,6 @@ require_once '../model/Login.php';
                                         echo "<tr>";
                                         echo "<td>" . $log->getIdlogin() . "</td>";
                                         echo "<td>" . $log->getIdusuario() . "</td>";
-                                        echo "<td>" . $log->getPasswordlogin() . "</td>";
                                         echo "<td><a href='../controller/controller.php?opcion=eliminar_login&idlogin=" . $log->getIdlogin() . "'><span class='glyphicon glyphicon-pencil '> Eliminar </span></a></td>";
                                         echo "<td><a href='../controller/controller.php?opcion=editar_login&idlogin=" . $log->getIdlogin() . "'><span class='glyphicon glyphicon-pencil'> Editar </span></a></td>";
                                         echo "</tr>";
