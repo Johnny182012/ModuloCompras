@@ -152,7 +152,6 @@ class FacturaModel {
         //creamos la nueva factura:
         $facturaCab = new Facturas();
         $facturaCab->setIdproveedor($idprov);
-        $facturaCab->setIdusuario($idusuario);
         $facturaCab->setFecha(date('Y-m-d'));
         $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
         $facturaCab->setBaseNoImponible($this->calcularBaseNoImponible($listaFacturaDet));
