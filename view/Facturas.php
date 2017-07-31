@@ -6,6 +6,95 @@ require_once '../model/Producto.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
+        <!--inicio del método búsqueda inteligente-->
+                <script type="text/javascript">
+                    (function (document) {
+                        'use strict';
+
+                        var LightTableFilter = (function (Arr) {
+
+                            var _input;
+
+                            function _onInputEvent(e) {
+                                _input = e.target;
+                                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                                Arr.forEach.call(tables, function (table) {
+                                    Arr.forEach.call(table.tBodies, function (tbody) {
+                                        Arr.forEach.call(tbody.rows, _filter);
+                                    });
+                                });
+                            }
+
+                            function _filter(row) {
+                                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                            }
+
+                            return {
+                                init: function () {
+                                    var inputs = document.getElementsByClassName('light-table-filter');
+                                    Arr.forEach.call(inputs, function (input) {
+                                        input.oninput = _onInputEvent;
+                                    });
+                                }
+                            };
+                        })(Array.prototype);
+
+                        document.addEventListener('readystatechange', function () {
+                            if (document.readyState === 'complete') {
+                                LightTableFilter.init();
+                            }
+                        });
+
+                    })(document);
+                </script>		
+                <style type="text/css">
+                    body {
+                        font: normal medium/1.4 sans-serif;
+                    }
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: center;
+                        margin: auto;
+
+                    }
+                    th, td {
+                        text-align: left;
+                        padding: 20px ;
+                        color: black;
+
+                    }
+                    tr:nth-child(even){background-color: #cccccc}
+                    tr:nth-child(odd){background-color: whitesmoke}
+                    th {
+                        background-color: #4CAF50;
+                        color: white;
+                    }
+
+                    .titulo{
+                        padding: 0.5rem;
+                        background: #FD0808 ;
+                        color: red;
+                        text-align: center;
+                        font-size: 21px;
+                    }
+
+                    #buscar{
+                        width: 650px;
+                        font-size: 18px;
+                        color: #fff;
+                        background: transparent ;
+                        padding-left: 20px ;
+                        text-align: center;
+                        border-radius: 5px;
+                        padding: 10px;
+                        margin:10px; 
+                        border: 4px solid #006633;
+                    }
+
+                </style>	
+                <!--fin búsqueda-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -249,32 +338,16 @@ require_once '../model/Producto.php';
                         </div>
                         <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
                         <br>
-                        <div style="overflow-x:auto;">
-                            <!--ESTILO DE LA TABLA-->
-                            <style>
-                                table {
-                                    border-collapse: collapse;
-                                    width: 100%;
+                                <br>
+                                <div style="overflow-x:auto;">
+                                    <div id="cuadro">
+                                        <center>
+                                            <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                        </center>
 
-                                }
-
-                                th, td {
-                                    text-align: left;
-                                    padding: 8px;
-                                    color: black;
-
-                                }
-
-                                tr:nth-child(even){background-color: #cccccc}
-                                tr:nth-child(odd){background-color: whitesmoke}
-
-                                th {
-                                    background-color: #4CAF50;
-                                    color: white;
-                                }
-                            </style>
-                            <table id="example">    
-                                <tr>
+                                        <div class="datagrid">
+                                            <table class="order-table table">   
+                                                <tr class="titulo" style="font-size: 1em">
                                     <th>NUMERO FACTURA</th>
                                     <th>PROVEEDOR</th>
                                     <th>USUARIO</th>
@@ -308,13 +381,14 @@ require_once '../model/Producto.php';
                                         echo "No se han cargado datos.";
                                     }
                                     ?>
-                                </tbody >                    
+                            </tbody >                    
 
-                            </table >
+                                            </table >
+                                            <a class="btn btn-success" href="../view/pdffacturas.php">IMPRIMIR</a>
 
-                        </div>
-                    </div>     <!-- End col-lg-12 -->
-                </div>	    <!-- End row -->
+                                        </div>
+                                    </div>     <!-- End col-lg-12 -->
+                                </div>	    <!-- End row -->
             </div>       <!-- End container -->
         </section>    <!-- End Section -->
 
