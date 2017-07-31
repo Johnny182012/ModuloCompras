@@ -182,15 +182,13 @@ echo $fecha;
             
             //guardamos los detalles:
             foreach ($listaFacturaDet as $det){
-                $sql = "insert into detallefacturacion(idproducto,idfactura,cantidadproducto,unidades,descuento,cantdescuento) values(?,?,?,?,?,?)";
+                $sql = "insert into detallefacturacion(idproducto,idfactura,cantidadproducto,descuento,cantdescuento) values(?,?,?,?,?,?)";
                 $consulta = $pdo->prepare($sql);
                 //en cada detalle asignamos el numero de factura padre:
                 $consulta->execute(array($det->getIdProductoss(),
                     $facturaCab->getIdFactura(),
-                                     $det->getPrecio(),
-                                     $det->getCantidadproducto(),
-                                     $det->getPorcentajeIva(),
-                                     $det->getSubtotal()));
+                                     $det->getCantidadproducto()),false,0);
+                                   
             }
         } catch (PDOException $e) {
             Database::disconnect();
