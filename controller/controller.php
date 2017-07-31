@@ -705,17 +705,17 @@ switch ($opcion) {
                 
                 $_SESSION['facturaCab'] = $facturaCab;
                 
-                //header('Location: ../view/factura_reporte.php');
+                header('Location: ../view/factura_reporte.php');
                 break;
             } catch (Exception $e) {
                 $mensajeError = $e->getMessage();
                 $_SESSION['mensajeError'] = $mensajeError;
             }
         }
-        //actualizamos lista de facturas:
-        //$listado = $gastosModel->getFacturas();
-        //$_SESSION['listado'] = serialize($listado);
-        header('Location: ../view/factura.php');
+      //  actualizamos lista de facturas:
+        $listado = $gastosModel->getFacturas();
+        $_SESSION['listado'] = serialize($listado);
+        header('Location: ../view/Facturas.php');
         break;
 
 
