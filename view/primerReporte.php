@@ -14,7 +14,7 @@ require_once '../model/CrudModel.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Proveedores</title>
+        <title>Cajeros</title>
 
         <meta name="description" content="description">
 
@@ -118,7 +118,7 @@ require_once '../model/CrudModel.php';
                             <i class="fa fa-book fa-4x"></i>
                         </div>
                         <div class="title text-center">
-                            <h2>Nuestros <span class="color">Proveedores</span></h2>
+                            <h2>Nuestros <span class="color">Cajeros</span></h2>
                             <div class="border"></div>
                         </div>
 
