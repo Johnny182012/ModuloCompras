@@ -20,6 +20,75 @@ unset($_SESSION['mensaje1']);
 unset($_SESSION['mensaje2']);
 
 switch ($opcion) {
+    
+    case "iniciarSesion":
+        $idusuario = $_REQUEST['idusuario'];
+        $passwordlogin = $_REQUEST['passwordlogin'];
+
+        $listaLogins = $crudModel->getLoginU($idusuario);
+        $usuarioBase = $listaLogins->getIdusuario();
+        $contraseñaBase = $listaLogins->getPasswordlogin();
+
+        $listaUsuarios = $crudModel->getUsuario($idusuario);
+        $rolusuario = $listaUsuarios->getRolusuario();
+
+//        echo $idusuario;
+//        echo $passwordlogin;
+//        echo $rolusuario;
+//        
+//        echo $usuarioBase;
+//        echo $contraseñaBase;
+
+
+        $bandera = 'N';
+        if ($rolusuario == "A") {
+            if ($idusuario == $usuarioBase && $passwordlogin == $contraseñaBase) {
+                $bandera = 'S';
+                $_SESSION["bandera"] = serialize($bandera);
+                $_SESSION["rolusuario"] = serialize($rolusuario);
+                header('Location: ../view/index.php');
+            } else {
+                $bandera = 'N';
+                $_SESSION["bandera"] = serialize($bandera);
+                header('Location: ../view/indexLogin.php');
+            }
+            break;
+        } else if ($rolusuario == "C") {
+            if ($idusuario == $usuarioBase && $passwordlogin == $contraseñaBase) {
+                $bandera = 'S';
+                $_SESSION["bandera"] = serialize($bandera);
+                $_SESSION["rolusuario"] = serialize($rolusuario);
+                header('Location: ../view/indexC.php');
+            } else {
+                $bandera = 'N';
+                $_SESSION["bandera"] = serialize($bandera);
+                header('Location: ../view/indexLogin.php');
+            }
+        }
+        break;
+    //CERRAR SESION
+    case "cerrarSesion":
+        session_destroy();
+        header('Location: ../view/indexLogin.php');
+        break;
+
+    //cambiar contraseña
+    case "cambiarContrasena":
+        //obtenemos los parametros del formulario login:
+        $idusuario = $_REQUEST['idusuario'];
+        $passwordlogin = $_REQUEST['passwordlogin'];
+        $passwordloginNueva = $_REQUEST['passwordloginNueva'];
+
+        $listaLogins = $crudModel->getLoginU($idusuario);
+        if ($passwordlogin == $listaLogins->getPasswordlogin()) {
+            //actualizamos los datos del login:
+            $crudModel->actualizarLoginU($idusuario, $passwordloginNueva);
+            header('Location: ../view/indexLogin.php');
+        } else {
+            header('Location: ../view/indexLogin.php');
+        }
+
+        break;
 
     // obtiene los datos de los usuarios de la base de datos
     case "listar_usuarios":
