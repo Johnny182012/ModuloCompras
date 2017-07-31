@@ -4,6 +4,7 @@ include_once 'Facturas.php';
 include_once 'DetalleFactura.php';
 include_once 'Producto.php';
 include_once 'CrudModel.php';
+$facturaDet=new DetalleFactura();
 
 /**
  * Clase que implementa la logica de facturacion.
@@ -124,15 +125,16 @@ class FacturaModel {
         $consulta->execute();
         //obtenemos el registro especifico:
         $res=$consulta->fetch(PDO::FETCH_ASSOC);
-        $numero=$res['idfactura'];
+        $numero=$res['numero'];
         Database::disconnect();
         //retornamos el numero encontrado:
         if(!isset($numero))
             return 0;
         return $numero;
     }
-    
-    public function guardarFactura($listaFacturaDet,$idprov,$idusuario){
+
+    public function guardarFactura($listaFacturaDet,$idprov,$idusuario,$fecha){
+        $idusuario="1009892333ED";    
         if(!isset($listaFacturaDet)){
             throw new Exception("Debe por lo menos registrar un producto.");
         }
@@ -145,41 +147,48 @@ class FacturaModel {
                 if(!isset($idusuario)){
             throw new Exception("Debe seleccionar el usuario.");
         }
-
+echo $fecha;     
         //obtenemos los datos completos del cliente:
         $crudModel=new CrudModel();
         $prob=$crudModel->getProveedor($idprov);
         //creamos la nueva factura:
         $facturaCab = new Facturas();
         $facturaCab->setIdproveedor($idprov);
-        $facturaCab->setFecha(date('Y-m-d'));
-        $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
-        $facturaCab->setBaseNoImponible($this->calcularBaseNoImponible($listaFacturaDet));
+        $facturaCab->setFechafactura($fecha);
         $facturaCab->setIvafactura($this->calcularIva($listaFacturaDet));
         $facturaCab->setValorfactura($this->calcularTotal($listaFacturaDet));
+        $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
+        $facturaCab->setBaseNoImponible($this->calcularBaseNoImponible($listaFacturaDet));
         //obtenemos el siguiente numero de factura:
-        $facturaCab->setIdFacturaCab($this->ultimoNumeroFactura()+1);
+        $facturaCab->setIdFactura($this->ultimoNumeroFactura()+1);
+//        echo $facturaCab->getFechafactura();
+        echo $facturaCab->getIdfactura();
+        echo $idusuario;
+//        echo $facturaCab->getValorfactura();
+        echo $facturaCab->getIvafactura();
         //guardar la cabecera:
         $pdo = Database::connect();
-        $sql = "insert into factura(idfactura,fechafactura,idproveedor,idusuario,valorfactura,ivafactura) values(?,?,?,?,?,?)";
+        $sql = "insert into facturas(idfactura,idproveedor,idusuario,valorfactura,fechafactura,ivafactura) values(?,?,?,?,?,?)";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos y pasamos los parametros:
-        try {
+        
             $consulta->execute(array($facturaCab->getIdFactura(),
-                                     $facturaCab->getFechafactura(),
                                      $facturaCab->getIdproveedor(),
-                                     $facturaCab->getIdusuario(),
+                                     $idusuario,
+                                     $facturaCab->getFechafactura(),
                                      $facturaCab->getValorfactura(),
                                      $facturaCab->getIvafactura()));
+            $consulta.$consulta;
+            try {
             //guardamos los detalles:
             foreach ($listaFacturaDet as $det){
                 $sql = "insert into detallefacturacion(idproducto,idfactura,cantidadproducto,unidades,descuento,cantdescuento) values(?,?,?,?,?,?)";
                 $consulta = $pdo->prepare($sql);
                 //en cada detalle asignamos el numero de factura padre:
-                $consulta->execute(array($det->getIdProducto(),
+                $consulta->execute(array($det->getIdProductoss(),
                     $facturaCab->getIdFactura(),
                                      $det->getPrecio(),
-                                     $det->getCantidad(),
+                                     $det->getCantidadproducto(),
                                      $det->getPorcentajeIva(),
                                      $det->getSubtotal()));
             }

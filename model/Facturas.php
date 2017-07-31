@@ -22,8 +22,23 @@ class Facturas {
     private $BaseImponible;
     private $BaseNoImponible;
     
-   
-    
+    function getBaseImponible() {
+        return $this->BaseImponible;
+    }
+
+    function getBaseNoImponible() {
+        return $this->BaseNoImponible;
+    }
+
+    function setBaseImponible($BaseImponible) {
+        $this->BaseImponible = $BaseImponible;
+    }
+
+    function setBaseNoImponible($BaseNoImponible) {
+        $this->BaseNoImponible = $BaseNoImponible;
+    }
+
+        
     function getIdfactura() {
         return $this->idfactura;
     }

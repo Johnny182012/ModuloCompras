@@ -62,7 +62,7 @@ class DetalleFactura {
         return $this->iddetalle;
     }
 
-    function getIdproductoss() {
+    function    getIdproductoss() {
         return $this->idproducto;
     }
     
