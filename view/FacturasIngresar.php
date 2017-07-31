@@ -163,7 +163,7 @@ require_once '../model/Producto.php';
                             <i class="fa fa-book fa-4x"></i>
                         </div>
                         <div class="title text-center">
-                            <h2>Nuestros <span class="color">Usuarios</span></h2>
+                            <h2>Nuestra <span class="color">Factura</span></h2>
                             <div class="border"></div>
                         </div>
 
@@ -174,7 +174,7 @@ require_once '../model/Producto.php';
                             <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
-                                    <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR USUARIO</a></li>
+                                    <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR FACTURA</a></li>
                                     <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
                                 </ul></div>
                             <!-- Modal -->
@@ -193,12 +193,38 @@ require_once '../model/Producto.php';
                 </div>	    <!-- End row -->
             </div>       <!-- End container -->
         </section>    <!-- End Section -->
-          <form action="../controller/controller.php" style=" width: 100%;">
+        
+        <!--INICIO DE INGRESAR FACTURA-->
+                                        <div class="panel-body">
+                                        <form action="../controller/controller.php" style=" width: 100%;">
                                                       
                                                 <input type="hidden" name="opcion" value="guardar_factura">
-                                                            
-                                                            Proveedor:
-                                                                <select name="idproveedor">                                        
+                                        <style>
+                                table {
+                                    border-collapse: collapse;
+                                    width: 100%;
+
+                                }
+
+                                th, td {
+                                    text-align: left;
+                                    padding: 8px;
+                                    color: black;
+
+                                }
+
+                                tr:nth-child(even){background-color: #cccccc}
+                                tr:nth-child(odd){background-color: whitesmoke}
+
+                                th {
+                                    background-color: #4CAF50;
+                                    color: white;
+                                }
+                                        </style><table>
+                                            <tr>
+                                                <td>Proveedor:</td>
+                                                <td>
+                                                    <select name="idproveedor">                                        
                                                                     <?php
                                                                     $listaProveedores = $crudModel->getProveedores();
 //                                                                    echo $listaProveedores;
@@ -206,16 +232,38 @@ require_once '../model/Producto.php';
                                                                         echo "<option value='" . $proveedor->getIdproveedor() . "'>" . $proveedor->getNombreproveedor() . "</option>";
                                                                     }
                                                                     ?>
-                                                                </select>
-                                                            Fecha:
-                                                            
-                                                                <input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo getdate(); ?>">
-                                                                
-                                                            
-                                                        
-                                                         <center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center>
-                                                        </form>
-                                                        
+                                                    </select>
+                                                </td>
+                                                <td>Fecha:</td>
+                                                <td><input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo date('d-m-Y'); ?>"></td>
+                                                <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center></td>
+                                            </tr>
+                                        </table>                                                         
+                                      </form>
+                                        
+        <!--FIN INGRESO FACTURA PARTE UNO-->
+                                            <form action="../controller/controller.php" style=" width: 100%;">          
+                                                    <input type="hidden" name="opcion" value="adicionar_detalle">
+                                                <table>
+                                                    <tr>
+                                                        <td>Producto:</td>
+                                                        <td><select name="idProducto">                                        
+                                                                <?php
+                                                                $listaProductos = $crudModel->getProductos();
+//                                                                    echo $listaProductos;
+                                                                foreach ($listaProductos as $producto) {
+                                                                    echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                            </td>
+                                                            <td>Cantidad:</td>
+                                                            <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
+                                                            <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
+                                            </tr>
+                                                </table>            
+                                            </form>
+                                        </div>  
                                                             <form action="../controller/controller.php">
                                                                 <input type="hidden" name="opcion" value="adicionar_detalle">
                                                             Producto:
