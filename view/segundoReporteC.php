@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once '../model/Proveedor.php';
+require_once '../model/ProveedoresCredito.php';
+require_once '../model/CrudModel.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
@@ -13,8 +14,8 @@ require_once '../model/Proveedor.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Editar Login Cambio</title>
-        <style type="text/css">
+        <title>Proveedores</title>
+<style type="text/css">
             *{
                 padding:0px;
                 margin: 0px;
@@ -117,7 +118,28 @@ require_once '../model/Proveedor.php';
                     </a>
                 </div>
 
-                
+                <nav class="collapse navbar-collapse navbar-right" role="Navigation">
+                    <ul id="nav" class="nav navbar-nav">
+                        <li class="current"><a href="../index.html">Inicio</a></li>
+                      
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                            </ul>
+                        </li>                        
+                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=primerReporte">Reporte Cajeros</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                    </ul>
+                </nav><!-- /.navbar-collapse -->
             </div>
         </header>
         <!--
@@ -127,67 +149,89 @@ require_once '../model/Proveedor.php';
 
         <!-- Start Blog Banner
         ==================================== -->
-        <section id="blog-banner" align="center" width="100%">
+        <section id="blog-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
 
-            <form action="../controller/controller.php" style=" width: 100%;">
-                <input type="hidden" name="opcion" value="cambiarContrasena">
-                <table  align="center" style=" width: 25%; background-color: #cccccc; display: block">                                                                                    
-                    <tr>
-                        <td width="450"></td>
-                        <td><br>Usuario:</br></td>
-                        <td><br><input type="text" name="idusuario"  required="true">  </br></td>        
-                        <td width="450"></td>
-                    </tr>
-                    <tr>
-                        <td width="450"></td>
-                        <td><br>Contraseña Actual:</br></td>
-                        <td><br><input type="password" name="passwordlogin"  required="true"></br></td>
-                        <td width="450" ></td>
-                    </tr>
-                    <tr>
-                        <td width="450"></td>
-                        <td><br>Contraseña Nueva:</br></td>
-                        <td><br><input type="password" name="passwordloginNueva"  required="true"></br></td>
-                        <td width="450"></td>
-                    </tr>
-                    <tr>
-                        <td width="450"></td>
-                        <td colspan="5"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="CAMBIAR CONTRASEÑA" class="btn btn-sm" ></center></td>
-                    <td width="450"></td>
-                    </tr>
-                </table>
-            </form>
+                        <div class="blog-icon">
+                            <i class="fa fa-book fa-4x"></i>
+                        </div>
+                        <div class="title text-center">
+                            <h2>Nuestros <span class="color">Proveedores</span></h2>
+                            <div class="border"></div>
+                        </div>
 
+                        <form action="../controller/controller.php">
+                            <input type="hidden" value="segundoReporteListar" name="opcion">
+                            <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Ver Reporte" class="btn btn-sm" ></center></td>
 
+                        </form>
 
-            <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
-            <br>
-            <br>
-            <div style="overflow-x:auto;" align="center">
-                <style>
-                    table {
-                        border-collapse: collapse;
-                        width: 100%;
-                    }
+                        <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
+                        <br>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <!--ESTILO DE LA TABLA-->
+                            <style>
+                                table {
+                                    border-collapse: collapse;
+                                    width: 100%;
 
-                    th, td {
-                        text-align: left;
-                        padding: 8px;
-                        color: black;
+                                }
 
-                    }
+                                th, td {
+                                    text-align: left;
+                                    padding: 8px;
+                                    color: black;
 
-                    tr:nth-child(even){background-color: #cccccc}
-                    tr:nth-child(odd){background-color: whitesmoke}
+                                }
 
-                    th {
-                        background-color: #4CAF50;
-                        color: white;
-                    }
-                </style>
+                                tr:nth-child(even){background-color: #cccccc}
+                                tr:nth-child(odd){background-color: whitesmoke}
 
-            </div>       
-        </section>    
+                                th {
+                                    background-color: #4CAF50;
+                                    color: white;
+                                }
+                            </style>
+                            <table id="example">    
+                                <tr>
+                                    <th>NOMBRE PROVEEDOR</th>
+                                    <th>CRÉDITO</th>
+                                    <th>N. FACTURA</th>
+                                    <th>SALDOS</th>
+                                </tr>
+                                <tbody >                    
+                                    <?php
+                                    //verificamos si existe en sesion el listado de login:
+                                    if (isset($_SESSION['listaSR'])) {
+                                        $listaSR = unserialize($_SESSION['listaSR']);
+                                        foreach ($listaSR as $pro) {
+                                            echo "<tr>";
+                                            echo "<td>" . $pro->getNombreproveedor() . "</td>";
+                                            if ($pro->getTipoproveedor() == 1) {
+                                                echo "<td>Si</td>";
+                                            } else {
+                                                echo "<td>No</td>";
+                                            }
+                                            echo "<td>" . $pro->getIdfactura() . "</td>";
+                                            echo "<td>" . $pro->getValorfactura() . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "No se han cargado datos.";
+                                    }
+                                    ?>
+                                </tbody >                    
+
+                            </table >
+
+                        </div>
+                    </div>     <!-- End col-lg-12 -->
+                </div>	    <!-- End row -->
+            </div>       <!-- End container -->
+        </section>    <!-- End Section -->
 
         <!-- Start Blog Post Section
         ==================================== -->

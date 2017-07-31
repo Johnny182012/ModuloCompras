@@ -162,7 +162,7 @@ require_once '../model/Proveedor.php';
                             <tr><td height="20" colspan="5"></td>
                             </tr>
                             <tr>
-                                <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Iniciar Sesión" class="btn btn-sm" ></td></center></td>
+                                <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Iniciar Sesión" class="btn btn-sm " ></td></center></td>
                             </tr>
                             <tr>
                             <tr>
