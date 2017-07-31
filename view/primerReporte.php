@@ -122,7 +122,11 @@ require_once '../model/CrudModel.php';
                             <div class="border"></div>
                         </div>
 
+                     <form action="../controller/controller.php">
+                        <input type="hidden" value="primerReporteListar" name="opcion">
+                        <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Ver Reporte" class="btn btn-sm" ></center></td>
 
+                    </form>
 
                         <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
                         <br>
