@@ -146,7 +146,8 @@ if (!isset($_SESSION['bandera'])) {
                                     </ul>
                                 </li>
                                 <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
-                                    <ul>
+                                    <ul><li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        
                                         <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
                                     </ul>
                                 </li>

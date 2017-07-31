@@ -236,7 +236,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
                                     <ul>
                                         
-                                        <li><a href="controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
                                         <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                                     </ul>
                                 </li>

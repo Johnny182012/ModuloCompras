@@ -29,7 +29,7 @@ $crudModel = new CrudModel();
             </thead>
             <tbody>
                 <?php
-                for ($i=0;$i<=count($inventario_array)+1;$i++) {
+                for ($i=0;$i<=100;$i++) {
                     if($inventario_array["data"][$i]["graba_iva_prod"] == "S"){
                       
                         
