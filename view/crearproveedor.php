@@ -239,7 +239,7 @@ if (!isset($_SESSION['bandera'])) {
                                     </ul>
                                 </li>
                                 <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
                             </ul>
                         </nav><!-- /.navbar-collapse -->
                     </div>
