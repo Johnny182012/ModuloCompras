@@ -19,6 +19,8 @@ class Facturas {
     private $valorfactura;
     private $fechafactura;
     private $ivafactura;
+    private $BaseImponible;
+    private $BaseNoImponible;
     
    
     

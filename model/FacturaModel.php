@@ -108,12 +108,12 @@ class FacturaModel {
     public function ultimoNumeroFactura(){
         //obtenemos la informacion de la bdd:
         $pdo = Database::connect();
-        $sql = "select max(id_factura_cab) numero from factura_cab";
+        $sql = "select max(idfactura) numero from facturas";
         $consulta = $pdo->prepare($sql);
         $consulta->execute();
         //obtenemos el registro especifico:
         $res=$consulta->fetch(PDO::FETCH_ASSOC);
-        $numero=$res['numero'];
+        $numero=$res['idfactura'];
         Database::disconnect();
         //retornamos el numero encontrado:
         if(!isset($numero))
@@ -128,46 +128,46 @@ class FacturaModel {
         if(count($listaFacturaDet)==0){
             throw new Exception("Debe por lo menos registrar un producto.");
         }
-        if(!isset($cedula)){
-            throw new Exception("Debe seleccionar el cliente.");
+        if(!isset($idprov)){
+            throw new Exception("Debe seleccionar el proveedor.");
         }
+                if(!isset($idusuario)){
+            throw new Exception("Debe seleccionar el usuario.");
+        }
+
         //obtenemos los datos completos del cliente:
         $crudModel=new CrudModel();
         $cliente=$crudModel->getCliente($cedula);
         //creamos la nueva factura:
-        $facturaCab = new FacturaCab();
-        $facturaCab->setCedula($cedula);
-        $facturaCab->setNombresCliente($cliente->getApellidos()." ".$cliente->getNombres());
-        $facturaCab->setDireccionCliente($cliente->getDireccion());
-        $facturaCab->setEstado("S");
+        $facturaCab = new Facturas();
+        $facturaCab->setIdproveedor($idprov);
+        $facturaCab->setIdusuario($idusuario);
         $facturaCab->setFecha(date('Y-m-d'));
         $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
         $facturaCab->setBaseNoImponible($this->calcularBaseNoImponible($listaFacturaDet));
-        $facturaCab->setValorIva($this->calcularIva($listaFacturaDet));
-        $facturaCab->setTotal($this->calcularTotal($listaFacturaDet));
+        $facturaCab->setIvafactura($this->calcularIva($listaFacturaDet));
+        $facturaCab->setValorfactura($this->calcularTotal($listaFacturaDet));
         //obtenemos el siguiente numero de factura:
         $facturaCab->setIdFacturaCab($this->ultimoNumeroFactura()+1);
         //guardar la cabecera:
         $pdo = Database::connect();
-        $sql = "insert into factura_cab(id_factura_cab,fecha,cedula,estado,base_imponible,base_no_imponible,valor_iva,total) values(?,?,?,?,?,?,?,?)";
+        $sql = "insert into factura(idfactura,fechafactura,idproveedor,idusuario,valorfactura,ivafactura) values(?,?,?,?,?,?)";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos y pasamos los parametros:
         try {
-            $consulta->execute(array($facturaCab->getIdFacturaCab(),
-                                     $facturaCab->getFecha(),
-                                     $facturaCab->getCedula(),
-                                     $facturaCab->getEstado(),
-                                     $facturaCab->getBaseImponible(),
-                                     $facturaCab->getBaseNoImponible(),
-                                     $facturaCab->getValorIva(),
-                                     $facturaCab->getTotal()));
+            $consulta->execute(array($facturaCab->getIdFactura(),
+                                     $facturaCab->getFechafactura(),
+                                     $facturaCab->getIdproveedor(),
+                                     $facturaCab->getIdusuario(),
+                                     $facturaCab->getValorfactura(),
+                                     $facturaCab->getIvafactura()));
             //guardamos los detalles:
             foreach ($listaFacturaDet as $det){
-                $sql = "insert into factura_det(id_factura_cab,id_producto,precio,cantidad,porcentaje_iva,subtotal) values(?,?,?,?,?,?)";
+                $sql = "insert into detallefacturacion(idproducto,idfactura,cantidadproducto,unidades,descuento,cantdescuento) values(?,?,?,?,?,?)";
                 $consulta = $pdo->prepare($sql);
                 //en cada detalle asignamos el numero de factura padre:
-                $consulta->execute(array($facturaCab->getIdFacturaCab(),
-                                     $det->getIdProducto(),
+                $consulta->execute(array($det->getIdProducto(),
+                    $facturaCab->getIdFactura(),
                                      $det->getPrecio(),
                                      $det->getCantidad(),
                                      $det->getPorcentajeIva(),
