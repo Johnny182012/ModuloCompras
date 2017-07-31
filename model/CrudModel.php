@@ -16,6 +16,32 @@ include_once 'ProveedoresCredito.php';
  */
 class CrudModel {
 
+        /////obtener el login mediante la id del usuario
+    public function getLoginU($idusuario) {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select * from login where idusuario=?";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array($idusuario));
+        //obtenemos el registro especifico:
+        $res = $consulta->fetch(PDO::FETCH_ASSOC);
+        $login = new Login($res['idusuario'], $res['idlogin'], $res['passwordlogin']);
+        Database::disconnect();
+        //retornamos el objeto encontrado:
+        return $login;
+    }
+
+    public function actualizarLoginU($idusuario, $passwordlogin) {
+        //Preparamos la conexión a la bdd:
+        $pdo = Database::connect();
+        $sql = "update login set passwordlogin=? where idusuario=?";
+        $consulta = $pdo->prepare($sql);
+        //Ejecutamos la sentencia incluyendo a los parametros:
+        $consulta->execute(array($passwordlogin, $idusuario));
+        Database::disconnect();
+    }
+
+    
     /**
      * Retorna la lista de clientes de la bdd.
      * @return array
