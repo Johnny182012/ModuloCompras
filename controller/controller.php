@@ -700,8 +700,11 @@ switch ($opcion) {
             $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
             try {
                 $facturaCab = $facturaModel->guardarFactura($listaFacturaDet, $idproveedor, $ID);
+                print_r($facturaCab);
+                
                 $_SESSION['facturaCab'] = $facturaCab;
-                header('Location: ../view/factura_reporte.php');
+                
+                //header('Location: ../view/factura_reporte.php');
                 break;
             } catch (Exception $e) {
                 $mensajeError = $e->getMessage();

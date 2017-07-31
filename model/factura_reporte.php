@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <?php
-require_once '../model/Cliente.php';
 require_once '../model/Producto.php';
-require_once '../model/FacturaDet.php';
+require_once '../model/Facturas.php';
+
+require_once '../model/DetalleFactura.php';
 require_once '../model/CrudModel.php';
 require_once '../model/FacturaModel.php';
 session_start();
@@ -32,7 +33,7 @@ $facturaCab=$_SESSION['facturaCab'];
             <table>
                 <tr>
                     <td>Nro. factura:</td>
-                    <td><?php echo $facturaCab->getIdFacturaCab(); ?></td>
+                    <td><?php echo $facturaCab->getIdFactura(); ?></td>
                 </tr>
                 <tr>
                     <td>Fecha:</td>

@@ -155,6 +155,7 @@ echo $fecha;
         $facturaCab = new Facturas();
         $facturaCab->setIdproveedor($idprov);
         $facturaCab->setFechafactura($fecha);
+        $facturaCab->setFechafactura($fecha);
         $facturaCab->setIvafactura($this->calcularIva($listaFacturaDet));
         $facturaCab->setValorfactura($this->calcularTotal($listaFacturaDet));
         $facturaCab->setBaseImponible($this->calcularBaseImponible($listaFacturaDet));
@@ -171,15 +172,14 @@ echo $fecha;
         $sql = "insert into facturas(idfactura,idproveedor,idusuario,valorfactura,fechafactura,ivafactura) values(?,?,?,?,?,?)";
         $consulta = $pdo->prepare($sql);
         //Ejecutamos y pasamos los parametros:
-        
+        try {
             $consulta->execute(array($facturaCab->getIdFactura(),
                                      $facturaCab->getIdproveedor(),
                                      $idusuario,
                                      $facturaCab->getFechafactura(),
                                      $facturaCab->getValorfactura(),
                                      $facturaCab->getIvafactura()));
-            $consulta.$consulta;
-            try {
+            
             //guardamos los detalles:
             foreach ($listaFacturaDet as $det){
                 $sql = "insert into detallefacturacion(idproducto,idfactura,cantidadproducto,unidades,descuento,cantdescuento) values(?,?,?,?,?,?)";
