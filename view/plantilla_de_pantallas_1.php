@@ -101,7 +101,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="../index.html">
                         <h1 id="logo">
                             <img src="img/logo-meghna.png" alt="Meghna" />
                         </h1>
