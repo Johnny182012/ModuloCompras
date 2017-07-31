@@ -4,6 +4,95 @@ require_once '../model/Usuario.php';
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
+        <!--inicio del método búsqueda inteligente-->
+        <script type="text/javascript">
+(function(document) {
+  'use strict';
+
+  var LightTableFilter = (function(Arr) {
+
+    var _input;
+
+    function _onInputEvent(e) {
+      _input = e.target;
+      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+      Arr.forEach.call(tables, function(table) {
+        Arr.forEach.call(table.tBodies, function(tbody) {
+          Arr.forEach.call(tbody.rows, _filter);
+        });
+      });
+    }
+
+    function _filter(row) {
+      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+    }
+
+    return {
+      init: function() {
+        var inputs = document.getElementsByClassName('light-table-filter');
+        Arr.forEach.call(inputs, function(input) {
+          input.oninput = _onInputEvent;
+        });
+      }
+    };
+  })(Array.prototype);
+
+  document.addEventListener('readystatechange', function() {
+    if (document.readyState === 'complete') {
+      LightTableFilter.init();
+    }
+  });
+
+})(document);
+</script>		
+<style type="text/css">
+	body {
+  font: normal medium/1.4 sans-serif;
+}
+			table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  
+}
+th, td {
+            text-align: left;
+            padding: 20px ;
+            color: black;
+            
+}
+tr:nth-child(even){background-color: #cccccc}
+tr:nth-child(odd){background-color: whitesmoke}
+th {
+background-color: #4CAF50;
+color: white;
+    }
+
+.titulo{
+  padding: 0.5rem;
+  background: #FD0808 ;
+  color: red;
+  text-align: center;
+  font-size: 21px;
+}
+
+#buscar{
+	width: 650px;
+	font-size: 18px;
+	color: #fff;
+        background: transparent ;
+	padding-left: 20px ;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px;
+	margin:10px; 
+        border: 4px solid #006633;
+}
+
+	</style>	
+        <!--fin búsqueda-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -132,7 +221,7 @@ require_once '../model/Usuario.php';
                             <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
                             <div class="portfolio-filter clearfix">
                                 <ul class="text-center">
-                                    <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR USUARIO</a></li>
+                           <li><a class="filter" data-toggle="modal" data-target="#myModal"><h3><span class='glyphicon glyphicon-folder-open'></span>&nbsp;&nbsp;&nbsp;INGRESAR USUARIO</h3></a></li>
                                   
                                     <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
                                 </ul></div>
@@ -148,46 +237,46 @@ require_once '../model/Usuario.php';
 
                                             <form action="../controller/controller.php" style=" width: 100%;">
                                                 <input type="hidden" name="opcion" value="crear_usuario">
-                                                <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
+                                                <center><table style=" width: 100%;   border-collapse: collapse;width: 100%;">                                                                                    
                                                         <tr>
-                                                            <td style="#cccccc"><br>Identificación:</br></td>
-                                                            <td><br><input type="text" name="idusuario" maxlength="13" required="true"></br></td>
-                                                            <td><br>Tipo:</br></td>
-                                                            <td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Identificación:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idusuario" maxlength="13" required="true" ></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Tipo:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
                                                                 <select name="tipoidusuario">
-                                                                    <option value="C">CEDULA</option>
-                                                                    <option value="P">PASAPORTE</option>
-                                                                    <option value="R">RUC</option>
+                                                                    <option>CEDULA</option>
+                                                                    <option>PASAPORTE</option>
+                                                                    <option>RUC</option>
                                                                 </select>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Rol:</br></td>
-                                                            <td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Rol:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
                                                                 <select name="rolusuario">
                                                                     <option value="C">CAJERO</option>
                                                                     <option value="A">ADMINISTRADOR</option>
                                                                 </select>
                                                             </td>
-                                                            <td ><br>Nombre:</br></td>
-                                                            <td><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="[A-Za-z ]+"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Nombre:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="[A-Za-z ]+"></br></td>
                                                         <tr>
-                                                            <td><br>Fecha de Nacimiento:</br></td>
-                                                            <td><br><input type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></br></td>
-                                                            <td><br>Ciudad de Nacimiento:</br></td>
-                                                            <td><br><input type="text" name="ciunacusuario" maxlength="50" placeholder="Ej: Quito" required="true" pattern="[A-Za-z ]+"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Fecha de Nacimiento:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Ciudad de Nacimiento:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="ciunacusuario" maxlength="50" placeholder="Ej: Quito" required="true" pattern="[A-Za-z ]+"></br></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Dirección:</br></td>
-                                                            <td><br><input type="text" name="direccionusuario" maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" required="true"></br></td>
-                                                            <td><br>Teléfono:</br></td>
-                                                            <td><br><input type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="[0-9]+"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Dirección:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="direccionusuario" maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Teléfono:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="[0-9]+"></br></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><br>Email:</br></td>
-                                                            <td><br><input type="email"  autocomplete="on" name="emailusuario" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" maxlength="50" required="true"></br></td>
-                                                            <td><br>Estado:</br></td>
-                                                            <td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Email:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br><input type="email"  autocomplete="on" name="emailusuario" placeholder="Ej: luis@gmail.com" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" maxlength="50" required="true"></br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;"><br>Estado:</br></td>
+                                                            <td style="text-align: left;padding: 8px;color: black;">
                                                                 <table>
                                                                     <tr>
                                                                         <td><input type="radio" name="estadousuario" value='true'>Activo</td>
@@ -198,14 +287,14 @@ require_once '../model/Usuario.php';
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
+                                                            <td colspan="4" style="text-align: left;padding: 8px;color: black;"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Crear" class="btn btn-sm" ></center></td>
                                                         </tr>
 
                                                     </table></center>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button  style="color: #000; font-size: medium;border-radius: 0 50% / 0 100%;" type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                            <button  style="color: #000; font-size: medium;border-radius: 0 50% / 0 100%;" type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -215,31 +304,14 @@ require_once '../model/Usuario.php';
                         <br>
                         <br>
                         <div style="overflow-x:auto;">
-                            <!--ESTILO DE LA TABLA-->
-                            <style>
-                                table {
-                                    border-collapse: collapse;
-                                    width: 100%;
+                            <div id="cuadro">
+			<center>
+                            <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+	</center>
 
-                                }
-
-                                th, td {
-                                    text-align: left;
-                                    padding: 8px;
-                                    color: black;
-
-                                }
-
-                                tr:nth-child(even){background-color: #cccccc}
-                                tr:nth-child(odd){background-color: whitesmoke}
-
-                                th {
-                                    background-color: #4CAF50;
-                                    color: white;
-                                }
-                            </style>
-                            <table id="example">    
-                                <tr>
+		<div class="datagrid">
+			<table class="order-table table">   
+                                <tr class="titulo">
                                     <th>ID USUARIO</th>
                                     <th>TIPO ID</th>
                                     <th>ROL</th>
@@ -272,8 +344,8 @@ require_once '../model/Usuario.php';
                                             echo "<td>" . $usu->getTelefonousuario() . "</td>";
                                             echo "<td>" . $usu->getEmailusuario() . "</td>";
                                             echo "<td>" . $usu->getEstadousuario() . "</td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
+                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a><center></td>";
+                                            echo "<td><center><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a><center></td>";
                                             echo "</tr>";
                                         }
                                     } else {
