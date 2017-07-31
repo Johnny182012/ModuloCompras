@@ -440,4 +440,20 @@ class CrudModel {
         return $listado;
     }
 
+    public function getCajeros() {
+        //obtenemos la informacion de la bdd:
+        $pdo = Database::connect();
+        $sql = "select nombreusuario, estadousuario from usuario where rolusuario='C'";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $listado = array();
+        foreach ($resultado as $res) {
+            $cajero = new Cajero($res['nombreusuario'], $res['estadousuario']);
+            array_push($listado, $cajero);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $listado;
+    }
+    
 }
