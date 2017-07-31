@@ -92,7 +92,7 @@ require_once '../model/Login.php';
                         <li><a href="#about">Acerca de Nosotros</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#our-team">Equipo de trabajo</a></li>
-                        <li><a href="controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a></li>
                         <li><a href="controller/controller.php?opcion=listar_usuarios">Usuarios</a></li>
                         <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a></li>
                         <li><a href="controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
