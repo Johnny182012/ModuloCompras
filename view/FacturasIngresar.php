@@ -196,11 +196,7 @@ require_once '../model/Producto.php';
         
         <!--INICIO DE INGRESAR FACTURA-->
                                         <div class="panel-body">
-                                            <table>
-                                        <form action="../controller/controller.php" style=" width: 100%;">
-                                                      
-                                                <input type="hidden" name="opcion" value="guardar_factura">
-                                        <style>
+                                            <style>
                                 table {
                                     border-collapse: collapse;
                                     width: 100%;
@@ -222,6 +218,11 @@ require_once '../model/Producto.php';
                                     color: white;
                                 }
                                         </style>
+                                            <table>
+                                        <form action="../controller/controller.php" style=" width: 100%;">
+                                                      
+                                                <input type="hidden" name="opcion" value="guardar_factura">
+                                        
                                             <tr>
                                                 <td>Proveedor:</td>
                                                 <td>
