@@ -5,7 +5,7 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Blog | Meghna - Responsive Multipurpose Parallax Theme</title>
-<style type="text/css">
+        <style type="text/css">
             *{
                 padding:0px;
                 margin: 0px;
@@ -101,7 +101,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../index.html">
+                    <a class="navbar-brand" href="../index.php">
                         <h1 id="logo">
                             <img src="img/logo-meghna.png" alt="Meghna" />
                         </h1>
@@ -110,24 +110,39 @@
 
                 <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
-                        <li class="current"><a href="../index.html">Inicio</a></li>
-                        
+                        <li class="current"><a href="../index.php">Inicio</a></li>
+
                         <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=segundoReporteListar">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_proveedores">Listar Proveedores</a></li>
                             </ul>
                         </li>                        
                         <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=primerReporte">Reporte Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=primerReporteListar">Listar Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_usuarios">Listar Usuarios</a></li>
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
+                                <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                             </ul>
                         </li>
-                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=listar_logins">Ver Usuarios con Inicio de Sesión</a></li>
+                            </ul>
+                        </li>                                
+                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                            <ul>
+                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </nav><!-- /.navbar-collapse -->
             </div>
@@ -162,7 +177,7 @@
                                 text-align: left;
                                 padding: 8px;
                                 color: black;
-                                
+
                             }
 
                             tr:nth-child(even){background-color: #cccccc}
@@ -174,47 +189,47 @@
                             }
                         </style>
                         <table id="example" >    
-                                <tr>
-                            <th>ID USUARIO</th>
-                            <th>TIPO ID</th>
-                            <th>ROL</th>
-                            <th>NOMBRE</th>
-                            <th>FECHA NAC.</th>
-                            <th>CIUDAD NAC.</th>
-                            <th>DIRECCIÓN</th>
-                            <th>TELÉFONO</th>
-                            <th>EMAIL</th>
-                            <th>ESTADO</th>
-                            <th>ELIMINAR</th>
-                            <th>EDITAR</th>
-                        </tr>
-                                <tbody >                    
-                        <?php
-                        //verificamos si existe en sesion el listado de login:
-                        if (isset($_SESSION['listaUsuarios'])) {
-                            $listado = unserialize($_SESSION['listaUsuarios']);
-                            foreach ($listado as $usu) {
-                                echo "<tr>";
-                                echo "<td>" . $usu->getIdusuario() . "</td>";
-                                echo "<td>" . $usu->getTipoidusuario() . "</td>";
-                                echo "<td>" . $usu->getRolusuario() . "</td>";
-                                echo "<td>" . $usu->getNombreusuario() . "</td>";
-                                echo "<td>" . $usu->getFecnacusuario() . "</td>";
-                                echo "<td>" . $usu->getCiunacusuario() . "</td>";
-                                echo "<td>" . $usu->getDireccionusuario() . "</td>";
-                                echo "<td>" . $usu->getTelefonousuario() . "</td>";
-                                echo "<td>" . $usu->getEmailusuario() . "</td>";
-                                echo "<td>" . $usu->getEstadousuario() . "</td>";
-                                echo "<td><a href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil '> Eliminar </span></a></td>";
-                                echo "<td><a href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil'> Editar </span></a></td>";
-                                echo "</tr>";
-                            }
-                        } else {
-                            echo "No se han cargado datos.";
-                        }
-                        ?>
-                                </tbody >                    
-                            </table>
+                            <tr>
+                                <th>ID USUARIO</th>
+                                <th>TIPO ID</th>
+                                <th>ROL</th>
+                                <th>NOMBRE</th>
+                                <th>FECHA NAC.</th>
+                                <th>CIUDAD NAC.</th>
+                                <th>DIRECCIÓN</th>
+                                <th>TELÉFONO</th>
+                                <th>EMAIL</th>
+                                <th>ESTADO</th>
+                                <th>ELIMINAR</th>
+                                <th>EDITAR</th>
+                            </tr>
+                            <tbody >                    
+                                <?php
+                                //verificamos si existe en sesion el listado de login:
+                                if (isset($_SESSION['listaUsuarios'])) {
+                                    $listado = unserialize($_SESSION['listaUsuarios']);
+                                    foreach ($listado as $usu) {
+                                        echo "<tr>";
+                                        echo "<td>" . $usu->getIdusuario() . "</td>";
+                                        echo "<td>" . $usu->getTipoidusuario() . "</td>";
+                                        echo "<td>" . $usu->getRolusuario() . "</td>";
+                                        echo "<td>" . $usu->getNombreusuario() . "</td>";
+                                        echo "<td>" . $usu->getFecnacusuario() . "</td>";
+                                        echo "<td>" . $usu->getCiunacusuario() . "</td>";
+                                        echo "<td>" . $usu->getDireccionusuario() . "</td>";
+                                        echo "<td>" . $usu->getTelefonousuario() . "</td>";
+                                        echo "<td>" . $usu->getEmailusuario() . "</td>";
+                                        echo "<td>" . $usu->getEstadousuario() . "</td>";
+                                        echo "<td><a href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil '> Eliminar </span></a></td>";
+                                        echo "<td><a href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil'> Editar </span></a></td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "No se han cargado datos.";
+                                }
+                                ?>
+                            </tbody >                    
+                        </table>
 
                     </div>     <!-- End col-lg-12 -->
                 </div>	    <!-- End row -->

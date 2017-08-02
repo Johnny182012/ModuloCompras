@@ -2,6 +2,7 @@
 session_start();
 require_once '../model/Proveedor.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
+$nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
     session_destroy();
     header('Location: ../view/indexLogin.php');
@@ -123,7 +124,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="../index.php">
+                            <a class="navbar-brand" href="../indexC.php">
                                 <h1 id="logo">
                                     <img src="../img/logos/meghuna1.gif" alt="Meghna" />
                                 </h1>
@@ -131,19 +132,31 @@ if (!isset($_SESSION['bandera'])) {
                         </div>
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
-                            <ul id="nav" class="nav navbar-nav">
-                                <li class="current"><a href="../index.php">Inicio</a></li>
-                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
-                                    <ul>
-                                        <li><a href="../controller/controller.php?opcion=segundoReporteC">Reporte Proveedores</a></li>
+                                    <ul id="nav" class="nav navbar-nav">
+                                        <li class="current"><a href="../index.php">Inicio</a></li>
+
+                                        <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
+                                            <ul>
+                                                <li><a href="../controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
+                                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
+                                            </ul>
+                                        </li> 
+                                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                                            <ul>
+                                                <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                                            </ul>
+                                        </li>                            
+                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                            <ul>
+                                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                            </ul>
+                                        </li>
+
                                     </ul>
-                                </li>
-                                <li><a href="../controller/controller.php?opcion=listar_facturasC">Facturas</a>
-                                </li>
-                                <li><a href="../controller/controller.php?opcion=primerReporteC">Cajeros</a></li>
-                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
-                            </ul>
-                        </nav><!-- /.navbar-collapse -->
+                                </nav><!-- /.navbar-collapse -->
                     </div>
                 </header>
                 <!--

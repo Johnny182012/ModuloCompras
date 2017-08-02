@@ -2,6 +2,7 @@
 session_start();
 require_once '../model/Login.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
+$nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
     session_destroy();
     header('Location: ../view/indexLogin.php');
@@ -133,25 +134,38 @@ if (!isset($_SESSION['bandera'])) {
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                             <ul id="nav" class="nav navbar-nav">
                                 <li class="current"><a href="../index.php">Inicio</a></li>
+
                                 <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
                                     <ul>
-                                        <li><a href="../controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                                        <li><a href="../controller/controller.php?opcion=segundoReporteListar">Reporte Proveedores</a></li>
+                                        <li><a href="../controller/controller.php?opcion=listar_proveedores">Listar Proveedores</a></li>
                                     </ul>
                                 </li>                        
                                 <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
                                     <ul>
-                                        <li><a href="../controller/controller.php?opcion=primerReporte">Reporte Cajeros</a></li>
+                                        <li><a href="../controller/controller.php?opcion=primerReporteListar">Listar Cajeros</a></li>
+                                        <li><a href="../controller/controller.php?opcion=listar_usuarios">Listar Usuarios</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
                                     <ul>
-                                        
+                                        <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
                                         <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
-                                        <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
+                                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a>
+                                    <ul>
+                                        <li><a href="../controller/controller.php?opcion=listar_logins">Ver Usuarios con Inicio de Sesión</a></li>
+                                    </ul>
+                                </li>                                
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                    <ul>
+                                        <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                    </ul>
+                                </li>
+
                             </ul>
                         </nav><!-- /.navbar-collapse -->
                     </div>

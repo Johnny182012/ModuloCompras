@@ -30,6 +30,7 @@ switch ($opcion) {
         $contraseñaBase = $listaLogins->getPasswordlogin();
 
         $listaUsuarios = $crudModel->getUsuario($idusuario);
+        $nombreusuario = $listaUsuarios->getNombreusuario();
         $rolusuario = $listaUsuarios->getRolusuario();
 
 //        echo $idusuario;
@@ -46,6 +47,7 @@ switch ($opcion) {
                 $bandera = 'S';
                 $_SESSION["bandera"] = serialize($bandera);
                 $_SESSION["rolusuario"] = serialize($rolusuario);
+                $_SESSION["nombreusuario"] = serialize($nombreusuario);
                 header('Location: ../index.php');
             } else {
                 $bandera = 'N';
@@ -58,6 +60,7 @@ switch ($opcion) {
                 $bandera = 'S';
                 $_SESSION["bandera"] = serialize($bandera);
                 $_SESSION["rolusuario"] = serialize($rolusuario);
+                $_SESSION["nombreusuario"] = serialize($nombreusuario);
                 header('Location: ../indexC.php');
             } else {
                 $bandera = 'N';

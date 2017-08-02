@@ -5,100 +5,101 @@ require_once '../model/DetalleFactura.php';
 require_once '../model/Producto.php';
 require_once '../model/CrudModel.php';
 require_once '../model/FacturaModel.php';
+$nombreusuario = unserialize($_SESSION['nombreusuario']);
 $crudModel = new CrudModel();
 $facturaModel = new FacturaModel();
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
         <!--inicio del método búsqueda inteligente-->
-                <script type="text/javascript">
-                    (function (document) {
-                        'use strict';
+        <script type="text/javascript">
+            (function (document) {
+                'use strict';
 
-                        var LightTableFilter = (function (Arr) {
+                var LightTableFilter = (function (Arr) {
 
-                            var _input;
+                    var _input;
 
-                            function _onInputEvent(e) {
-                                _input = e.target;
-                                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                                Arr.forEach.call(tables, function (table) {
-                                    Arr.forEach.call(table.tBodies, function (tbody) {
-                                        Arr.forEach.call(tbody.rows, _filter);
-                                    });
-                                });
-                            }
-
-                            function _filter(row) {
-                                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                            }
-
-                            return {
-                                init: function () {
-                                    var inputs = document.getElementsByClassName('light-table-filter');
-                                    Arr.forEach.call(inputs, function (input) {
-                                        input.oninput = _onInputEvent;
-                                    });
-                                }
-                            };
-                        })(Array.prototype);
-
-                        document.addEventListener('readystatechange', function () {
-                            if (document.readyState === 'complete') {
-                                LightTableFilter.init();
-                            }
+                    function _onInputEvent(e) {
+                        _input = e.target;
+                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                        Arr.forEach.call(tables, function (table) {
+                            Arr.forEach.call(table.tBodies, function (tbody) {
+                                Arr.forEach.call(tbody.rows, _filter);
+                            });
                         });
-
-                    })(document);
-                </script>		
-                <style type="text/css">
-                    body {
-                        font: normal medium/1.4 sans-serif;
-                    }
-                    table {
-                        border-collapse: collapse;
-                        width: 100%;
-                        text-align: center;
-                        margin: auto;
-
-                    }
-                    th, td {
-                        text-align: left;
-                        padding: 20px ;
-                        color: black;
-
-                    }
-                    tr:nth-child(even){background-color: #cccccc}
-                    tr:nth-child(odd){background-color: whitesmoke}
-                    th {
-                        background-color: #4CAF50;
-                        color: white;
                     }
 
-                    .titulo{
-                        padding: 0.5rem;
-                        background: #FD0808 ;
-                        color: red;
-                        text-align: center;
-                        font-size: 21px;
+                    function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
                     }
 
-                    #buscar{
-                        width: 650px;
-                        font-size: 18px;
-                        color: #fff;
-                        background: transparent ;
-                        padding-left: 20px ;
-                        text-align: center;
-                        border-radius: 5px;
-                        padding: 10px;
-                        margin:10px; 
-                        border: 4px solid #006633;
-                    }
+                    return {
+                        init: function () {
+                            var inputs = document.getElementsByClassName('light-table-filter');
+                            Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                            });
+                        }
+                    };
+                })(Array.prototype);
 
-                </style>	
-                <!--fin búsqueda-->
+                document.addEventListener('readystatechange', function () {
+                    if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                    }
+                });
+
+            })(document);
+        </script>		
+        <style type="text/css">
+            body {
+                font: normal medium/1.4 sans-serif;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: center;
+                margin: auto;
+
+            }
+            th, td {
+                text-align: left;
+                padding: 20px ;
+                color: black;
+
+            }
+            tr:nth-child(even){background-color: #cccccc}
+            tr:nth-child(odd){background-color: whitesmoke}
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .titulo{
+                padding: 0.5rem;
+                background: #FD0808 ;
+                color: red;
+                text-align: center;
+                font-size: 21px;
+            }
+
+            #buscar{
+                width: 650px;
+                font-size: 18px;
+                color: #fff;
+                background: transparent ;
+                padding-left: 20px ;
+                text-align: center;
+                border-radius: 5px;
+                padding: 10px;
+                margin:10px; 
+                border: 4px solid #006633;
+            }
+
+        </style>	
+        <!--fin búsqueda-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -205,7 +206,7 @@ $facturaModel = new FacturaModel();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="../index.php">
                         <h1 id="logo">
                             <img src="../img/logos/meghuna1.gif" alt="Meghna" />
                         </h1>
@@ -215,24 +216,37 @@ $facturaModel = new FacturaModel();
                 <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
                         <li class="current"><a href="../index.php">Inicio</a></li>
+
                         <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=segundoReporteListar">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_proveedores">Listar Proveedores</a></li>
                             </ul>
                         </li>                        
                         <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=primerReporte">Reporte Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=primerReporteListar">Listar Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_usuarios">Listar Usuarios</a></li>
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
                             <ul>
-                                
-                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
-                                <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
+                                <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                             </ul>
                         </li>
-                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=listar_logins">Ver Usuarios con Inicio de Sesión</a></li>
+                            </ul>
+                        </li>                                
+                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                            <ul>
+                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </nav><!-- /.navbar-collapse -->

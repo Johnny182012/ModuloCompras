@@ -2,99 +2,100 @@
 session_start();
 require_once '../model/Facturas.php';
 require_once '../model/Producto.php';
-        require_once '../model/CrudModel.php';
+require_once '../model/CrudModel.php';
+$nombreusuario = unserialize($_SESSION['nombreusuario']);
 ?>
 <html class="no-js"> <!--<![endif]-->
     <head>
         <!--inicio del método búsqueda inteligente-->
-                <script type="text/javascript">
-                    (function (document) {
-                        'use strict';
+        <script type="text/javascript">
+            (function (document) {
+                'use strict';
 
-                        var LightTableFilter = (function (Arr) {
+                var LightTableFilter = (function (Arr) {
 
-                            var _input;
+                    var _input;
 
-                            function _onInputEvent(e) {
-                                _input = e.target;
-                                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                                Arr.forEach.call(tables, function (table) {
-                                    Arr.forEach.call(table.tBodies, function (tbody) {
-                                        Arr.forEach.call(tbody.rows, _filter);
-                                    });
-                                });
-                            }
-
-                            function _filter(row) {
-                                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                            }
-
-                            return {
-                                init: function () {
-                                    var inputs = document.getElementsByClassName('light-table-filter');
-                                    Arr.forEach.call(inputs, function (input) {
-                                        input.oninput = _onInputEvent;
-                                    });
-                                }
-                            };
-                        })(Array.prototype);
-
-                        document.addEventListener('readystatechange', function () {
-                            if (document.readyState === 'complete') {
-                                LightTableFilter.init();
-                            }
+                    function _onInputEvent(e) {
+                        _input = e.target;
+                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                        Arr.forEach.call(tables, function (table) {
+                            Arr.forEach.call(table.tBodies, function (tbody) {
+                                Arr.forEach.call(tbody.rows, _filter);
+                            });
                         });
-
-                    })(document);
-                </script>		
-                <style type="text/css">
-                    body {
-                        font: normal medium/1.4 sans-serif;
-                    }
-                    table {
-                        border-collapse: collapse;
-                        width: 100%;
-                        text-align: center;
-                        margin: auto;
-
-                    }
-                    th, td {
-                        text-align: left;
-                        padding: 20px ;
-                        color: black;
-
-                    }
-                    tr:nth-child(even){background-color: #cccccc}
-                    tr:nth-child(odd){background-color: whitesmoke}
-                    th {
-                        background-color: #4CAF50;
-                        color: white;
                     }
 
-                    .titulo{
-                        padding: 0.5rem;
-                        background: #FD0808 ;
-                        color: red;
-                        text-align: center;
-                        font-size: 21px;
+                    function _filter(row) {
+                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
                     }
 
-                    #buscar{
-                        width: 650px;
-                        font-size: 18px;
-                        color: #fff;
-                        background: transparent ;
-                        padding-left: 20px ;
-                        text-align: center;
-                        border-radius: 5px;
-                        padding: 10px;
-                        margin:10px; 
-                        border: 4px solid #006633;
-                    }
+                    return {
+                        init: function () {
+                            var inputs = document.getElementsByClassName('light-table-filter');
+                            Arr.forEach.call(inputs, function (input) {
+                                input.oninput = _onInputEvent;
+                            });
+                        }
+                    };
+                })(Array.prototype);
 
-                </style>	
-                <!--fin búsqueda-->
+                document.addEventListener('readystatechange', function () {
+                    if (document.readyState === 'complete') {
+                        LightTableFilter.init();
+                    }
+                });
+
+            })(document);
+        </script>		
+        <style type="text/css">
+            body {
+                font: normal medium/1.4 sans-serif;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                text-align: center;
+                margin: auto;
+
+            }
+            th, td {
+                text-align: left;
+                padding: 20px ;
+                color: black;
+
+            }
+            tr:nth-child(even){background-color: #cccccc}
+            tr:nth-child(odd){background-color: whitesmoke}
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .titulo{
+                padding: 0.5rem;
+                background: #FD0808 ;
+                color: red;
+                text-align: center;
+                font-size: 21px;
+            }
+
+            #buscar{
+                width: 650px;
+                font-size: 18px;
+                color: #fff;
+                background: transparent ;
+                padding-left: 20px ;
+                text-align: center;
+                border-radius: 5px;
+                padding: 10px;
+                margin:10px; 
+                border: 4px solid #006633;
+            }
+
+        </style>	
+        <!--fin búsqueda-->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -201,7 +202,7 @@ require_once '../model/Producto.php';
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="../index.php">
                         <h1 id="logo">
                             <img src="../img/logos/meghuna1.gif" alt="Meghna" />
                         </h1>
@@ -211,25 +212,38 @@ require_once '../model/Producto.php';
                 <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                     <ul id="nav" class="nav navbar-nav">
                         <li class="current"><a href="../index.php">Inicio</a></li>
+
                         <li><a href="../controller/controller.php?opcion=listar_proveedores">Proveedores</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=segundoReporte">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=segundoReporteListar">Reporte Proveedores</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_proveedores">Listar Proveedores</a></li>
                             </ul>
                         </li>                        
                         <li><a href="../controller/controller.php?opcion=listar_usuarios">Usuarios</a>
                             <ul>
-                                <li><a href="../controller/controller.php?opcion=primerReporte">Reporte Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=primerReporteListar">Listar Cajeros</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_usuarios">Listar Usuarios</a></li>
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
                             <ul>
-                                
-                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
-                                <li><a href="../controller/controller.php?opcion=tercerReporte">Reporte Facturas</a></li>
+                                <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                             </ul>
                         </li>
-                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
-                      
+                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a>
+                            <ul>
+                                <li><a href="../controller/controller.php?opcion=listar_logins">Ver Usuarios con Inicio de Sesión</a></li>
+                            </ul>
+                        </li>                                
+                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                            <ul>
+                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </nav><!-- /.navbar-collapse -->
             </div>
@@ -274,12 +288,12 @@ require_once '../model/Producto.php';
                                         </div>
                                         <div class="modal-body" >
 
-                                         <form action="../controller/controller.php" style=" width: 100%;">
+                                            <form action="../controller/controller.php" style=" width: 100%;">
                                                 <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
-                                                       
-                                                <input type="hidden" name="opcion" value="guardar_factura">
+
+                                                        <input type="hidden" name="opcion" value="guardar_factura">
                                                         <tr>
-                                                            
+
                                                             <td style="#cccccc"><br>Proveedor:</br></td>
                                                             <td><br><select name="idproveedor">                                        
                                                                     <?php
@@ -294,41 +308,41 @@ require_once '../model/Producto.php';
                                                             <td><br>Fecha:</br></td>
                                                             <td>
                                                                 <input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo getdate(); ?>">
-                                                                
+
                                                             </td>
                                                         </tr>
                                                         <input type="submit" value="Guardar">
                                                         </form>
                                                         <tr>
-                                                            <form action="../controller/controller.php">
-                                                                <input type="hidden" name="opcion" value="adicionar_detalle">
+                                                        <form action="../controller/controller.php">
+                                                            <input type="hidden" name="opcion" value="adicionar_detalle">
                                                             <td>Producto:</td>
-                                                        
-                                                        <td><select name="idProducto">                                        
-                                                                <?php
-                                                                $crudModel = new CrudModel();
-                                                                $listaProductos = $crudModel->getProductos();
+
+                                                            <td><select name="idProducto">                                        
+                                                                    <?php
+                                                                    $crudModel = new CrudModel();
+                                                                    $listaProductos = $crudModel->getProductos();
 //                                                                    echo $listaProductos;
-                                                                foreach ($listaProductos as $producto) {
-                                                                    echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
-                                                                }
-                                                                ?>
-                                                            </select></td>
-                                                        <td >Cantidad:</td>
-                                                        <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
-                                                            </form>
+                                                                    foreach ($listaProductos as $producto) {
+                                                                        echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
+                                                                    }
+                                                                    ?>
+                                                                </select></td>
+                                                            <td >Cantidad:</td>
+                                                            <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
+                                                        </form>
                                                     </table>
-                                                    
+
                                                     </tr>
                                                     <tr>
                                                         <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
                                                     </tr>
                                                     </table></center>
-                                                                                                        </form>
+                                            </form>
 
-             
-        </tbody>
-    </table>
+
+                                            </tbody>
+                                            </table>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -340,143 +354,143 @@ require_once '../model/Producto.php';
                         </div>
                         <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
                         <br>
-                                <br>
-                                <div style="overflow-x:auto;">
-                                    <div id="cuadro">
-                                        <center>
-                                            <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
-                                        </center>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <div id="cuadro">
+                                <center>
+                                    <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                </center>
 
-                                        <div class="datagrid">
-                                            <table class="order-table table">   
-                                                <tr class="titulo" style="font-size: 1em">
-                                    <th>NUMERO FACTURA</th>
-                                    <th>PROVEEDOR</th>
-                                    <th>USUARIO</th>
-                                    <th>VALOR FACTURA</th>
-                                    <th>FECHA FACTURA</th>
-                                    <th>IVA FACTURA</th>
-                                    <th>ELIMINAR</th>
-                                    <th>EDITAR</th>
-                                </tr>
+                                <div class="datagrid">
+                                    <table class="order-table table">   
+                                        <tr class="titulo" style="font-size: 1em">
+                                            <th>NUMERO FACTURA</th>
+                                            <th>PROVEEDOR</th>
+                                            <th>USUARIO</th>
+                                            <th>VALOR FACTURA</th>
+                                            <th>FECHA FACTURA</th>
+                                            <th>IVA FACTURA</th>
+                                            <th>ELIMINAR</th>
+                                            <th>EDITAR</th>
+                                        </tr>
 
-                                <tbody >                    
+                                        <tbody >                    
 
-                                    <?php
-                                    //verificamos si existe en sesion el listado de login:
-                                    if (isset($_SESSION['listaFacturas'])) {
-                                        $listado = unserialize($_SESSION['listaFacturas']);
-                                        foreach ($listado as $usu) {
+                                            <?php
+                                            //verificamos si existe en sesion el listado de login:
+                                            if (isset($_SESSION['listaFacturas'])) {
+                                                $listado = unserialize($_SESSION['listaFacturas']);
+                                                foreach ($listado as $usu) {
 
-                                            echo "<tr>";
-                                            echo "<td>" . $usu->getIdfactura() . "</td>";
-                                            echo "<td>" . $usu->getIdproveedor() . "</td>";
-                                            echo "<td>" . $usu->getIdusuario() . "</td>";
-                                            echo "<td>" . $usu->getValorfactura() . "</td>";
-                                            echo "<td>" . $usu->getFechafactura() . "</td>";
-                                            echo "<td>" . $usu->getIvafactura() . "</td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
-                                            echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
-                                            echo "</tr>";
-                                        }
-                                    } else {
-                                        echo "No se han cargado datos.";
-                                    }
-                                    ?>
-                            </tbody >                    
+                                                    echo "<tr>";
+                                                    echo "<td>" . $usu->getIdfactura() . "</td>";
+                                                    echo "<td>" . $usu->getIdproveedor() . "</td>";
+                                                    echo "<td>" . $usu->getIdusuario() . "</td>";
+                                                    echo "<td>" . $usu->getValorfactura() . "</td>";
+                                                    echo "<td>" . $usu->getFechafactura() . "</td>";
+                                                    echo "<td>" . $usu->getIvafactura() . "</td>";
+                                                    echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=eliminar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-trash' style='color: black;'> </span></a></td>";
+                                                    echo "<td><a title='Eliminar dato' href='../controller/controller.php?opcion=editar_usuario&idusuario=" . $usu->getIdusuario() . "'><span class='glyphicon glyphicon-pencil' style='color: black;'>  </span></a></td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "No se han cargado datos.";
+                                            }
+                                            ?>
+                                        </tbody >                    
 
-                                            </table >
-                                            <a class="btn btn-success" href="../view/pdffacturas.php">IMPRIMIR</a>
+                                    </table >
+                                    <a class="btn btn-success" href="../view/pdffacturas.php">IMPRIMIR</a>
 
-                                        </div>
-                                    </div>     <!-- End col-lg-12 -->
-                                </div>	    <!-- End row -->
-            </div>       <!-- End container -->
-        </section>    <!-- End Section -->
+                                </div>
+                            </div>     <!-- End col-lg-12 -->
+                        </div>	    <!-- End row -->
+                    </div>       <!-- End container -->
+                    </section>    <!-- End Section -->
 
-        <!-- Start Blog Post Section
-        ==================================== -->
-        <section id="blog-page">
-            <div class="container">
-                <div class="row">
+                    <!-- Start Blog Post Section
+                    ==================================== -->
+                    <section id="blog-page">
+                        <div class="container">
+                            <div class="row">
 
-                    <div id="blog-posts" class="col-md-8 col-sm-8">
-                        <div class="post-item">
-
-
+                                <div id="blog-posts" class="col-md-8 col-sm-8">
+                                    <div class="post-item">
 
 
-                        </div>
-                    </div>
-
-                </div>	    <!-- End row -->
-            </div>       <!-- End container -->
-        </section>    <!-- End Section -->
 
 
-        <!-- Start Footer Section
-        ========================================== -->
-        <footer id="footer" class="bg-one">
-            <div class="container">
-                <div class="row wow fadeInUp" data-wow-duration="500ms">
-                    <div class="col-lg-12">
+                                    </div>
+                                </div>
 
-                        <!-- Footer Social Links -->
-                        <div class="social-icon">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                        <!--/. End Footer Social Links -->
+                            </div>	    <!-- End row -->
+                        </div>       <!-- End container -->
+                    </section>    <!-- End Section -->
 
-                        <!-- copyright -->
-                        <div class="copyright text-center">
-                            <img src="img/logo-meghna.png" alt="Meghna" /> <br />
-                            <p>Copyright &copy; 2014. All Rights Reserved.</p>
-                        </div>
-                        <!-- /copyright -->
 
-                    </div> <!-- end col lg 12 -->
-                </div> <!-- end row -->
-            </div> <!-- end container -->
-        </footer> <!-- end footer -->
+                    <!-- Start Footer Section
+                    ========================================== -->
+                    <footer id="footer" class="bg-one">
+                        <div class="container">
+                            <div class="row wow fadeInUp" data-wow-duration="500ms">
+                                <div class="col-lg-12">
 
-        <!-- Back to Top
-        ============================== -->
-        <a href="#" id="scrollUp"><i class="fa fa-angle-up fa-2x"></i></a>
+                                    <!-- Footer Social Links -->
+                                    <div class="social-icon">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <!--/. End Footer Social Links -->
 
-        <!-- end Footer Area
-        ========================================== -->
+                                    <!-- copyright -->
+                                    <div class="copyright text-center">
+                                        <img src="img/logo-meghna.png" alt="Meghna" /> <br />
+                                        <p>Copyright &copy; 2014. All Rights Reserved.</p>
+                                    </div>
+                                    <!-- /copyright -->
 
-        <!-- 
-        Essential Scripts
-        =====================================-->
+                                </div> <!-- end col lg 12 -->
+                            </div> <!-- end row -->
+                        </div> <!-- end container -->
+                    </footer> <!-- end footer -->
 
-        <!-- Main jQuery -->
-        <script src="js/jquery-1.11.0.min.js"></script>
-        <!-- Bootstrap 3.1 -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Back to Top -->
-        <script src="js/jquery.scrollUp.min.js"></script>
-        <script src="js/classie.js"></script>
-        <!-- Owl Carousel -->
-        <script src="js/owl.carousel.min.js"></script>
-        <!-- Custom Scrollbar -->
-        <script src="js/jquery.nicescroll.min.js"></script>
-        <!-- jQuery Easing -->
-        <script src="js/jquery.easing-1.3.pack.js"></script>
-        <!-- wow.min Script -->
-        <script src="js/wow.min.js"></script>
-        <!-- For video responsive -->
-        <script src="js/jquery.fitvids.js"></script>
-        <!-- Custom js -->
-        <script src="js/custom.js"></script>
+                    <!-- Back to Top
+                    ============================== -->
+                    <a href="#" id="scrollUp"><i class="fa fa-angle-up fa-2x"></i></a>
 
-    </body>
-</html>
+                    <!-- end Footer Area
+                    ========================================== -->
+
+                    <!-- 
+                    Essential Scripts
+                    =====================================-->
+
+                    <!-- Main jQuery -->
+                    <script src="js/jquery-1.11.0.min.js"></script>
+                    <!-- Bootstrap 3.1 -->
+                    <script src="js/bootstrap.min.js"></script>
+                    <!-- Back to Top -->
+                    <script src="js/jquery.scrollUp.min.js"></script>
+                    <script src="js/classie.js"></script>
+                    <!-- Owl Carousel -->
+                    <script src="js/owl.carousel.min.js"></script>
+                    <!-- Custom Scrollbar -->
+                    <script src="js/jquery.nicescroll.min.js"></script>
+                    <!-- jQuery Easing -->
+                    <script src="js/jquery.easing-1.3.pack.js"></script>
+                    <!-- wow.min Script -->
+                    <script src="js/wow.min.js"></script>
+                    <!-- For video responsive -->
+                    <script src="js/jquery.fitvids.js"></script>
+                    <!-- Custom js -->
+                    <script src="js/custom.js"></script>
+
+                    </body>
+                    </html>

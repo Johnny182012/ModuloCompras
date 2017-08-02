@@ -7,6 +7,7 @@
 <?php
 session_start();
 $rolusuario = unserialize($_SESSION['rolusuario']);
+$nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
     session_destroy();
     header('Location: view/indexLogin.php');
@@ -237,13 +238,24 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="#our-team">Equipo de trabajo</a></li>
                                 <li><a href="controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>
-                                        <li><a href="controller/controller.php?opcion=segundoReporteC">Reporte Proveedores</a></li>
+                                        <li><a href="controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
+                                        <li><a href="controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="controller/controller.php?opcion=listar_facturasC">Facturas</a>
+                                <li><a href="controller/controller.php?opcion=listar_facturas">Facturas</a>
+                                    <ul>
+
+                                        <li><a href="controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        <a href="controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                        <li><a href="controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                                    </ul>
                                 </li>
-                                <li><a href="controller/controller.php?opcion=primerReporteC">Cajeros</a></li>
-                                <li><a href='controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                <li><a href='controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                    <ul>
+                                        <li><a href='view/editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                        <li><a href='controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                         <!-- /main nav -->
