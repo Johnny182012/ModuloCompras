@@ -2,10 +2,10 @@
 <?php
 require_once '../model/Producto.php';
 require_once '../model/Facturas.php';
-require_once '../model/Producto.php';
 require_once '../model/DetalleFactura.php';
 require_once '../model/CrudModel.php';
 require_once '../model/FacturaModel.php';
+require_once '../model/Proveedor.php';
 session_start();
 $facturaCab = $_SESSION['facturaCab'];
 ?>
@@ -274,19 +274,42 @@ $facturaCab = $_SESSION['facturaCab'];
                             <div class="datagrid">
                                 <table class="order-table table">
                                     <tr>
-                                        <td >Proveedor:</td>
-                                        <td><?php echo $facturaCab->getIdproveedor(); ?></td>
-                                        <td >Nro. factura:</td>
-                                        <td><?php echo $facturaCab->getIdfacturass(); ?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Dirección:</td>
-                                        <td>sdsd</td>
-                                        <td>Fecha:</td>
+                                        <th>Fecha:</th>
                                         <td><?php echo $facturaCab->getFechafactura(); ?></td>
+                                        <th>Nro. factura:</th>
+                                        <td><?php echo $facturaCab->getIdfacturass(); ?></td>
                                     </tr>
                                     <tr>
+                                        <th>Cédula:</th>
+                                        <td><?php echo $facturaCab->getidProveedor(); ?></td>
+                                        <th>Dirección:</th>
+                                        <td><?php
+                                            //  $proveedor = new Proveedor();
+                                            $crudModel = new CrudModel();
+
+                                            $proveedor = $crudModel->getProveedor($facturaCab->getIdproveedor());
+                                            echo $proveedor->getDireccionproveedor();
+                                            ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Proveedor:</th>
+                                        <td><?php
+                                            //  $proveedor = new Proveedor();
+                                            $crudModel = new CrudModel();
+                                            $proveedor = $crudModel->getProveedor($facturaCab->getIdproveedor());
+                                            echo $proveedor->getNombreproveedor();
+                                            ?></td>
+
+                                        <th>teléfono:</th>
+                                        <td><?php
+                                            //  $proveedor = new Proveedor();
+                                            $crudModel = new CrudModel();
+
+                                            $proveedor = $crudModel->getProveedor($facturaCab->getIdproveedor());
+                                            echo $proveedor->getTelefonoproveedor();
+                                            ?></td>
+                                    </tr>
+
                                 </table>
                             </div>
 
@@ -307,7 +330,7 @@ $facturaCab = $_SESSION['facturaCab'];
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                //verificamos si existe en sesion el listado de clientes:
+//verificamos si existe en sesion el listado de clientes:
                                                 if (isset($_SESSION['listaFacturaDet'])) {
                                                     $listado = unserialize($_SESSION['listaFacturaDet']);
                                                     foreach ($listado as $facturaDet) {
