@@ -148,7 +148,7 @@ require_once '../model/Proveedor.php';
                                 <td width="20" ></td>
                                 <td>Usuario *:</td>
                                 <td width='10'>
-                                <td><input type="text" name="idusuario" requiered="true"></td>
+                                <td><font color="black"><input type="text" name="idusuario" requiered="true"></font></td>
                                 <td width="20"></td>
                             </tr>
                             <tr><td height="20" colspan="5"></td></tr>
@@ -156,7 +156,7 @@ require_once '../model/Proveedor.php';
                                 <td width="20"></td>
                                 <td>Clave *:</td>
                                 <td width='10'>
-                                <td><input type="password" name="passwordlogin" requiered="true"></td>
+                                <td><font color="black"><input type="password" name="passwordlogin" requiered="true"></font></td>
                                 <td width="20"></td>
                             </tr>
                             <tr><td height="20" colspan="5"></td>
