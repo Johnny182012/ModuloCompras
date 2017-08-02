@@ -150,8 +150,8 @@ if (!isset($_SESSION['bandera'])) {
                 </style>
                 <!--validar cédula y ruc-->
                 <script type="text/javascript">
-            function validad(campo) {
-                numero = campo.value;
+            function validad(idproveedor) {
+                numero = idproveedor.value;
                 var suma = 0;
                 var residuo = 0;
                 var pri = false;
@@ -436,7 +436,7 @@ if (!isset($_SESSION['bandera'])) {
                                                         <center><table style=" width: 100%;   border-collapse: collapse;width: 100%;">                                                                                    
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Identificación Proveedor:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idproveedor" maxlength="13" required="true"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idproveedor" maxlength="13" required="true" onchange="validad()"></br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Tipo Identificación</br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;">
                                                                         <select name="tipoidproveedor">
