@@ -223,6 +223,7 @@ $nombreusuario = unserialize($_SESSION['nombreusuario']);
                             <ul>
                                 <li><a href="../controller/controller.php?opcion=primerReporteListar">Listar Cajeros</a></li>
                                 <li><a href="../controller/controller.php?opcion=listar_usuarios">Listar Usuarios</a></li>
+                                <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a></li>
                             </ul>
                         </li>
                         <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
@@ -231,12 +232,7 @@ $nombreusuario = unserialize($_SESSION['nombreusuario']);
                                 <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
                                 <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
                             </ul>
-                        </li>
-                        <li><a href="../controller/controller.php?opcion=listar_logins">Inicios de Sesión</a>
-                            <ul>
-                                <li><a href="../controller/controller.php?opcion=listar_logins">Ver Usuarios con Inicio de Sesión</a></li>
-                            </ul>
-                        </li>                                
+                        </li>                              
                         <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
                             <ul>
                                 <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
