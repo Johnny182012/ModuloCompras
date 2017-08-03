@@ -364,31 +364,31 @@ if (!isset($_SESSION['bandera'])) {
                         </div>
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
-                                    <ul id="nav" class="nav navbar-nav">
-                                        <li class="current"><a href="../index.php">Inicio</a></li>
+                            <ul id="nav" class="nav navbar-nav">
+                                <li class="current"><a href="../index.php">Inicio</a></li>
 
-                                        <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
-                                            <ul>
-                                                <li><a href="../controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
-                                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
-                                            </ul>
-                                        </li> 
-                                        <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
-                                            <ul>
-                                                <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
-                                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
-                                                <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
-                                            </ul>
-                                        </li>                            
-                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
-                                            <ul>
-                                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
-                                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
-                                            </ul>
-                                        </li>
-
+                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
+                                    <ul>
+                                        <li><a href="../controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
+                                        <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
                                     </ul>
-                                </nav><!-- /.navbar-collapse -->
+                                </li> 
+                                <li><a href="../controller/controller.php?opcion=listar_facturas">Facturas</a>
+                                    <ul>
+                                        <a href="../controller/controller.php?opcion=listar_facturas">Listar Facturas</a>
+                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        <li><a href="../controller/controller.php?opcion=tercerReporte">Ver Facturas</a></li>
+                                    </ul>
+                                </li>                            
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                    <ul>
+                                        <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </nav><!-- /.navbar-collapse -->
                     </div>
                 </header>
                 <!--

@@ -468,14 +468,6 @@ switch ($opcion) {
         header('Location: ../view/COnsumoWS.php');
 
         break;
-    
-    case "listar_facturasC":
-        //obtenemos la lista de facturas y subimos a sesion:
-        $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
-        $vec = $crudModel->getFacturas();
-        header('Location: ../view/COnsumoWS.php');
-
-        break;
 
     // obtiene los datos de los login de la base de datos
     case "listar_logins":
