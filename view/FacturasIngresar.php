@@ -301,7 +301,7 @@ $facturaModel = new FacturaModel();
                                 <style>
                                     table {
                                         border-collapse: collapse;
-                                        width: 100%;
+                                        width: 20%;
 
                                     }
 
@@ -324,7 +324,7 @@ $facturaModel = new FacturaModel();
                                     <form action="../controller/controller.php" >
                                         <input type="hidden" name="opcion" value="guardar_factura">
                                         <tr>
-                                            <td>Proveedor:</td>
+                                            <td colspan="3"><p align="right">Proveedor:</p></td>
                                             <td>
                                                 <select name="idproveedor">                                        
                                                     <?php
@@ -336,8 +336,6 @@ $facturaModel = new FacturaModel();
                                                     ?>
                                                 </select>
                                             </td>
-                                            <td>Fecha:</td>
-                                            <td><input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo date('d-m-Y'); ?>"></td>
                                             <td><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Guardar" class="btn btn-sm" ></center></td>
                                         </tr>                                    
                                     </form>
@@ -405,14 +403,12 @@ $facturaModel = new FacturaModel();
                                                     echo "<td>BASE IMPONIBLE</td>";
                                                     echo "<td></td>";
                                                     echo "<td></td>";
-                                                    echo "<td></td>";
                                                     echo "<td>" . $facturaModel->calcularBaseImponible($listado) . "</td>";
                                                     echo "<td></td>";
                                                     echo "</tr>";
                                                     echo "<tr>";
                                                     echo "<td> </td>";
                                                     echo "<td>BASE NO IMPONIBLE</td>";
-                                                    echo "<td></td>";
                                                     echo "<td></td>";
                                                     echo "<td></td>";
                                                     echo "<td>" . $facturaModel->calcularBaseNoImponible($listado) . "</td>";
@@ -423,14 +419,12 @@ $facturaModel = new FacturaModel();
                                                     echo "<td>IVA</td>";
                                                     echo "<td></td>";
                                                     echo "<td></td>";
-                                                    echo "<td></td>";
                                                     echo "<td>" . $facturaModel->calcularIva($listado) . "</td>";
                                                     echo "<td></td>";
                                                     echo "</tr>";
                                                     echo "<tr>";
                                                     echo "<td> </td>";
                                                     echo "<td>TOTAL</td>";
-                                                    echo "<td></td>";
                                                     echo "<td></td>";
                                                     echo "<td></td>";
                                                     echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
@@ -442,8 +436,9 @@ $facturaModel = new FacturaModel();
                                                 ?> </tbody >                    
 
                                         </table >
+                                        <p align="center">
                                         <a class="btn btn-success" href="../view/pdffacturadetalle.php">IMPRIMIR</a>
-
+                                        </p>
                                     </div>
                                 </div>     <!-- End col-lg-12 -->
                             </div>	    <!-- End row -->
