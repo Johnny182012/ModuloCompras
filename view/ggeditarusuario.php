@@ -267,7 +267,7 @@ if (!isset($_SESSION['bandera'])) {
                                                         </td>
                                                         <td>Nombre:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaUsuarios->getNombreusuario(); ?>" type="text" name="nombreusuario"  title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+">
+                                                            <input value="<?php echo $listaUsuarios->getNombreusuario(); ?>" type="text" name="nombreusuario"  title="Se necesita un nombre" placeholder="Ej: Luis Lomas" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+">
                                                         </td>
                                                     </tr>
                                                     <tr>

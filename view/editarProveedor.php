@@ -250,7 +250,7 @@ if (!isset($_SESSION['bandera'])) {
                                                     <tr>
                                                         <td>Nombres:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaProveedores->getNombreproveedor(); ?>" type="text" name="nombreproveedor"  required="true" title="Se necesita un nombre" placeholder="Ej: Luis" pattern="[A-Za-z ]+" maxlength="100" >
+                                                            <input value="<?php echo $listaProveedores->getNombreproveedor(); ?>" type="text" name="nombreproveedor"  required="true" title="Se necesita un nombre" placeholder="Ej: Luis" pattern="^[a-zA-Z]+[ ][a-zA-Z]+" maxlength="100" >
                                                         </td>
                                                         <td>DOB:</td>
                                                         <td>
@@ -260,7 +260,7 @@ if (!isset($_SESSION['bandera'])) {
                                                     <tr>
                                                         <td>Ciudad de nacimiento:</td>
                                                         <td>
-                                                            <input  placeholder="Ej: Quito" pattern="[A-Za-z ]+" value="<?php echo $listaProveedores->getCiudnacproveedor(); ?>" type="text" name="ciudnacproveedor"  maxlength="50" required="true">
+                                                            <input  placeholder="Ej: Quito" pattern="^[A-Za-z]+" value="<?php echo $listaProveedores->getCiudnacproveedor(); ?>" type="text" name="ciudnacproveedor"  maxlength="50" required="true">
                                                         </td>
                                                         <td>Tipo de proveedor</td>
                                                         <td>
@@ -285,11 +285,11 @@ if (!isset($_SESSION['bandera'])) {
                                                     <tr>
                                                         <td>Dirección:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaProveedores->getDireccionproveedor(); ?>" placeholder="Ej: Quito y Via. Amazonas" type="text" name="direccionproveedor" maxlength="100" required="true">
+                                                            <input value="<?php echo $listaProveedores->getDireccionproveedor(); ?>" placeholder="Ej: Quito y Via. Amazonas" type="text" name="direccionproveedor" maxlength="100" required="true" pattern="^[0-9A-Za-z- ]+">
                                                         </td>
                                                         <td>Teléfono:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaProveedores->getTelefonoproveedor(); ?>" placeholder="Ej: 0909785967" pattern="[0-9]+" type="tel" name="telefonoproveedor" maxlength="10" required="true">
+                                                            <input value="<?php echo $listaProveedores->getTelefonoproveedor(); ?>" placeholder="Ej: 0909785967" pattern="^[0-9]+" type="tel" name="telefonoproveedor" maxlength="10" required="true">
                                                         </td>
                                                     </tr>
                                                     <tr>

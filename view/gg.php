@@ -410,7 +410,7 @@ if (!isset($_SESSION['bandera'])) {
                                                                         </select>
                                                                     </td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Nombre:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis Lomas" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+"></br></td>
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Fecha de Nacimiento:</br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br><input type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></br></td>
