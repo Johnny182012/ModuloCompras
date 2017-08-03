@@ -29,26 +29,23 @@ $crudModel = new CrudModel();
             </thead>
             <tbody>
                 <?php
-                for ($i=0;$i<=count($inventario_array)+2;$i++) {
-                    if($inventario_array["data"][$i]["GRABA_IVA_PROD"] == "S"){
-                      
-                        
-                        $iva="true";
+                for ($i = 0; $i <= count($inventario_array) + 2; $i++) {
+                    if ($inventario_array["data"][$i]["GRABA_IVA_PROD"] == "S") {
+
+
+                        $iva = "true";
                     } else {
-                        $iva="false";
+                        $iva = "false";
                     }
-                    if ($inventario_array["data"][$i]["ESTADO_PROD"] == "A"){
-                        $estado="Activo";
+                    if ($inventario_array["data"][$i]["ESTADO_PROD"] == "A") {
+                        $estado = "Activo";
                     } else {
-                        $estado="Inactivo";
+                        $estado = "Inactivo";
                     }
-                    
-                      $crudModel->insertarProducto($inventario_array["data"][$i]["ID_PROD"],
-                                $inventario_array["data"][$i]["NOMBRE_PROD"], 
-                                $inventario_array["data"][$i]["COSTO_PROD"],
-                                $iva);
+
+                    $crudModel->insertarProducto($inventario_array["data"][$i]["ID_PROD"], $inventario_array["data"][$i]["NOMBRE_PROD"], $inventario_array["data"][$i]["COSTO_PROD"], $iva);
                     echo "<tr>";
-                    echo "<td>" . $inventario_array["data"][$i]["ID_PROD"]. "</td>";
+                    echo "<td>" . $inventario_array["data"][$i]["ID_PROD"] . "</td>";
                     echo "<td>" . $inventario_array["data"][$i]["NOMBRE_PROD"] . "</td>";
                     echo "<td>" . $inventario_array["data"][$i]["DESCRIPCION_PROD"] . "</td>";
                     echo "<td>" . $iva . "</td>";
@@ -57,8 +54,8 @@ $crudModel = new CrudModel();
                     echo "<td>" . $estado . "</td>";
                     echo "<td>" . $inventario_array["data"][$i]["STOCK_PROD"] . "</td>";
                     echo "</tr>";
-                    
-                              //       header('Location: Facturas.php');
+
+                    header('Location: Facturas.php');
                 }
                 ?>
             </tbody>
