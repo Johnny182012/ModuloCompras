@@ -30,7 +30,7 @@ $crudModel = new CrudModel();
             <tbody>
                 <?php
                 for ($i=0;$i<count($inventario_array);$i++) {
-                    if($inventario_array["data"][$i]["graba_iva_prod"] == "S"){
+                    if($inventario_array["data"][$i]["GRABA_IVA_PROD"] == "S"){
                       
                         
                         $iva="true";
@@ -43,16 +43,16 @@ $crudModel = new CrudModel();
                         $estado="Inactivo";
                     }
                     
-                      $crudModel->insertarProducto($inventario_array["data"][$i]["id_prod"],
-                                $inventario_array["data"][$i]["nombre_prod"], 
-                                $inventario_array["data"][$i]["costo_prod"],
+                      $crudModel->insertarProducto($inventario_array["data"][$i]["ID_PROD"],
+                                $inventario_array["data"][$i]["NOMBRE_PROD"], 
+                                $inventario_array["data"][$i]["COSTO_PROD"],
                                 $iva);
                     echo "<tr>";
                     echo "<td>" . $inventario_array["data"][$i]["id_prod"]. "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["nombre_prod"] . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["descripcion_prod"] . "</td>";
+                    echo "<td>" . $inventario_array["data"][$i]["NOMBRE_PROD"] . "</td>";
+                    echo "<td>" . $inventario_array["data"][$i]["DESCRIPCION_PROD"] . "</td>";
                     echo "<td>" . $iva . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["costo_prod"] . "</td>";
+                    echo "<td>" . $inventario_array["data"][$i]["COSTO_PROD"] . "</td>";
                     echo "<td>" . $inventario_array["data"][$i]["pvp_prod"] . "</td>";
                     echo "<td>" . $estado . "</td>";
                     echo "<td>" . $inventario_array["data"][$i]["stock_prod"] . "</td>";
