@@ -59,7 +59,97 @@ if (!isset($_SESSION['bandera'])) {
                         });
 
                     })(document);
-                </script>		
+                </script>	
+                       <!--validar ruc-->
+        <script>
+ function validarRuc(type="text/javascript"){
+  var number = document.getElementById('idusuario').value;
+  var dto = number.length;
+  var valor;
+  var acu=0;
+  if(number==""){
+   alert('No has ingresado ningún dato, porfavor ingresar los datos correspondientes.');
+   }
+  else{
+   for (var i=0; i<dto; i++){
+   valor = number.substring(i,i+1);
+   if(valor==0||valor==1||valor==2||valor==3||valor==4||valor==5||valor==6||valor==7||valor==8||valor==9){
+    acu = acu+1;
+   }
+   }
+   if(acu==dto){
+    while(number.substring(10,13)!=001){
+     alert('Los tres últimos dígitos no tienen el código del RUC 001.');
+     document.getElementById("idusuario").value="";
+     return;
+    }
+    while(number.substring(0,2)>24){    
+     alert('Los dos primeros dígitos no pueden ser mayores a 24.');
+     return;
+    }
+    alert('El RUC está escrito correctamente');
+    alert('Se procederá a analizar el respectivo RUC.');
+    var porcion1 = number.substring(2,3);
+    if(porcion1<6){
+     alert('El tercer dígito es menor a 6, por lo \ntanto el usuario es una persona natural.\n');
+    }
+    else{
+     if(porcion1==6){
+      alert('El tercer dígito es igual a 6, por lo \ntanto el usuario es una entidad pública.\n');
+     }
+     else{
+      if(porcion1==9){
+       alert('El tercer dígito es igual a 9, por lo \ntanto el usuario es una sociedad privada.\n');
+      }
+     }
+    }
+   }
+   else{
+   alert("ERROR: Por favor no ingrese texto");
+   }
+  }
+ }
+</script>
+<!--validar cédula-->
+        <script type="text/javascript">
+                    function validarcedula() {
+                        var i;
+                        var cedula;
+                        var acumulado;
+                        cedula = document.cedula.idusuario.value;
+                        var instancia;
+                        acumulado = 0;
+                        for (i = 1; i <= 9; i++) {
+                            if (i % 2 != 0) {
+                                instancia = cedula.substring(i - 1, i) * 2;
+                                if (instancia > 9)
+                                    instancia -= 9;
+                            } else
+                                instancia = cedula.substring(i - 1, i);
+                            acumulado += parseInt(instancia);
+                        }
+                        while (acumulado > 0)
+                            acumulado -= 10;
+                        if (cedula.substring(9, 10) != (acumulado * -1)) {
+                            alert("Cedula no valida!!");
+                            document.getElementById("idusuario").value="";
+                        }
+                    }
+                </script>
+       <!--validar nombre-->
+ <script>
+        function validaSoloTexto(){
+        var ciunacusuario;
+                ciunacusuario=document.cedula.ciunacusuario.value;
+        var patron = /^[A-Za-z]+ /;
+  // En caso de querer validar cadenas con espacios usar: /^[a-zA-Z\s]*$/
+        if(!ciunacusuario.search(patron))
+            window.alert("dato correcto");
+            else
+            document.getElementById("ciunacusuario").value="";
+}
+</script>
+
                 <style type="text/css">
                     body {
                         font: normal medium/1.4 sans-serif;
@@ -296,12 +386,12 @@ if (!isset($_SESSION['bandera'])) {
                                                 </div>
                                                 <div class="modal-body" >
 
-                                                    <form action="../controller/controller.php" style=" width: 100%;">
+                                                    <form name="cedula" action="../controller/controller.php" style=" width: 100%;">
                                                         <input type="hidden" name="opcion" value="crear_usuario">
                                                         <center><table style=" width: 100%;   border-collapse: collapse;width: 100%;">                                                                                    
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Identificación:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idusuario" maxlength="13" required="true" ></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="idusuario" id="idusuario" maxlength="13" required="true" onchange="validarcedula();validarRuc()"></br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Tipo:</br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;">
                                                                         <select name="tipoidusuario">
@@ -320,18 +410,18 @@ if (!isset($_SESSION['bandera'])) {
                                                                         </select>
                                                                     </td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Nombre:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="[A-Za-z ]+"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input style="" type="text" name="nombreusuario" title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+"></br></td>
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Fecha de Nacimiento:</br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br><input type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Ciudad de Nacimiento:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="ciunacusuario" maxlength="50" placeholder="Ej: Quito" required="true" pattern="[A-Za-z ]+"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="ciunacusuario" maxlength="50" placeholder="Ej: Quito" required="true" pattern="^[A-Za-z ]+"></br></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Dirección:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="direccionusuario" maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" required="true"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="text" name="direccionusuario" maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="^[0-9A-Za-z- ]+" required="true"></br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Teléfono:</br></td>
-                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="[0-9]+"></br></td>
+                                                                    <td style="text-align: left;padding: 8px;color: black;"><br><input type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="^[0-9]+"></br></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Email:</br></td>

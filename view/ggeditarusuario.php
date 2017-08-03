@@ -267,7 +267,7 @@ if (!isset($_SESSION['bandera'])) {
                                                         </td>
                                                         <td>Nombre:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaUsuarios->getNombreusuario(); ?>" type="text" name="nombreusuario"  title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="[A-Za-z ]+">
+                                                            <input value="<?php echo $listaUsuarios->getNombreusuario(); ?>" type="text" name="nombreusuario"  title="Se necesita un nombre" placeholder="Ej: Luis" maxlength="100" required="true" pattern="^[a-zA-Z]+[ ][a-zA-Z]+">
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -275,17 +275,17 @@ if (!isset($_SESSION['bandera'])) {
                                                         <td><input value="<?php echo $listaUsuarios->getFecnacusuario(); ?>" type="date" name="fecnacusuario" required="true" autocomplete="off" required="" max="today" min="01-01-1800" value="<?php echo date('d-m-Y'); ?>"></td>
                                                         <td>Ciudad:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaUsuarios->getCiunacusuario(); ?>" type="text" name="ciunacusuario"  maxlength="50" placeholder="Ej: Quito" required="true" pattern="[A-Za-z ]+">
+                                                            <input value="<?php echo $listaUsuarios->getCiunacusuario(); ?>" type="text" name="ciunacusuario"  maxlength="50" placeholder="Ej: Quito" required="true" pattern="^[A-Za-z]+">
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Dirección:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaUsuarios->getDireccionusuario(); ?>" type="text" name="direccionusuario"  maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="[0-9A-Za-z- ]+" required="true">
+                                                            <input value="<?php echo $listaUsuarios->getDireccionusuario(); ?>" type="text" name="direccionusuario"  maxlength="100" placeholder="Ej: Quito y Via. Amazonas" pattern="^[0-9A-Za-z- ]+" required="true">
                                                         </td>
                                                         <td>Teléfono:</td>
                                                         <td>
-                                                            <input value="<?php echo $listaUsuarios->getTelefonousuario(); ?>" type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="[0-9]+">
+                                                            <input value="<?php echo $listaUsuarios->getTelefonousuario(); ?>" type="tel" name="telefonousuario" placeholder="Ej: 0909785967" maxlength="10" required="true" pattern="^[0-9]+">
 
                                                         </td>
                                                     </tr>
