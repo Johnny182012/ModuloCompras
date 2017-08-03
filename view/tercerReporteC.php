@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/Cajero.php';
+//include_once '../model/Facturas1.php';
 require_once '../model/CrudModel.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
 $nombreusuario = unserialize($_SESSION['nombreusuario']);
@@ -28,7 +28,7 @@ if (!isset($_SESSION['bandera'])) {
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                <title>Cajeros</title>
+                <title>Facturas</title>
                 <style type="text/css">
                     *{
                         padding:0px;
@@ -125,7 +125,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="../indexC.php">
+                            <a class="navbar-brand" href="../index.php">
                                 <h1 id="logo">
                                     <img src="../img/logos/meghuna1.gif" alt="Meghna" />
                                 </h1>
@@ -133,31 +133,31 @@ if (!isset($_SESSION['bandera'])) {
                         </div>
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
-                                    <ul id="nav" class="nav navbar-nav">
-                                        <li class="current"><a href="../index.php">Inicio</a></li>
+                            <ul id="nav" class="nav navbar-nav">
+                                <li class="current"><a href="../index.php">Inicio</a></li>
 
-                                        <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
-                                            <ul>
-                                                <li><a href="../controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
-                                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
-                                            </ul>
-                                        </li> 
-                                        <li><a href="../controller/controller.php?opcion=listar_facturasC">Facturas</a>
-                                            <ul>
-                                                <a href="../controller/controller.php?opcion=listar_facturasC">Listar Facturas</a>
-                                                <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
-                                                <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
-                                            </ul>
-                                        </li>                            
-                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
-                                            <ul>
-                                                <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
-                                                <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
-                                            </ul>
-                                        </li>
-
+                                <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
+                                    <ul>
+                                        <li><a href="../controller/controller.php?opcion=segundoReporteListarC">Reporte Proveedores</a></li>
+                                        <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Listar Proveedores</a></li>
                                     </ul>
-                                </nav><!-- /.navbar-collapse -->
+                                </li> 
+                                <li><a href="../controller/controller.php?opcion=listar_facturasC">Facturas</a>
+                                    <ul>
+                                        <a href="../controller/controller.php?opcion=listar_facturasC">Listar Facturas</a>
+                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
+                                    </ul>
+                                </li>                            
+                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                    <ul>
+                                        <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
+                                        <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </nav><!-- /.navbar-collapse -->
                     </div>
                 </header>
                 <!--
@@ -176,13 +176,29 @@ if (!isset($_SESSION['bandera'])) {
                                     <i class="fa fa-book fa-4x"></i>
                                 </div>
                                 <div class="title text-center">
-                                    <h2>Nuestros <span class="color">Cajeros</span></h2>
+                                    <h2>Buscar <span class="color">Facturas</span></h2>
                                     <div class="border"></div>
                                 </div>
 
-                                
-
-                                <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
+                                <table  align="center"  style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
+                                    <tr>
+                                        <td width="450"></td>
+                                        <td><br>Fecha Inicial</br></td>
+                                        <td><br><input  type="date" name="fechainicio" required="true">  </br></td>        
+                                        <td width="450"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="450"></td>
+                                        <td><br>Fecha Final</br></td>
+                                        <td><br><input  type="date" name="fechafin" required="true">  </br></td>        
+                                        <td width="450"></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="450"></td>
+                                        <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="BUSCAR" class="btn btn-sm" ></center></td>
+                                    <td width="450"></td>
+                                    </tr>
+                                </table>         <!--FIN DE LA VENTANA EMERGENTE DE CREAR USUARIO-->
                                 <br>
                                 <br>
                                 <div style="overflow-x:auto;">
@@ -211,24 +227,29 @@ if (!isset($_SESSION['bandera'])) {
                                     </style>
                                     <table id="example">    
                                         <tr>
-                                            <th>NOMBRE CAJERO</th>
-                                            <th>ESTADO CAJERO</th>
+                                            <th>CODIGO FACTURA</th>
+                                            <th>PROVEEDOR</th>
+                                            <th>CAJERO</th>
+                                            <th>FECHA</th>
+                                            <th>VALOR FACTURA</th>
+                                            <th>IVA</th>
+                                            <th>DETALLES</th>
                                         </tr>
                                         <tbody >                    
                                             <?php
                                             //verificamos si existe en sesion el listado de login:
-                                            if (isset($_SESSION['listaPR'])) {
-                                                $listaPR = unserialize($_SESSION['listaPR']);
-                                                foreach ($listaPR as $caj) {
+                                            if (isset($_SESSION['listaTR'])) {
+                                                $listaTR = unserialize($_SESSION['listaTR']);
+                                                foreach ($listaTR as $fac) {
                                                     echo "<tr>";
-                                                    echo "<td>" . $caj->getNombreusuario() . "</td>";
-                                                    if ($caj->getEstadousuario() == 1) {
-                                                        echo "<td>Activo</td>";
-                                                        echo "</tr>";
-                                                    } else {
-                                                        echo "<td>Inactivo</td>";
-                                                        echo "</tr>";
-                                                    }
+                                                    echo "<td>" . $fac->getIdfactura() . "</td>";
+                                                    echo "<td>" . $fac->getIdproveedor() . "</td>";
+                                                    echo "<td>" . $fac->getIdusuario() . "</td>";
+                                                    echo "<td>" . $fac->getValorfactura() . "</td>";
+                                                    echo "<td>" . $fac->getFechafactura() . "</td>";
+                                                    echo "<td>" . $fac->getIvafactura() . "</td>";
+                                                    echo "<td><a href='../controller/controller.php?opcion=eliminarPersona&idPersona=" . $fac->getIdPersona() . "'>eliminar</a></td>";
+                                                    echo "</tr>";
                                                 }
                                             } else {
                                                 echo "No se han cargado datos.";

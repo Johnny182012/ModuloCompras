@@ -468,6 +468,14 @@ switch ($opcion) {
         header('Location: ../view/COnsumoWS.php');
 
         break;
+    
+    case "listar_facturasC":
+        //obtenemos la lista de facturas y subimos a sesion:
+        $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
+        $vec = $crudModel->getFacturas();
+        header('Location: ../view/COnsumoWSC.php');
+
+        break;
 
     // obtiene los datos de los login de la base de datos
     case "listar_logins":
@@ -666,6 +674,21 @@ switch ($opcion) {
 
         header('Location: ../view/tercerReporte.php');
         break;
+    
+    case "tercerReporteC":
+        header('Location: ../view/tercerReporteC.php');
+        break;
+    case "tercerReporteListarC":
+        //obtenemos la lista de productos:
+        $fechainicio = $_REQUEST['fechainicio'];
+        $fechafin = $_REQUEST['fechafin'];
+        $listaTR = $crudModel->getFacturasFecha($fechainicio, $fechafin);
+        //y los guardamos en sesion:
+        $_SESSION['listaTR'] = serialize($listaTR);
+        //redireccionamos a una nueva pagina para visualizar:
+
+        header('Location: ../view/tercerReporteC.php');
+        break;
 
     case "adicionar_detalle":
         //obtenemos los parametros del formulario:
@@ -685,6 +708,25 @@ switch ($opcion) {
         }
         header('Location: ../view/FacturasIngresar.php');
         break;
+        
+        case "adicionar_detalleC":
+        //obtenemos los parametros del formulario:
+        $idProducto = $_REQUEST['idProducto'];
+        $cantidad = $_REQUEST['cantidad'];
+        if (!isset($_SESSION['listaFacturaDet'])) {
+            $listaFacturaDet = array();
+        } else {
+            $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
+        }
+        try {
+            $listaFacturaDet = $facturaModel->adicionarDetalle($listaFacturaDet, $idProducto, $cantidad);
+            $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
+        } catch (Exception $e) {
+            $mensajeError = $e->getMessage();
+            $_SESSION['mensajeError'] = $mensajeError;
+        }
+        header('Location: ../view/FacturasIngresarC.php');
+        break;
 
     case "eliminar_detalle":
         //obtenemos los parametros del formulario:
@@ -693,6 +735,15 @@ switch ($opcion) {
         $listaFacturaDet = $facturaModel->eliminarDetalle($listaFacturaDet, $idProducto);
         $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
         header('Location: ../view/FacturasIngresar.php');
+        break;
+    
+    case "eliminar_detalleC":
+        //obtenemos los parametros del formulario:
+        $idProducto = $_REQUEST['idProducto'];
+        $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
+        $listaFacturaDet = $facturaModel->eliminarDetalle($listaFacturaDet, $idProducto);
+        $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
+        header('Location: ../view/FacturasIngresarC.php');
         break;
 
     case "guardar_factura":
@@ -720,12 +771,40 @@ switch ($opcion) {
         header('Location: ../view/Facturas.php');
         break;
 
+        case "guardar_facturaC":
+        //obtenemos los parametros del formulario:
+        $idproveedor = $_REQUEST['idproveedor'];
+        $idusuario = "1009892333ED";
+        if (isset($_SESSION['listaFacturaDet'])) {
+            $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
+            try {
+                $facturaCab = $facturaModel->guardarFactura($listaFacturaDet, $idproveedor, $idusuario);
+                print_r($facturaCab);
+                
+                $_SESSION['facturaCab'] = $facturaCab;
+                
+                header('Location: ../view/factura_reporteC.php');
+                break;
+            } catch (Exception $e) {
+                $mensajeError = $e->getMessage();
+                $_SESSION['mensajeError'] = $mensajeError;
+            }
+        }
+      //  actualizamos lista de facturas:
+        $listado = $gastosModel->getFacturas();
+        $_SESSION['listado'] = serialize($listado);
+        header('Location: ../view/FacturasC.php');
+        break;
 
     case "nueva_factura":
         unset($_SESSION['listaFacturaDet']);
         header('Location: ../view/FacturasIngresar.php');
         break;
 
+    case "nueva_facturaC":
+        unset($_SESSION['listaFacturaDet']);
+        header('Location: ../view/FacturasIngresarC.php');
+        break;
 
 
 //    default:
