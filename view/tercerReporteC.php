@@ -149,7 +149,7 @@ if (!isset($_SESSION['bandera'])) {
                                         <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
                                     </ul>
                                 </li>                            
-                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                <li><a href="../indexC.php"><?php echo $nombreusuario; ?></a>
                                     <ul>
                                         <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
                                         <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>

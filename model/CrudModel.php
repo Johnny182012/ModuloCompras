@@ -537,4 +537,25 @@ $inventario_array = json_decode($inventario_json1, true);
 </html>
   <?php
 }
+public function getDetalle($idfact){
+     $pdo = Database::connect();
+        $sql = "select * from detallefacturacion where idfactura='"+$idfact+"'";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos:
+        $deta = array();
+         foreach ($resultado as $res) {
+        $listado= new DetalleFactura();
+        $listado->setIddetalle($res['iddetalle']);
+        $listado->setIdproducto($res['idproducto']);
+        $listado->setIdfactura($res['idfactura']);
+        $listado->setCantidadproducto($res['cantidadproducto']);
+         $listado->setDescuento($res['descuento']);
+         $listado->setCantdescuento($res['cantdescuento']);
+
+            array_push($deta,$listado);
+        }
+        Database::disconnect();
+        //retornamos el listado resultante:
+        return $deta;
+}
 }

@@ -122,7 +122,7 @@ if (!isset($_SESSION['bandera'])) {
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                <title>Usuarios</title>
+                <title>Facturas</title>
                 <style type="text/css">
                     *{
                         padding:0px;
@@ -243,7 +243,7 @@ if (!isset($_SESSION['bandera'])) {
                                         <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
                                     </ul>
                                 </li>                            
-                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                <li><a href='../indexC.php'><?php echo $nombreusuario; ?></a>
                                     <ul>
                                         <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
                                         <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
@@ -290,7 +290,7 @@ if (!isset($_SESSION['bandera'])) {
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Usuarios</h2>
+                                                    <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Facturas</h2>
                                                 </div>
 
 

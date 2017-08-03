@@ -118,7 +118,7 @@ if (!isset($_SESSION['bandera'])) {
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                <title>Usuarios</title>
+                <title>Facturas</title>
                 <style type="text/css">
                     *{
                         padding:0px;
@@ -239,7 +239,7 @@ if (!isset($_SESSION['bandera'])) {
                                         <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
                                     </ul>
                                 </li>                            
-                                <li><a href='../controller/controller.php?opcion=cerrarSesion'><?php echo $nombreusuario; ?></a>
+                                <li><a href='../indexC.php'><?php echo $nombreusuario; ?></a>
                                     <ul>
                                         <li><a href='editarLoginCambio.php'>Cambiar Contraseña</a></li>
                                         <li><a href='../controller/controller.php?opcion=cerrarSesion'>Cerrar Sesion</a></li>
@@ -266,7 +266,7 @@ if (!isset($_SESSION['bandera'])) {
                                     <i class="fa fa-book fa-4x"></i>
                                 </div>
                                 <div class="title text-center">
-                                    <h2>Nuestros <span class="color">Usuarios</span></h2>
+                                    <h2>Nuestras <span class="color">Facturas</span></h2>
                                     <div class="border"></div>
                                 </div>
 
@@ -453,7 +453,7 @@ if (!isset($_SESSION['bandera'])) {
 
                                             <!-- copyright -->
                                             <div class="copyright text-center">
-                                                <img src="img/logo-meghna.png" alt="Meghna" /> <br />
+                                                <img src="../img/logos/meghuna1.gif" alt="Meghna" /> <br />
                                                 <p>Copyright &copy; 2014. All Rights Reserved.</p>
                                             </div>
                                             <!-- /copyright -->
