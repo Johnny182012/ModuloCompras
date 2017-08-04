@@ -395,9 +395,9 @@ if (!isset($_SESSION['bandera'])) {
                                                                     <td style="text-align: left;padding: 8px;color: black;"><br>Tipo:</br></td>
                                                                     <td style="text-align: left;padding: 8px;color: black;">
                                                                         <select name="tipoidusuario">
-                                                                            <option value="CEDULA">CÉDULA</option>
-                                                                            <option value="PASAPORTE">PASAPORTE</option>
-                                                                            <option value="RUC">RUC</option>
+                                                                            <option value="C">CÉDULA</option>
+                                                                            <option value="P">PASAPORTE</option>
+                                                                            <option value="R">RUC</option>
                                                                         </select>
                                                                     </td>
                                                                 </tr>

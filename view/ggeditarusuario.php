@@ -233,18 +233,18 @@ if (!isset($_SESSION['bandera'])) {
                                                         <td>
                                                             <select name="tipoidusuario">
                                                                 <?php
-                                                                if ($listaUsuarios->getTipoidusuario() == 'Cedula' || $listaUsuarios->getTipoidusuario() == 'c' || $listaUsuarios->getTipoidusuario() == 'C' || $listaUsuarios->getTipoidusuario() == 'cedula' || $listaUsuarios->getTipoidusuario() == 'CEDULA') {
-                                                                    echo"<option select=true>CÉDULA</option>";
-                                                                    echo"<option>PASAPORTE</option>";
-                                                                    echo"<option>RUC</option>";
+                                                                if ($listaUsuarios->getTipoidusuario() == 'Cedula' || $listaUsuarios->getTipoidusuario() == 'c' || $listaUsuarios->getTipoidusuario() == 'C' || $listaUsuarios->getTipoidusuario() == 'cedula' || $listaUsuarios->getTipoidusuario() == 'CEDULA' || $listaUsuarios->getTipoidusuario() == 'CÉDULA') {
+                                                                    echo"<option value='C' select=true>CÉDULA</option>";
+                                                                    echo"<option value='P'>PASAPORTE</option>";
+                                                                    echo"<option value='R'>RUC</option>";
                                                                 } else if ($listaUsuarios->getTipoidusuario() == 'ruc' || $listaUsuarios->getTipoidusuario() == 'r' || $listaUsuarios->getTipoidusuario() == 'R' || $listaUsuarios->getTipoidusuario() == 'Ruc' || $listaUsuarios->getTipoidusuario() == 'RUC') {
-                                                                    echo"<option select=true>RUC</option>";
-                                                                    echo"<option>CÉDULA</option>";
-                                                                    echo"<option>PASAPORTE</option>";
+                                                                    echo"<option value='R' select=true>RUC</option>";
+                                                                    echo"<option value='C'>CÉDULA</option>";
+                                                                    echo"<option value='P'>PASAPORTE</option>";
                                                                 } else if ($listaUsuarios->getTipoidusuario() == 'pasaporte' || $listaUsuarios->getTipoidusuario() == 'p' || $listaUsuarios->getTipoidusuario() == 'P' || $listaUsuarios->getTipoidusuario() == 'Pasaporte' || $listaUsuarios->getTipoidusuario() == 'PASAPORTE') {
-                                                                    echo"<option select=true>PASAPORTE</option>";
-                                                                    echo"<option >CÉDULA</option>";
-                                                                    echo"<option>RUC</option>";
+                                                                    echo"<option value='P' select=true>PASAPORTE</option>";
+                                                                    echo"<option value='C'>CÉDULA</option>";
+                                                                    echo"<option value='R'>RUC</option>";
                                                                 }
                                                                 ?>
                                                             </select>
