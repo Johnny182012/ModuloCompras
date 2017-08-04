@@ -707,6 +707,7 @@ header('Location: ../view/FacturasC.php');
             $mensajeError = $e->getMessage();
             $_SESSION['mensajeError'] = $mensajeError;
         }
+        $crudModel->getws();
         header('Location: ../view/FacturasIngresar.php');
         break;
         
@@ -726,6 +727,7 @@ header('Location: ../view/FacturasC.php');
             $mensajeError = $e->getMessage();
             $_SESSION['mensajeError'] = $mensajeError;
         }
+        $crudModel->getws();
         header('Location: ../view/FacturasIngresarC.php');
         break;
 
@@ -805,6 +807,7 @@ header('Location: ../view/FacturasC.php');
          $listaProductos = $crudModel->getProductos();
         //y los guardamos en sesion:
         $_SESSION['listaProductos'] = serialize($listaProductos);
+        $crudModel->getws();
         header('Location: ../view/FacturasIngresar.php');
         break;
 
@@ -816,6 +819,7 @@ header('Location: ../view/FacturasC.php');
          $listaProductos = $crudModel->getProductos();
         //y los guardamos en sesion:
         $_SESSION['listaProductos'] = serialize($listaProductos);
+        $crudModel->getws();
         header('Location: ../view/FacturasIngresarC.php');
         break;
 
