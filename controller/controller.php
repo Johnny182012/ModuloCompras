@@ -46,6 +46,7 @@ switch ($opcion) {
             if ($idusuario == $usuarioBase && $passwordlogin == $contraseñaBase) {
                 $bandera = 'S';
                 $_SESSION["bandera"] = serialize($bandera);
+                $_SESSION["idusuario"] = serialize($idusuario);
                 $_SESSION["rolusuario"] = serialize($rolusuario);
                 $_SESSION["nombreusuario"] = serialize($nombreusuario);
                 header('Location: ../index.php');
@@ -176,11 +177,7 @@ switch ($opcion) {
         header('Location: ../view/gg.php');
         break;
 
-    default:
-        //si no existe la opcion recibida por el controlador, siempre
-        //redirigimos la navegacion a la pagina index:
-        header('Location: ../view/indexLogin.php');
-
+    
 
     //    -------------------LISTAR---------------------
     // obtiene los datos de los proveedores de la base de datos
@@ -361,23 +358,7 @@ switch ($opcion) {
         break;
 
     // crea un nuevo factura
-    case "crear_facturas":
-        //obtenemos los parametros del formulario cliente:
-        $idfactura = $_REQUEST['idfactura'];
-        $idproveedor = $_REQUEST['idproveedor'];
-        $idusuario = $_REQUEST['idusuario'];
-        $valorfactura = $_REQUEST['valorfactura'];
-        $fechafactura = $_REQUEST['fechafactura'];
-        $ivafactura = $_REQUEST['ivafactura'];
-        //creamos el nuevo registro:
-        $crudModel->insertarFacturas($idfactura, $idproveedor, $idusuario, $valorfactura, $fechafactura, $ivafactura);
-        //actualizamos el listado:
-        $listaFacturas = $crudModel->getFacturas();
-        //y los guardamos en sesion:
-        $_SESSION['listaFacturas'] = serialize($listaFacturas);
-        //redireccionamos a una nueva pagina para visualizar:
-        header('Location: ../view/facturas.php');
-        break;
+    
     //crea un nuevo empleado
     case "crear_detalle":
         //obtenemos los parametros del formulario empleado:
@@ -457,6 +438,7 @@ switch ($opcion) {
         //actualizamos lista de empleados:
         $listaDetalle = $crudModel->getDetalles();
         $_SESSION['listaDetalles'] = serialize($listaDetalle);
+        
         //redireccionamos a una nueva pagina para visualizar el cambio:
         header('Location: ../view/facturas_1.php');
         break;
@@ -465,15 +447,16 @@ switch ($opcion) {
         //obtenemos la lista de facturas y subimos a sesion:
         $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
         $vec = $crudModel->getFacturas();
-        header('Location: ../view/COnsumoWS.php');
+        $crudModel->getws();
+header('Location: ../view/Facturas.php');
 
         break;
     
     case "listar_facturasC":
         //obtenemos la lista de facturas y subimos a sesion:
         $_SESSION['listaFacturas'] = serialize($crudModel->getFacturas());
-        $vec = $crudModel->getFacturas();
-        header('Location: ../view/COnsumoWSC.php');
+                $crudModel->getws();
+header('Location: ../view/FacturasC.php');
 
         break;
 
@@ -696,12 +679,30 @@ switch ($opcion) {
         $cantidad = $_REQUEST['cantidad'];
         if (!isset($_SESSION['listaFacturaDet'])) {
             $listaFacturaDet = array();
+            $listadetdet="";
+            $basenoimp="";
+            $iva="";
+            $total="";
         } else {
             $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
+            $listadetdet = $_SESSION['listadetdet'];
+            $basenoimp = $_SESSION['basenoimp'];
+            $iva = $_SESSION['iva'];
+            $total = $_SESSION['total'];
+            
         }
         try {
             $listaFacturaDet = $facturaModel->adicionarDetalle($listaFacturaDet, $idProducto, $cantidad);
+            $listadetdet = $facturaModel->calcularBaseImponible($listaFacturaDet);
+            $basenoimp = $facturaModel->calcularBaseNoImponible($listaFacturaDet);
+            $iva = $facturaModel->calcularIva($listaFacturaDet);
+            $total= $facturaModel->calcularTotal($listaFacturaDet);
             $_SESSION['listaFacturaDet'] = serialize($listaFacturaDet);
+            $_SESSION['listadetdet'] = $listadetdet;
+            $_SESSION['basenoimp'] = $basenoimp;
+            $_SESSION['iva'] = $iva;
+            $_SESSION['total'] = $total;
+            
         } catch (Exception $e) {
             $mensajeError = $e->getMessage();
             $_SESSION['mensajeError'] = $mensajeError;
@@ -749,7 +750,7 @@ switch ($opcion) {
     case "guardar_factura":
         //obtenemos los parametros del formulario:
         $idproveedor = $_REQUEST['idproveedor'];
-        $idusuario = "1009892333ED";
+        $idusuario = unserialize($_SESSION['idusuario']);
         if (isset($_SESSION['listaFacturaDet'])) {
             $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
             try {
@@ -766,7 +767,7 @@ switch ($opcion) {
             }
         }
       //  actualizamos lista de facturas:
-        $listado = $gastosModel->getFacturas();
+        $listado = $crudModel->getFacturas();
         $_SESSION['listado'] = serialize($listado);
         header('Location: ../view/Facturas.php');
         break;
@@ -774,7 +775,7 @@ switch ($opcion) {
         case "guardar_facturaC":
         //obtenemos los parametros del formulario:
         $idproveedor = $_REQUEST['idproveedor'];
-        $idusuario = "1009892333ED";
+        $idusuario = unserialize($_SESSION['idusuario']);
         if (isset($_SESSION['listaFacturaDet'])) {
             $listaFacturaDet = unserialize($_SESSION['listaFacturaDet']);
             try {
@@ -791,25 +792,37 @@ switch ($opcion) {
             }
         }
       //  actualizamos lista de facturas:
-        $listado = $gastosModel->getFacturas();
+        $listado = $CrudModel->getFacturas();
         $_SESSION['listado'] = serialize($listado);
         header('Location: ../view/FacturasC.php');
         break;
 
     case "nueva_factura":
         unset($_SESSION['listaFacturaDet']);
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+         $listaProductos = $crudModel->getProductos();
+        //y los guardamos en sesion:
+        $_SESSION['listaProductos'] = serialize($listaProductos);
         header('Location: ../view/FacturasIngresar.php');
         break;
 
     case "nueva_facturaC":
         unset($_SESSION['listaFacturaDet']);
+        $listaProveedores = $crudModel->getProveedores();
+        //y los guardamos en sesion:
+        $_SESSION['listaProveedores'] = serialize($listaProveedores);
+         $listaProductos = $crudModel->getProductos();
+        //y los guardamos en sesion:
+        $_SESSION['listaProductos'] = serialize($listaProductos);
         header('Location: ../view/FacturasIngresarC.php');
         break;
 
 
-//    default:
-//        //si no existe la opcion recibida por el controlador, siempre
-//        //redirigimos la navegacion a la pagina index:
-//        header('Location: ../view/index.php');
-//        break;
+    default:
+        //si no existe la opcion recibida por el controlador, siempre
+        //redirigimos la navegacion a la pagina index:
+        header('Location: ../view/indexLogin.php');
+        break;
 }

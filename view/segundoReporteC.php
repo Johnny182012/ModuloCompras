@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../model/ProveedoresCredito.php';
-require_once '../model/CrudModel.php';
+//require_once '../model/CrudModel.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
 $nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
@@ -134,7 +134,7 @@ if (!isset($_SESSION['bandera'])) {
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                             <ul id="nav" class="nav navbar-nav">
-                                <li class="current"><a href="../index.php">Inicio</a></li>
+                                <li class="current"><a href="../indexC.php">Inicio</a></li>
 
                                 <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>
@@ -145,7 +145,7 @@ if (!isset($_SESSION['bandera'])) {
                                 <li><a href="../controller/controller.php?opcion=listar_facturasC">Facturas</a>
                                     <ul>
                                         <a href="../controller/controller.php?opcion=listar_facturasC">Listar Facturas</a>
-                                        <li><a href="../controller/controller.php?opcion=nueva_factura">Ingresar Factura</a></li>
+                                        <li><a href="../controller/controller.php?opcion=nueva_facturaC">Ingresar Factura</a></li>
                                         <li><a href="../controller/controller.php?opcion=tercerReporteC">Ver Facturas</a></li>
                                     </ul>
                                 </li>                            

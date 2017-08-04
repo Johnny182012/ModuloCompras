@@ -224,7 +224,7 @@ if (!isset($_SESSION['bandera'])) {
 
                         <nav class="collapse navbar-collapse navbar-right" role="Navigation">
                             <ul id="nav" class="nav navbar-nav">
-                                <li class="current"><a href="../index.php">Inicio</a></li>
+                                <li class="current"><a href="../indexC.php">Inicio</a></li>
 
                                 <li><a href="../controller/controller.php?opcion=listar_proveedoresC">Proveedores</a>
                                     <ul>

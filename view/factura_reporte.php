@@ -198,11 +198,11 @@ if (!isset($_SESSION['bandera'])) {
                 <!--
                 Start Preloader
                 ==================================== -->
-                <div id="loading-mask">
+<!--                <div id="loading-mask">
                     <div class="loading-img">
                         <img alt="Meghna Preloader" src="img/preloader.gif"  />
                     </div>
-                </div>
+                </div>-->
                 <!--
                 End Preloader
                 ==================================== -->

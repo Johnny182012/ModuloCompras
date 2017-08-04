@@ -2,7 +2,6 @@
 session_start();
 require_once '../model/Facturas.php';
 require_once '../model/Producto.php';
-require_once '../model/CrudModel.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
 $nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
@@ -282,11 +281,7 @@ if (!isset($_SESSION['bandera'])) {
 
                                     <!-- Trigger the modal with a button -->
                                     <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
-                                    <div class="portfolio-filter clearfix">
-                                        <ul class="text-center">
-                                            <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR FACTURA</a></li>
-                                            <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
-                                        </ul></div>
+                                  
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal" role="dialog">
                                         <div class="modal-dialog modal-lg">
@@ -297,58 +292,7 @@ if (!isset($_SESSION['bandera'])) {
                                                 </div>
                                                 <div class="modal-body" >
 
-                                                    <form action="../controller/controller.php" style=" width: 100%;">
-                                                        <center><table style=" width: 100%; background-color: #cccccc; display: block">                                                                                    
-
-                                                                <input type="hidden" name="opcion" value="guardar_factura">
-                                                                <tr>
-
-                                                                    <td style="#cccccc"><br>Proveedor:</br></td>
-                                                                    <td><br><select name="idproveedor">                                        
-                                                                            <?php
-                                                                            $crudModel = new CrudModel();
-                                                                            $listaProveedores = $crudModel->getProveedores();
-//                                                                    echo $listaProveedores;
-                                                                            foreach ($listaProveedores as $proveedor) {
-                                                                                echo "<option value='" . $proveedor->getIdproveedor() . "'>" . $proveedor->getNombreproveedor() . "</option>";
-                                                                            }
-                                                                            ?>
-                                                                        </select></td>
-                                                                    <td><br>Fecha:</br></td>
-                                                                    <td>
-                                                                        <input type="date" name="fecha" required="true" autocomplete="off" required="" value="<?php echo getdate(); ?>">
-
-                                                                    </td>
-                                                                </tr>
-                                                                <input type="submit" value="Guardar">
-                                                                </form>
-                                                                <tr>
-                                                                <form action="../controller/controller.php">
-                                                                    <input type="hidden" name="opcion" value="adicionar_detalle">
-                                                                    <td>Producto:</td>
-
-                                                                    <td><select name="idProducto">                                        
-                                                                            <?php
-                                                                            $crudModel = new CrudModel();
-                                                                            $listaProductos = $crudModel->getProductos();
-//                                                                    echo $listaProductos;
-                                                                            foreach ($listaProductos as $producto) {
-                                                                                echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
-                                                                            }
-                                                                            ?>
-                                                                        </select></td>
-                                                                    <td >Cantidad:</td>
-                                                                    <td><input style="" type="text" name="cantidad" title="Se necesita un nombre" placeholder="Ej: 12" maxlength="100" required="true" pattern="[0-9 ]+"></td>
-                                                                </form>
-                                                            </table>
-
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="4"><center><input style="background-color: #006633; font-size: medium;border-radius: 0 50% / 0 100%;" type="submit" value="Adicionar" class="btn btn-sm" ></center></td>
-                                                            </tr>
-                                                            </table></center>
-                                                    </form>
-
+                                                   
 
                                                     </tbody>
                                                     </table>

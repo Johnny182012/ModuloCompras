@@ -1,12 +1,11 @@
 <?php
 session_start();
-require_once '../model/Facturas.php';
-require_once '../model/DetalleFactura.php';
-require_once '../model/Producto.php';
-require_once '../model/CrudModel.php';
-require_once '../model/FacturaModel.php';
-$crudModel = new CrudModel();
-$facturaModel = new FacturaModel();
+include_once '../model/Facturas.php';
+include_once '../model/DetalleFactura.php';
+include_once '../model/Producto.php';
+//include '../model/FacturaModel.php';
+include '../model/Proveedor.php';
+//$facturaModel = new FacturaModel();
 $rolusuario = unserialize($_SESSION['rolusuario']);
 $nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {
@@ -122,7 +121,7 @@ if (!isset($_SESSION['bandera'])) {
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-                <title>Usuarios</title>
+                <title>Facturas</title>
                 <style type="text/css">
                     *{
                         padding:0px;
@@ -198,11 +197,11 @@ if (!isset($_SESSION['bandera'])) {
                 <!--
                 Start Preloader
                 ==================================== -->
-                <div id="loading-mask">
-                    <div class="loading-img">
-                        <img alt="Meghna Preloader" src="img/preloader.gif"  />
-                    </div>
-                </div>
+                <!--                <div id="loading-mask">
+                                    <div class="loading-img">
+                                        <img alt="Meghna Preloader" src="img/preloader.gif"  />
+                                    </div>
+                                </div>-->
                 <!--
                 End Preloader
                 ==================================== -->
@@ -287,52 +286,53 @@ if (!isset($_SESSION['bandera'])) {
 
                                     <!-- Trigger the modal with a button -->
                                     <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Ingresar un usuario</button>-->
-                                    <div class="portfolio-filter clearfix">
-                                        <ul class="text-center">
-                                            <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR FACTURA</a></li>
-                                            <!--<li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>-->
-                                        </ul></div>
+                                    <!--                                    <div class="portfolio-filter clearfix">
+                                                                            <ul class="text-center">
+                                                                                <li><a class="filter" data-toggle="modal" data-target="#myModal">INGRESAR FACTURA</a></li>
+                                                                                <li><a href="controller/controller.php?opcion=listar_usuarios" class="filter">LISTAR USUARIOS</a></li>
+                                                                            </ul></div>-->
                                     <!-- Modal -->
-                                    <div class="modal fade" id="myModal" role="dialog">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Usuarios</h2>
-                                                </div>
-
-
-
-
-                                            </div>     <!-- End col-lg-12 -->
-                                        </div>	    <!-- End row -->
-                                    </div>       <!-- End container -->
+                                    <!--                                    <div class="modal fade" id="myModal" role="dialog">
+                                                                            <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                        <h2  style="background-color: #006633" class="modal-title" class="btn btn-primary">Ingresar  Usuarios</h2>
+                                                                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                                                                </div>      End col-lg-12 
+                                                                            </div>	     End row 
+                                                                        </div>        End container -->
                                     </section>    <!-- End Section -->
 
                                     <!--INICIO DE INGRESAR FACTURA-->
-                                    <div class="panel-body">
-                                        <style>
-                                            table {
-                                                border-collapse: collapse;
-                                                width: 20%;
+                                    <!--<div class="panel-body">-->
+                                    <style>
+                                        table {
+                                            border-collapse: collapse;
+                                            width: 20%;
 
-                                            }
+                                        }
 
-                                            th, td {
-                                                text-align: left;
-                                                padding: 8px;
-                                                color: black;
+                                        th, td {
+                                            text-align: left;
+                                            padding: 8px;
+                                            color: black;
 
-                                            }
+                                        }
 
-                                            tr:nth-child(even){background-color: #cccccc}
-                                            tr:nth-child(odd){background-color: whitesmoke}
+                                        tr:nth-child(even){background-color: #cccccc}
+                                        tr:nth-child(odd){background-color: whitesmoke}
 
-                                            th {
-                                                background-color: #4CAF50;
-                                                color: white;
-                                            }
-                                        </style>
+                                        th {
+                                            background-color: #4CAF50;
+                                            color: white;
+                                        }
+                                    </style>
+                                    <div>
                                         <table>
                                             <form action="../controller/controller.php" >
                                                 <input type="hidden" name="opcion" value="guardar_factura">
@@ -341,9 +341,9 @@ if (!isset($_SESSION['bandera'])) {
                                                     <td>
                                                         <select name="idproveedor">                                        
                                                             <?php
-                                                            $listaProveedores = $crudModel->getProveedores();
-//                                                                    echo $listaProveedores;
-                                                            foreach ($listaProveedores as $proveedor) {
+                                                            $listado1 = unserialize($_SESSION['listaProveedores']);
+                                                            foreach ($listado1 as $proveedor) {
+
                                                                 echo "<option value='" . $proveedor->getIdproveedor() . "'>" . $proveedor->getNombreproveedor() . "</option>";
                                                             }
                                                             ?>
@@ -361,7 +361,7 @@ if (!isset($_SESSION['bandera'])) {
                                                     <td>Producto:</td>
                                                     <td><select name="idProducto">                                        
                                                             <?php
-                                                            $listaProductos = $crudModel->getProductos();
+                                                            $listaProductos = unserialize($_SESSION['listaProductos']);
 //                                                                    echo $listaProductos;
                                                             foreach ($listaProductos as $producto) {
                                                                 echo "<option value='" . $producto->getIdproducto() . "'>" . $producto->getNombreproducto() . "</option>";
@@ -376,13 +376,14 @@ if (!isset($_SESSION['bandera'])) {
 
                                             </form>
                                         </table>
-                                    </div>  
+                                    </div>
+                                    <!--</div>-->  
                                     <br>
                                     <br>
                                     <div style="overflow-x:auto;">
                                         <div id="cuadro">
                                             <center>
-                                                <div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>
+                                                <!--<div class="derecha" id="buscar"><B><span class='glyphicon glyphicon-zoom-in'></span>&nbsp;&nbsp;&nbsp; BUSCAR</B>&nbsp;&nbsp;&nbsp; <input type="search" class="light-table-filter" style="color: black; width:500 " data-table="order-table" placeholder="Filtro" ></div><br>-->
                                             </center>
 
                                             <div class="datagrid">
@@ -401,6 +402,10 @@ if (!isset($_SESSION['bandera'])) {
                                                         //verificamos si existe en sesion el listado de clientes:
                                                         if (isset($_SESSION['listaFacturaDet'])) {
                                                             $listado = unserialize($_SESSION['listaFacturaDet']);
+                                                            $listadetdet = $_SESSION['listadetdet'];
+                                                            $basenoimp = $_SESSION['basenoimp'];
+                                                            $iva = $_SESSION['iva'];
+                                                            $total = $_SESSION['total'];
                                                             foreach ($listado as $facturaDet) {
                                                                 echo "<tr>";
                                                                 echo "<td>" . $facturaDet->getIdproductoss() . "</td>";
@@ -416,7 +421,7 @@ if (!isset($_SESSION['bandera'])) {
                                                             echo "<td>BASE IMPONIBLE</td>";
                                                             echo "<td></td>";
                                                             echo "<td></td>";
-                                                            echo "<td>" . $facturaModel->calcularBaseImponible($listado) . "</td>";
+                                                            echo "<td>" . $listadetdet . "</td>";
                                                             echo "<td></td>";
                                                             echo "</tr>";
                                                             echo "<tr>";
@@ -424,7 +429,7 @@ if (!isset($_SESSION['bandera'])) {
                                                             echo "<td>BASE NO IMPONIBLE</td>";
                                                             echo "<td></td>";
                                                             echo "<td></td>";
-                                                            echo "<td>" . $facturaModel->calcularBaseNoImponible($listado) . "</td>";
+                                                            echo "<td>" . $basenoimp . "</td>";
                                                             echo "<td></td>";
                                                             echo "</tr>";
                                                             echo "<tr>";
@@ -432,7 +437,7 @@ if (!isset($_SESSION['bandera'])) {
                                                             echo "<td>IVA</td>";
                                                             echo "<td></td>";
                                                             echo "<td></td>";
-                                                            echo "<td>" . $facturaModel->calcularIva($listado) . "</td>";
+                                                            echo "<td>" . $iva . "</td>";
                                                             echo "<td></td>";
                                                             echo "</tr>";
                                                             echo "<tr>";
@@ -440,7 +445,7 @@ if (!isset($_SESSION['bandera'])) {
                                                             echo "<td>TOTAL</td>";
                                                             echo "<td></td>";
                                                             echo "<td></td>";
-                                                            echo "<td>" . $facturaModel->calcularTotal($listado) . "</td>";
+                                                            echo "<td>" . $total . "</td>";
                                                             echo "<td></td>";
                                                             echo "</tr>";
                                                         } else {

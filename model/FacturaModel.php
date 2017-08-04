@@ -3,7 +3,6 @@ include_once 'Database.php';
 include_once 'Facturas.php';
 include_once 'DetalleFactura.php';
 include_once 'Producto.php';
-include_once 'CrudModel.php';
 $facturaDet=new DetalleFactura();
 
 /**
@@ -135,7 +134,7 @@ class FacturaModel {
     }
 
     public function guardarFactura($listaFacturaDet,$idprov,$idusuario){
-        $idusuario="1009892333ED";    
+        
         if(!isset($listaFacturaDet)){
             throw new Exception("Debe por lo menos registrar un producto.");
         }

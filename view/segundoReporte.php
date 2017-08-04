@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../model/ProveedoresCredito.php';
-require_once '../model/CrudModel.php';
+//require_once '../model/CrudModel.php';
 $rolusuario = unserialize($_SESSION['rolusuario']);
 $nombreusuario = unserialize($_SESSION['nombreusuario']);
 if (!isset($_SESSION['bandera'])) {

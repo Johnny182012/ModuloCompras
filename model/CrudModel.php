@@ -485,57 +485,26 @@ class CrudModel {
       $inventario_URL = "https://wsinventario.herokuapp.com/product";
 $inventario_json1 = file_get_contents($inventario_URL);
 $inventario_array = json_decode($inventario_json1, true);
-?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>CODIGO</th>
-                    <th>PRODUCTO</th>
-                    <th>DESCRIPCION</th>
-                    <th>IVA</th>
-                    <th>COSTO COMPRA</th>
-                    <th>PRECIO VENTA</th>
-                    <th>ESTADO</th>
-                    <th>STOCK</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                for ($i=0;$i<count($inventario_array);$i++) {
-                    echo $i;
-                    if($inventario_array["data"][$i]["graba_iva_prod"] == "S"){
-                        $iva="Si";
+                
+                    for ($i = 0; $i <= count($inventario_array) + 2; $i++) {
+                    if ($inventario_array["data"][$i]["GRABA_IVA_PROD"] == "S") {
+
+
+                        $iva = "true";
                     } else {
-                        $iva="No";
+                        $iva = "false";
                     }
-                    if ($inventario_array["data"][$i]["estado_prod"] == "A"){
-                        $estado="Activo";
+                    if ($inventario_array["data"][$i]["ESTADO_PROD"] == "A") {
+                        $estado = "true";
                     } else {
-                        $estado="Inactivo";
+                        $estado = "false";
                     }
-                    echo "<tr>";
-                    echo "<td>" . $inventario_array["data"][$i]["id_prod"]. "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["nombre_prod"] . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["descripcion_prod"] . "</td>";
-                    echo "<td>" . $iva . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["costo_prod"] . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["pvp_prod"] . "</td>";
-                    echo "<td>" . $estado . "</td>";
-                    echo "<td>" . $inventario_array["data"][$i]["stock_prod"] . "</td>";
-                    echo "</tr>";
+
+                    $this->insertarProducto($inventario_array["data"][$i]["ID_PROD"], $inventario_array["data"][$i]["NOMBRE_PROD"], $inventario_array["data"][$i]["COSTO_PROD"], $iva);
+                    
+                
                 }
-                ?>
-            </tbody>
-        </table>
-    </body>
-</html>
-  <?php
+          
 }
 public function getDetalle($idfact){
      $pdo = Database::connect();

@@ -55,8 +55,9 @@ $crudModel = new CrudModel();
                     echo "<td>" . $inventario_array["data"][$i]["STOCK_PROD"] . "</td>";
                     echo "</tr>";
 
-                    header('Location: Facturas.php');
+                   
                 }
+                 header('Location: FacturasIngresar.php');
                 ?>
             </tbody>
         </table>
